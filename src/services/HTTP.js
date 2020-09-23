@@ -1,13 +1,16 @@
 import axios from 'axios';
 
 const HTTP = axios.create({
-  baseURL: process.env.NODE_ENV !== 'development' ? '/' : '/',
+  baseURL: 'http://dataservice.accuweather.com/',
 
   withCredentials: false,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
+  params:{
+    apikey: 'JpXZNXKBXpKo5VVG0RZzybpKahdMX8vv'
+  }
 });
 
 const get = (route, params, config) => {

@@ -5,7 +5,9 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import "./App.css";
 import HeroloTabs from "./components/HeroloTabs";
 import HeroloAutocomplete from "./components/HeroloAutocomplete";
-import DailyForecasts from "./modules/DailyForecasts/DailyForecasts";
+import CurrentWeather from "./modules/CurrentWeather/CurrentWeather";
+import Weather from "./Views/Weather/Weather";
+
 const theme = createMuiTheme({
   breakpoints: {
     // Define custom breakpoint values.
@@ -13,61 +15,28 @@ const theme = createMuiTheme({
     // breakpoints, such as `Grid` and `Hidden`. You can also use the
     // theme breakpoint functions `up`, `down`, and `between` to create
     // media queries for these breakpoints
-    values: {
-      xs: 0,
-      sm: 450,
-      md: 600,
-      lg: 900,
-      xl: 1200,
-      test: 1120,
-    },
+    values: { xs: 0, sm: 450, md: 600, lg: 900, xl: 1200, test: 1120 },
   },
 });
 function App() {
   const [selectedLocation, setselectedLocation] = React.useState(null);
   return (
-    <MuiThemeProvider theme={theme}>
-      <Router>
-        <div className="App">
-          {/* HEADER */}
-          <Route
-            path="/:tab"
-            render={({ match }) => <HeroloTabs url={match} />}
-          />
+    // <MuiThemeProvider theme={theme}>
+    <Router>
+      <div className="App">
+        {/* HEADER */}
+        <Route path="/:tab" render={({ match }) => <HeroloTabs url={match} />} />
 
-          {/* BODY */}
-          <Switch>
-            <Route
-              path="/weather"
-              render={({ history }) => {
-                return (
-                  <React.Fragment>
-                    <HeroloAutocomplete
-                      onChange={(event, item) =>
-                        history.push(`/weather/${item ? item.Key : ""}`)
-                      }
-                    />
-                    <Route
-                      exact
-                      path="/weather/:locationId/"
-                      render={({ match }) => (
-                        <DailyForecasts locationId={match.params.locationId} />
-                      )}
-                    />
-                  </React.Fragment>
-                );
-              }}
-            />
-
-            <Route path="/favorite/">
-              <h1>favorite</h1>
-            </Route>
-            <Redirect exact to="/weather/redirect" />
-          </Switch>
-          {/* FOOTER */}
-        </div>
-      </Router>
-    </MuiThemeProvider>
+        {/* BODY */}
+        <Switch>
+          <Route path="/weather/:locationId?" component={Weather} />
+          <Route path="/favorite/"> <h1>favorite</h1> </Route>
+          <Redirect exact to="/weather/redirect" />
+        </Switch>
+        {/* FOOTER */}
+      </div>
+    </Router>
+    // </MuiThemeProvider>
   );
 }
 

@@ -25,7 +25,6 @@ export default function HeroloTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(null);
   React.useEffect(() => {
-    debugger;
     setValue(props.url.params.tab);
   }, [props.url.params.tab]);
   const handleChange = (event, newValue) => {
