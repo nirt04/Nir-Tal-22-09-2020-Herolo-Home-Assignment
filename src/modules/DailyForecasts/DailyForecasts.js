@@ -19,14 +19,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DailyForecasts(props) {
-  React.useEffect(() => {
-    console.log("location changed", props);
-  }, [props.location]);
-
+  React.useEffect(() => { console.log("location changed", props); }, [props.location]);
+debugger
   const [spacing, setSpacing] = React.useState(2);
-  const [forecastsDays, setForecastsDays] = React.useState(
-    days_of_daily_forecasts.DailyForecasts
-  );
+  const [forecastsDays, setForecastsDays] = React.useState( days_of_daily_forecasts.DailyForecasts );
   const classes = useStyles();
 
   const handleChange = (event) => {

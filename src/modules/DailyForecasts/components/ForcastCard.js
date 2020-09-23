@@ -48,8 +48,9 @@ export default function ForcastCard(props) {
           {item ? moment(item.Date).format("dddd") : ""}
         </Typography>
         <CardMedia className={classes.media} image={`https://developer.accuweather.com/sites/default/files/${item.Day.Icon.toString().padStart( 2, "0" )}-s.png`} title="Paella dish" />
-        <Typography variant="h5" component="h2">{item.Day.ShortPhrase}</Typography>
-        <Typography className={classes.pos} color="textSecondary"> adjective </Typography>
+        <Typography variant="h5" component="h2">{item.Day.IconPhrase}</Typography>
+  <Typography className={classes.pos} color="textSecondary"> {`${item.Temperature.Maximum.Value}°${item.Temperature.Maximum.Unit}`}</Typography>
+  <Typography className={classes.pos} color="textSecondary"> {`${item.Temperature.Minimum.Value}°${item.Temperature.Minimum.Unit}`}</Typography>
         <Typography variant="body2" component="p"> well meaning and kindly. <br /> {'"a benevolent smile"'} </Typography>
       </CardContent>
 
