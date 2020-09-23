@@ -1,5 +1,7 @@
 import ForcastCard from "./components/ForcastCard";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Divider from "@material-ui/core/Divider";
+import Box from "@material-ui/core/Box";
 
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,10 +21,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DailyForecasts(props) {
-  React.useEffect(() => { console.log("location changed", props); }, [props.location]);
-debugger
+  React.useEffect(() => {
+    console.log("location changed", props);
+  }, [props.locationId]);
+  debugger;
   const [spacing, setSpacing] = React.useState(2);
-  const [forecastsDays, setForecastsDays] = React.useState( days_of_daily_forecasts.DailyForecasts );
+  const [forecastsDays, setForecastsDays] = React.useState(
+    days_of_daily_forecasts.DailyForecasts
+  );
   const classes = useStyles();
 
   const handleChange = (event) => {
@@ -30,14 +36,17 @@ debugger
   };
 
   return (
-    <Grid container className={classes.root} spacing={2}>
+    <Grid container className={classes.root}>
       <Grid item xs={12}>
-        <Grid container justify="center" spacing={spacing}>
+        <Grid container justify="center" direction="row">
           {forecastsDays.map((item, i) => (
-            <Grid key={i} item>
-              <CircularProgress color="inherit" size={20} />
-
-              <ForcastCard item={item} />
+            <Grid key={i} item md={12} lg={'auto'} xs={12} >
+              <Box display="flex">
+                {/* <CircularProgress color="inherit" size={20} /> */}
+                {i !== 0 && <Divider orientation="vertical" flexItem />}
+                <ForcastCard item={item} />
+                {/* <Divider orientation="vertical" /> */}
+              </Box>
             </Grid>
           ))}
         </Grid>
