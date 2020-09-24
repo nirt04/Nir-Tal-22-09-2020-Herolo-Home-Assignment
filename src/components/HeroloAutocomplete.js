@@ -20,11 +20,10 @@ const useStyles = makeStyles((theme) => ({
 export default function HeroloAutocomplete(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const loading = false;
   return (
     <Autocomplete
       {...props}
-      getOptionSelected={(option, value) => option.Key === value.Key}
+      getOptionSelected={(option, value) => (value && option) && option.Key === value.Key}
       renderOption={(option) => {
         return (
           <Grid container alignItems="center">
@@ -57,7 +56,7 @@ export default function HeroloAutocomplete(props) {
             ...params.InputProps,
             endAdornment: (
               <React.Fragment>
-                {loading ? (
+                {props.loading ? (
                   <CircularProgress color="inherit" size={20} />
                 ) : null}
                 {params.InputProps.endAdornment}

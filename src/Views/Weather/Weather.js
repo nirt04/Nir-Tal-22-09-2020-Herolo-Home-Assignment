@@ -11,10 +11,11 @@ import currentWeather from "../../data/current_weather.json"
 const useQuery = () => { return new URLSearchParams(useLocation().search); };
 
 
-// function sleep(delay = 0) {
-//   return new Promise((resolve) => {
-//     setTimeout(resolve, delay);
-//   });
+function sleep(delay = 0) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+}
 
 function Weather(props) {
 const query = useQuery();
@@ -25,15 +26,19 @@ const query = useQuery();
   const [autocompleteLoading, setAutocompleteLoading] = React.useState(false);
   const [autocompleteItems, setAutocompleteItems] = React.useState([]);
   const [autocompleteValue, setAutocompleteValue] = React.useState(null);
+  const [autocompleteInput, setAutocompleteInput] = React.useState(null);
   
-  
+
   // CurrentWeatherInfo State
 
-  const fetchAutocompleteCities = async (searchQuery, locationId) => {
+  const fetchAutocompleteCities = async (searchQuery) => {
+    console.log('fetchAutocompleteCities')
+        let cities
         setAutocompleteLoading(true);
-        if (!searchQuery) return [];
+        await sleep(1000);
+        if (!searchQuery) cities = [];
+        else cities = CITEIS_AUTOCOMPLETE_DATA || await HTTP.get("locations/v1/cities/autocomplete", { language: "en-us", q: searchQuery, });
         setAutocompleteLoading(false);
-        const cities = await HTTP.get("locations/v1/cities/autocomplete", { language: "en-us", q: searchQuery, });
         return cities;
   };
 
@@ -50,14 +55,16 @@ const query = useQuery();
     }
   }
 
-  const weatherDataInit = async () => {
+//   const getCitiesAutocomplete = async (searchQuery) => {
+//     const cities = await fetchAutocompleteCities(searchQuery);
+//     return cities
+// }
 
-    const searchQuery = query.get("search");
-    // Fetching cities for autocomplete with searchQuery in the route if existed
-    const cities = CITEIS_AUTOCOMPLETE_DATA || await fetchAutocompleteCities(searchQuery);
-    setAutocompleteItems(cities);
-
-    if (props.match.params.locationId) {
+const onMountedData = async () =>{
+  const searchQuery = query.get("search");
+  const cities = await fetchAutocompleteCities(searchQuery)
+  setAutocompleteItems(cities);
+  if (props.match.params.locationId) {
     // If there is locationId in the route we wants to select it from the items we fetched to the autocomplete 
       const itemInAutocompleteOptions = cities.find( (option) => option.Key === props.match.params.locationId );
       setNewAutocompleteVal(itemInAutocompleteOptions)
@@ -66,23 +73,53 @@ const query = useQuery();
 
 // On Mounted
   React.useEffect(() => {
-    weatherDataInit()
+    onMountedData()
   }, []);
 
-  // React.useEffect(() => {
-  //   dispatchCurrentWeatherInfo({name: null, key: props.match.params.locationId})
-  // }, [props.match.params.locationId]);
-  // React.useEffect(() => {
-  //   weatherDataInit()
-  // }, [currentWeather.info.key]);
 
 
+
+       
+// Hook
+function useDebounce(value, delay, callback) {
+  // State and setters for debounced value
+  const [debouncedValue, setDebouncedValue] = React.useState(value);
+  
+  React.useEffect(
+    () => {
+      // Update debounced value after delay
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+        if(callback) callback(value)
+      }, delay);
+
+      // Cancel the timeout if value changes (also on delay change or unmount)
+      // This is how we prevent debounced value from updating if value is changed ...
+      // .. within the delay period. Timeout gets cleared and restarted.
+      
+      return () => {
+        clearTimeout(handler);
+      };
+    },
+    [value, delay] // Only re-call effect if value or delay changes
+  );
+
+  return debouncedValue;
+}
+
+  useDebounce(autocompleteInput,1000, async () => {
+   if(autocompleteInput)  setAutocompleteItems( await fetchAutocompleteCities(autocompleteInput))
+  })
 // Render  
   return (
     <React.Fragment>
       <Route
         render={({ history }) => (
           <HeroloAutocomplete
+            onInputChange={async (event, searchQuery) => {
+              // Emiting the function only if input changed came from user typing and not by clicking on of the options
+            if(event && event.type === 'change' && searchQuery) setAutocompleteInput(searchQuery)
+            }}
             onChange={(event, newVal) => { setNewAutocompleteVal(newVal) }}
             getOptionLabel={(option) => `${option.LocalizedName}, ${ option.Country ? option.Country.LocalizedName : "" }` }
             value={autocompleteValue}

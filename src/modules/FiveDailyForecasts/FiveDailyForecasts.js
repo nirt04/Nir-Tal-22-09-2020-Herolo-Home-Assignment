@@ -1,20 +1,22 @@
 import ForcastCard from "./components/ForcastCard";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
 import { connect } from "react-redux";
-import { accuweatherAPI } from "../../services/API/accuweather"
+import { accuweatherAPI } from "../../services/API/accuweather";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import days_of_daily_forecasts from "../../data/5_days_of_daily_forecasts.json";
-import FIVE_DAYS_DATA from "../../data/5_days_of_daily_forecasts.json"
+import FIVE_DAYS_DATA from "../../data/5_days_of_daily_forecasts.json";
 
 const useStyles = makeStyles((theme) => ({
   forecastGridItem: {
     // marginRight: "10px",
     // margin: "10px",
   },
+
   root: {
     flexGrow: 1,
   },
@@ -27,59 +29,75 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function sleep(delay = 0) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+}
+
 function DailyForecasts(props) {
-  
   const classes = useStyles();
 
   // FiveDaysForecastsItems State
-  const [fiveDaysForecastsItems, setFiveDaysForecastsItems] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
+  const [fiveDaysForecastsItems, setFiveDaysForecastsItems] = React.useState(
+    null
+  );
 
   const dataInit = async () => {
+    setLoading(true)
+    await sleep(1000);
     // Fetching 5 Days of Daily Forecasts according to the locationId from the route, first trying to get data from redux store, if not exsit fetching from the server
-    const fiveDaysFetch = FIVE_DAYS_DATA || props.fiveDay[props.locationId] || await accuweatherAPI.fiveDays(props.locationId);
+    const fiveDaysFetch = FIVE_DAYS_DATA || props.fiveDay[props.locationId] || (await accuweatherAPI.fiveDays(props.locationId));
     if (fiveDaysFetch.DailyForecasts) {
       setFiveDaysForecastsItems(fiveDaysFetch.DailyForecasts);
-      props.setFiveDaysToReduxStore({ ...props.fiveDay, [props.locationId]: fiveDaysFetch });
+      props.setFiveDaysToReduxStore({ ...props.fiveDay, [props.locationId]: fiveDaysFetch, });
     }
+    setLoading(false)
   };
   React.useEffect(() => {
-
-    dataInit()
+    dataInit();
   }, [props.locationId]);
-
-
 
   return (
     <Grid container className={classes.root}>
-      <Grid item xs={12}>
-        <Grid container justify="center" direction="row">
-          {fiveDaysForecastsItems &&
-            fiveDaysForecastsItems.map((item, i) => (
-              <Grid
-                key={i}
-                item
-                md={"auto"}
-                xs={12}
-                lg={"auto"}
-                className={classes.forecastGridItem}
-              >
-                <Box display="flex" justifyContent="center">
-                  {/* <CircularProgress color="inherit" size={20} /> */}
-                  {i !== 0 && (
-                    <Divider
-                      orientation="vertical"
-                      flexItem
-                      style={{ marginRight: "10px" }}
-                      m={2}
-                    />
-                  )}
-                  <ForcastCard item={item} />
-                  {/* <Divider orientation="vertical" /> */}
-                </Box>
-              </Grid>
-            ))}
+      {loading ? (
+        <Grid item xs={12}>
+          <Box display="flex" justifyContent="center" height={283} alignItems="center">
+            <CircularProgress color="inherit" size={80} />
+          </Box>
         </Grid>
-      </Grid>
+      ) : (
+        <Grid item xs={12}>
+          <Grid container justify="center" direction="row">
+            {fiveDaysForecastsItems &&
+              fiveDaysForecastsItems.map((item, i) => (
+                <Grid
+                  key={i}
+                  item
+                  md={"auto"}
+                  xs={12}
+                  lg={"auto"}
+                  className={classes.forecastGridItem}
+                >
+                  <Box display="flex" justifyContent="center">
+                    {/* <CircularProgress color="inherit" size={20} /> */}
+                    {i !== 0 && (
+                      <Divider
+                        orientation="vertical"
+                        flexItem
+                        style={{ marginRight: "10px" }}
+                        m={2}
+                      />
+                    )}
+                    <ForcastCard item={item} />
+                    {/* <Divider orientation="vertical" /> */}
+                  </Box>
+                </Grid>
+              ))}
+          </Grid>
+        </Grid>
+      )}
     </Grid>
   );
 }
@@ -92,7 +110,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setFiveDaysToReduxStore: (payload) => dispatch({ type: "ADD_FIVE_DAY", payload }),
+    setFiveDaysToReduxStore: (payload) =>
+      dispatch({ type: "ADD_FIVE_DAY", payload }),
   };
 };
 
