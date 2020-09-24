@@ -2,11 +2,14 @@ import ForcastCard from "./components/ForcastCard";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
-
+import { connect } from "react-redux";
+import { accuweatherAPI } from "../../services/API/accuweather"
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import days_of_daily_forecasts from "../../data/5_days_of_daily_forecasts.json";
+import FIVE_DAYS_DATA from "../../data/5_days_of_daily_forecasts.json"
+
 const useStyles = makeStyles((theme) => ({
   forecastGridItem: {
     // marginRight: "10px",
@@ -24,24 +27,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function DailyForecasts(props) {
-  // React.useEffect(() => {
-  //   console.log("location changed", props);
-  // }, [props.locationId]);
-  const [spacing, setSpacing] = React.useState(2);
-  // const [forecastsDays, setForecastsDays] = React.useState( days_of_daily_forecasts.DailyForecasts );
+function DailyForecasts(props) {
+  
   const classes = useStyles();
 
-  const handleChange = (event) => {
-    setSpacing(Number(event.target.value));
+  // FiveDaysForecastsItems State
+  const [fiveDaysForecastsItems, setFiveDaysForecastsItems] = React.useState(null);
+
+  const dataInit = async () => {
+    // Fetching 5 Days of Daily Forecasts according to the locationId from the route, first trying to get data from redux store, if not exsit fetching from the server
+    const fiveDaysFetch = FIVE_DAYS_DATA || props.fiveDay[props.locationId] || await accuweatherAPI.fiveDays(props.locationId);
+    if (fiveDaysFetch.DailyForecasts) {
+      setFiveDaysForecastsItems(fiveDaysFetch.DailyForecasts);
+      props.setFiveDaysToReduxStore({ ...props.fiveDay, [props.locationId]: fiveDaysFetch });
+    }
   };
-  debugger;
+  React.useEffect(() => {
+
+    dataInit()
+  }, [props.locationId]);
+
+
+
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12}>
         <Grid container justify="center" direction="row">
-          {props.items &&
-            props.items.map((item, i) => (
+          {fiveDaysForecastsItems &&
+            fiveDaysForecastsItems.map((item, i) => (
               <Grid
                 key={i}
                 item
@@ -70,3 +83,17 @@ export default function DailyForecasts(props) {
     </Grid>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    fiveDay: state.fiveDay,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setFiveDaysToReduxStore: (payload) => dispatch({ type: "ADD_FIVE_DAY", payload }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DailyForecasts);

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HeroloTabs(props) {
 
-  const a11yProps = (index, tabName) => {
+  const tabProps = (index, tabName) => {
     const locationId = props.url.match.params.locationId;
     const query = props.url.location.search;
     return {
@@ -34,7 +34,7 @@ export default function HeroloTabs(props) {
   
   const classes = useStyles();
   const [value, setValue] = React.useState(null);
-  
+
   React.useEffect(() => {
     setValue(props.url.match.params.tab);
   }, [props.url.match.params.tab]);
@@ -44,13 +44,13 @@ export default function HeroloTabs(props) {
   };
 
 
-  debugger;
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" >
-          <Tab {...a11yProps(0, "weather")} />
-          <Tab {...a11yProps(1, "favorite")} />
+          <Tab {...tabProps(0, "weather")} />
+          <Tab {...tabProps(1, "favorite")} />
         </Tabs>
       </AppBar>
     </div>
