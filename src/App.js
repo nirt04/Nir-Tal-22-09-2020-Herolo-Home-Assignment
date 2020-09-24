@@ -25,12 +25,12 @@ function App() {
     <Router>
       <div className="App">
         {/* HEADER */}
-        <Route path="/:tab" render={({ match }) => <HeroloTabs url={match} />} />
+        <Route path="/:tab/:locationId?" render={(url) => <HeroloTabs url={url} />} />
 
         {/* BODY */}
         <Switch>
           <Route path="/weather/:locationId?" component={Weather} />
-          <Route path="/favorite/"> <h1>favorite</h1> </Route>
+          <Route path="/favorite"> <h1>favorite</h1> </Route>
           <Redirect exact to="/weather/redirect" />
         </Switch>
         {/* FOOTER */}

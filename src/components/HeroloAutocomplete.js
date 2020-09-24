@@ -24,6 +24,7 @@ export default function HeroloAutocomplete(props) {
   return (
     <Autocomplete
       {...props}
+      getOptionSelected={(option, value) => option.Key === value.Key}
       renderOption={(option) => {
         return (
           <Grid container alignItems="center">

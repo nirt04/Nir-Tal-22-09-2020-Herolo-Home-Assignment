@@ -30,19 +30,17 @@ const query = useQuery();
   // CurrentWeatherInfo State
   const [currentWeatherInfo, setCurrentWeatherInfo] = React.useState(null);
 
-  const fetchAutocompleteCities = async (searchQuery, locationId) => {
-    if (!searchQuery) return [];
-    const cities = await HTTP.get("locations/v1/cities/autocomplete", { language: "en-us", q: searchQuery, });
-    return cities;
-  };
+    const fetchAutocompleteCities = async (searchQuery, locationId) => {
+        if (!searchQuery) return [];
+        const cities = await HTTP.get("locations/v1/cities/autocomplete", { language: "en-us", q: searchQuery, });
+        return cities;
+    };
 
-// On Mounted
-  React.useEffect(async () => {
-    const searchQuery = query.get("search");
-    debugger;
+    const weatherDataInit = async () => {
+
+        const searchQuery = query.get("search");
 
     // Fetching cities for autocomplete with searchQuery in the route if existed
-
         setAutocompleteLoading(true);
         const cities = CITEIS_AUTOCOMPLETE_DATA || await fetchAutocompleteCities(searchQuery);
         setAutocompleteItems(cities);
@@ -58,6 +56,11 @@ const query = useQuery();
         const itemInAutocompleteOptions = cities.find( (option) => option.Key === props.match.params.locationId );
         if (itemInAutocompleteOptions) setAutocompleteValue(itemInAutocompleteOptions);
     }
+}
+
+// On Mounted
+  React.useEffect(() => {
+    weatherDataInit()
   }, []);
 
 
@@ -67,13 +70,10 @@ const query = useQuery();
       <Route
         render={({ history }) => (
           <HeroloAutocomplete
-            getOptionSelected={(option, value) => option.Key === value.Key}
             onChange={(event, newVal) => {
-              history.push({
-                pathname: `/weather/${newVal ? newVal.Key : ""}`,
-                search: `${newVal ? newVal.LocalizedName : ""}`,
-              });
-              setAutocompleteValue(newVal);
+                if(!newVal) return;
+                history.push(`/weather/${newVal.Key}/?search=${newVal.LocalizedName}`);
+                setAutocompleteValue(newVal);
             }}
             getOptionLabel={(option) => `${option.LocalizedName}, ${ option.Country ? option.Country.LocalizedName : "" }` }
             value={autocompleteValue}
@@ -85,16 +85,12 @@ const query = useQuery();
       <Route
         exact
         path="/weather/:locationId/"
-        render={({ match }) => (
-          <CurrentWeather locationId={match.params.locationId} />
-        )}
+        render={() => ( <CurrentWeather info={currentWeatherInfo} /> )}
       />
       <Route
         exact
         path="/weather/:locationId/"
-        render={({ match }) => ( 
-          <FiveDailyForecasts items={fiveDaysForecastsItems} />
-        )}
+        render={() => ( <FiveDailyForecasts items={fiveDaysForecastsItems} /> )}
       />
     </React.Fragment>
   );

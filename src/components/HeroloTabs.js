@@ -7,12 +7,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { Link } from "react-router-dom";
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,37 +18,39 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function HeroloTabs(props) {
+
+  const a11yProps = (index, tabName) => {
+    const locationId = props.url.match.params.locationId;
+    const query = props.url.location.search;
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
+      label: tabName,
+      value: tabName,
+      to: `/${tabName}${locationId ? "/" + locationId : ""}/${ query }`,
+      component: Link,
+    };
+  }
+  
   const classes = useStyles();
   const [value, setValue] = React.useState(null);
+  
   React.useEffect(() => {
-    setValue(props.url.params.tab);
-  }, [props.url.params.tab]);
+    setValue(props.url.match.params.tab);
+  }, [props.url.match.params.tab]);
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+
+  debugger;
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="simple tabs example"
-        >
-          <Tab
-            label="weather"
-            {...a11yProps(0)}
-            component={Link}
-            to="/weather/"
-            value="weather"
-          />
-          <Tab
-            value="favorite"
-            label="favorite"
-            {...a11yProps(1)}
-            component={Link}
-            to="/favorite/"
-          />
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" >
+          <Tab {...a11yProps(0, "weather")} />
+          <Tab {...a11yProps(1, "favorite")} />
         </Tabs>
       </AppBar>
     </div>

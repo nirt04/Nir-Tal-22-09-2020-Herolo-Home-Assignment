@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const HTTP = axios.create({
   baseURL: 'http://dataservice.accuweather.com/',
-
   withCredentials: false,
   headers: {
     Accept: 'application/json',
