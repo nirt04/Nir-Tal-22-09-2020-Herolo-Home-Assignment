@@ -66,7 +66,6 @@ export default function ForcastCard(props) {
               2,
               "0"
             )}-s.png`}
-            title="Paella dish"
           />
         </Grid>
         <Grid container item xs={12} className={classes.weatherInfo}>

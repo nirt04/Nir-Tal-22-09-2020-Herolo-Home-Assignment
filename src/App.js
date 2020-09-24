@@ -31,7 +31,7 @@ function App() {
         <Switch>
           <Route path="/weather/:locationId?" component={Weather} />
           <Route path="/favorite"> <h1>favorite</h1> </Route>
-          <Redirect exact to="/weather/redirect" />
+          <Redirect exact to="/weather" />
         </Switch>
         {/* FOOTER */}
       </div>

@@ -39,7 +39,7 @@ export default function HeroloAutocomplete(props) {
         );
       }}
       id="asynchronous-demo"
-      style={{ width: 300 }}
+      style={{ width: '90%' }}
       open={open}
       onOpen={() => {
         setOpen(true);
