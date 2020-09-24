@@ -3,8 +3,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import "./App.css";
-import HeroloTabs from "./components/HeroloTabs";
-import HeroloAutocomplete from "./components/HeroloAutocomplete";
+import HeroloTabs from "./components/HeroloTabs/HeroloTabs";
+// import HeroloAutocomplete from "./Views/Weather/components/HeroloAutocomplete/HeroloAutocomplete";
 import CurrentWeather from "./modules/CurrentWeather/CurrentWeather";
 import Weather from "./Views/Weather/Weather";
 

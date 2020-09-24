@@ -1,4 +1,4 @@
-import ForcastCard from "./components/ForcastCard";
+import ForcastCard from "../ForcastCard/ForcastCard";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
 import { connect } from "react-redux";
@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import days_of_daily_forecasts from "../../data/5_days_of_daily_forecasts.json";
+// import days_of_daily_forecasts from "../../data/5_days_of_daily_forecasts.json";
 import FIVE_DAYS_DATA from "../../data/5_days_of_daily_forecasts.json";
 
 const useStyles = makeStyles((theme) => ({

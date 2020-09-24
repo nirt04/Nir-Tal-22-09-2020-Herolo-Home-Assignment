@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route, useLocation } from "react-router-dom";
-import HeroloAutocomplete from "../../components/HeroloAutocomplete";
+import HeroloAutocomplete from "./components/HeroloAutocomplete/HeroloAutocomplete";
 import CurrentWeather from "../../modules/CurrentWeather/CurrentWeather";
-import FiveDailyForecasts from "../../modules/FiveDailyForecasts/FiveDailyForecasts";
+import FiveDailyForecasts from "../../components/FiveDailyForecasts/FiveDailyForecasts";
 import HTTP from "../../services/HTTP";
 import CITEIS_AUTOCOMPLETE_DATA from "../../data/cities_autocomplete.json";
 import FIVE_DAYS_DATA from "../../data/5_days_of_daily_forecasts.json";
@@ -46,13 +46,7 @@ function Weather(props) {
     setAutocompleteLoading(true);
     await sleep(1000);
     if (!searchQuery) cities = [];
-    else
-      cities =
-        CITEIS_AUTOCOMPLETE_DATA ||
-        (await HTTP.get("locations/v1/cities/autocomplete", {
-          language: "en-us",
-          q: searchQuery,
-        }));
+    else cities = CITEIS_AUTOCOMPLETE_DATA || (await HTTP.get("locations/v1/cities/autocomplete", { language: "en-us", q: searchQuery, }));
     setAutocompleteLoading(false);
     return cities;
   };
@@ -150,16 +144,10 @@ function Weather(props) {
               <HeroloAutocomplete
                 onInputChange={async (event, searchQuery) => {
                   // Emiting the function only if input changed came from user typing and not by clicking on of the options
-                  if (event && event.type === "change" && searchQuery)
-                    setAutocompleteInput(searchQuery);
+                  if (event && event.type === "change" && searchQuery) setAutocompleteInput(searchQuery);
                 }}
-                onChange={(event, newVal) => {
-                  setNewAutocompleteVal(newVal);
-                }}
-                getOptionLabel={(option) =>
-                  `${option.LocalizedName}, ${
-                    option.Country ? option.Country.LocalizedName : ""
-                  }`
+                onChange={(event, newVal) => { setNewAutocompleteVal(newVal); }}
+                getOptionLabel={(option) => `${option.LocalizedName}, ${ option.Country ? option.Country.LocalizedName : "" }`
                 }
                 value={autocompleteValue}
                 options={autocompleteItems}
@@ -172,21 +160,14 @@ function Weather(props) {
           <Route
             exact
             path="/weather/:locationId/"
-            render={(url) => (
-              <CurrentWeather
-                url={url}
-                locationId={props.match.params.locationId}
-              />
-            )}
+            render={(url) => ( <CurrentWeather url={url} locationId={props.match.params.locationId} /> )}
           />
         </Grid>
         <Grid item xs={12}>
           <Route
             exact
             path="/weather/:locationId/"
-            render={() => (
-              <FiveDailyForecasts locationId={props.match.params.locationId} />
-            )}
+            render={() => ( <FiveDailyForecasts locationId={props.match.params.locationId} /> )}
           />
         </Grid>
       </Grid>
@@ -203,10 +184,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchCurrentWeatherInfo: (payload) =>
-      dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
-    dispatchFiveDaysData: (payload) =>
-      dispatch({ type: "ADD_FIVE_DAY", payload }),
+    dispatchCurrentWeatherInfo: (payload) => dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
+    dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY", payload }),
   };
 };
 
