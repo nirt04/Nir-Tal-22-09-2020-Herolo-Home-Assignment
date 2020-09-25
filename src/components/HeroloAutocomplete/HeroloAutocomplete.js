@@ -16,6 +16,9 @@ import HTTP from "../../services/HTTP";
 import CITEIS_AUTOCOMPLETE_DATA from "../../data/cities_autocomplete.json";
 
 const useStyles = makeStyles((theme) => ({
+  root:{
+    padding: 0
+  },
   icon: {
     color: theme.palette.text.secondary,
     marginRight: theme.spacing(2),
@@ -26,7 +29,6 @@ const useQuery = () => new URLSearchParams(useLocation().search);
 /* prettier-ignore */
 function HeroloAutocomplete(props) {
   const query = useQuery();
-  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [items, setItems] = React.useState([]);
@@ -80,6 +82,7 @@ function HeroloAutocomplete(props) {
   }, []);
 
   util.useDebounce(input, 1000, async () => { if (input) setItems(await fetchCities(input)); });
+  const classes = useStyles();
 
   return (
     <Autocomplete
@@ -93,28 +96,22 @@ function HeroloAutocomplete(props) {
       value={value}
       options={items}
       loading={loading}
-      getOptionSelected={(option, value) =>
-        value && option && option.Key === value.Key
-      }
+      getOptionSelected={(option, value) => value && option && option.Key === value.Key }
+      open={open}
+      onOpen={() => { setOpen(true); }}
+      onClose={() => { setOpen(false); }}
       renderOption={(option) => {
         return (
-          <Grid container alignItems="center">
+          <Grid container alignItems="center" className={classes.root}>
             <Grid item>
               <LocationOnIcon className={classes.icon} />
             </Grid>
             <Grid item xs>
-              <Typography variant="body2" color="textSecondary">
-                {`${option.LocalizedName}, ${option.Country.LocalizedName}`}
-              </Typography>
+              <Typography variant="body2" color="textSecondary">{`${option.LocalizedName}, ${option.Country.LocalizedName}`}</Typography>
             </Grid>
           </Grid>
         );
       }}
-      id="asynchronous-demo"
-      // style={{ width: '100%' }}
-      open={open}
-      onOpen={() => { setOpen(true); }}
-      onClose={() => { setOpen(false); }}
       renderInput={(params) => (
         <TextField
           autoFocus

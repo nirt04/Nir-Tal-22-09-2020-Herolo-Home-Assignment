@@ -12,9 +12,10 @@ const convert = require('convert-units')
 
 const useStyles = makeStyles({
   media: {
-    margin: "auto",
-    width: "150px",
-    height: "150px",
+    backgroundSize: 'auto',
+    // margin: "auto",
+    width: "47px",
+    height: "45px",
   },
   weatherInfo: {
     margin: "10px",

@@ -22,7 +22,7 @@ body{
 
 /* As hex codes */
 
-.color-primary-0 { color: #461EB7 }	/* Main Primary color */
+.color-primary-0 { color: #461EB7; background-color: #461EB7;}	/* Main Primary color */
 .color-primary-1 { color: #7F63CE }
 .color-primary-2 { color: #613FBF }
 .color-primary-3 { color: #320F95 }

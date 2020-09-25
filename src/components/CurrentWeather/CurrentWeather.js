@@ -1,10 +1,17 @@
 import React from "react";
 import current_weather from "../../data/current_weather.json";
 import { makeStyles } from "@material-ui/core/styles";
-import appConfigActions from "../../App/actions"
+import appConfigActions from "../../App/actions";
 import { accuweatherAPI } from "../../services/API/accuweather";
 import { connect } from "react-redux";
-import { Box, Button, CardMedia, Divider } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  CardMedia,
+  Divider,
+  Grid,
+  Typography,
+} from "@material-ui/core";
 import moment from "moment";
 
 const useStyles = makeStyles({
@@ -12,14 +19,15 @@ const useStyles = makeStyles({
     minWidth: "unset",
   },
   media: {
+    backgroundSize: "auto",
     // margin: "auto",
-    width: "85px",
-    height: "85px",
+    width: "45px",
+    height: "45px",
   },
 });
 
 function CurrentWeather(props) {
-  const locationId = props.match.params.locationId
+  const locationId = props.match.params.locationId;
   const [currentWeather, setCurrentWeather] = React.useState(null);
   // const [props.appConfig.tempratureUnit, setTemperatureUnit] = React.useState("Metric");
   const classes = useStyles();
@@ -42,15 +50,23 @@ function CurrentWeather(props) {
 
   debugger;
   return (
-    <div>
-      <h1>{props.currentWeather.info.name}</h1>
+    <React.Fragment >
+      <Typography variant="h5" gutterBottom>
+        {props.currentWeather.info.name}
+      </Typography>
       {currentWeather &&
         currentWeather.map((item, i) => (
           <React.Fragment key={i}>
-            <Box display="flex" justifyContent="center">
+            <Box display="flex" justifyContent="center" flexDirection="column">
               <Button
-                onClick={() => props.updateAppConfig({tempratureUnit: "Metric"})}
-                color={props.appConfig.tempratureUnit === "Metric" ? "primary" : undefined}
+                onClick={() =>
+                  props.updateAppConfig({ tempratureUnit: "Metric" })
+                }
+                color={
+                  props.appConfig.tempratureUnit === "Metric"
+                    ? "primary"
+                    : undefined
+                }
                 className={classes.tempUnitBtn}
               >
                 °C
@@ -62,20 +78,33 @@ function CurrentWeather(props) {
                 // m={2}
               />
               <Button
-                onClick={() => props.updateAppConfig({tempratureUnit: "Imperial"})}
-                color={props.appConfig.tempratureUnit === "Imperial" ? "primary" : undefined}
+                onClick={() =>
+                  props.updateAppConfig({ tempratureUnit: "Imperial" })
+                }
+                color={
+                  props.appConfig.tempratureUnit === "Imperial"
+                    ? "primary"
+                    : undefined
+                }
                 className={classes.tempUnitBtn}
               >
                 °F
               </Button>
             </Box>
-            <h1>{item.WeatherText}</h1>
-            <h1>
+            <Typography variant="h5" gutterBottom>
+              {item.WeatherText}
+            </Typography>
+
+            <h5>
               {" "}
               {moment(item.LocalObservationDateTime).format("dddd")}{" "}
               {moment(item.LocalObservationDateTime).format("HH:MM")}{" "}
-            </h1>
-            <h1>{Math.floor(item.Temperature[props.appConfig.tempratureUnit].Value)}</h1>
+            </h5>
+            <h5>
+              {Math.floor(
+                item.Temperature[props.appConfig.tempratureUnit].Value
+              )}
+            </h5>
             <CardMedia
               className={classes.media}
               image={`https://developer.accuweather.com/sites/default/files/${item.WeatherIcon.toString().padStart(
@@ -86,8 +115,8 @@ function CurrentWeather(props) {
           </React.Fragment>
         ))}
 
-      <h1>hello current_weather </h1>
-    </div>
+      <h5>hello current_weather </h5>
+    </React.Fragment>
   );
 }
 
@@ -100,8 +129,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateAppConfig: (payload) => dispatch(appConfigActions.UPDATE_APP_CONFIG(payload)),
-    dispatchCurrentWeather: (payload) => dispatch({ type: "ADD_CURRENT_WEATHER_RESULTS", payload }),
+    updateAppConfig: (payload) =>
+      dispatch(appConfigActions.UPDATE_APP_CONFIG(payload)),
+    dispatchCurrentWeather: (payload) =>
+      dispatch({ type: "ADD_CURRENT_WEATHER_RESULTS", payload }),
   };
 };
 
