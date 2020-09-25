@@ -1,3 +1,10 @@
 .App {
     height: 100vh;
 }
+body{
+    background-image: url("/img/background.svg");
+    background-color: #450057;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
