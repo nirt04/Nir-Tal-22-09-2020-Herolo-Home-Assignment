@@ -19,11 +19,12 @@ const useStyles = makeStyles({
 });
 
 function CurrentWeather(props) {
+  const locationId = props.match.params.locationId
   const [currentWeather, setCurrentWeather] = React.useState(null);
   // const [props.appConfig.tempratureUnit, setTemperatureUnit] = React.useState("Metric");
   const classes = useStyles();
 
-  const dataInit = async (locationId) => {
+  const dataInit = async () => {
     if (!locationId) return;
 
     const currentWeather =
@@ -31,7 +32,7 @@ function CurrentWeather(props) {
       props.currentWeather[locationId] ||
       (await accuweatherAPI.currentWeather(locationId));
     setCurrentWeather(currentWeather);
-    props.dispatchCurrentWeather({ [props.locationId]: currentWeather });
+    props.dispatchCurrentWeather({ [locationId]: currentWeather });
   };
 
   React.useEffect(() => {
@@ -45,7 +46,7 @@ function CurrentWeather(props) {
       <h1>{props.currentWeather.info.name}</h1>
       {currentWeather &&
         currentWeather.map((item, i) => (
-          <React.Fragment>
+          <React.Fragment key={i}>
             <Box display="flex" justifyContent="center">
               <Button
                 onClick={() => props.updateAppConfig({tempratureUnit: "Metric"})}
