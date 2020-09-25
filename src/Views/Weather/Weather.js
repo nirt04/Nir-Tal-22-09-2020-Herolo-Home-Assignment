@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route, useLocation } from "react-router-dom";
-import HeroloAutocomplete from "./components/HeroloAutocomplete/HeroloAutocomplete";
-import CurrentWeather from "../../modules/CurrentWeather/CurrentWeather";
+import HeroloAutocomplete from "../../components/HeroloAutocomplete/HeroloAutocomplete";
+import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import FiveDailyForecasts from "../../components/FiveDailyForecasts/FiveDailyForecasts";
 import HTTP from "../../services/HTTP";
 import CITEIS_AUTOCOMPLETE_DATA from "../../data/cities_autocomplete.json";
@@ -95,6 +95,7 @@ function Weather(props) {
 
   const useStyles = makeStyles((theme) => ({
     root: {
+      
       margin: '20px auto',
       maxWidth: "994px",
     },
@@ -185,7 +186,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatchCurrentWeatherInfo: (payload) => dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
-    dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY", payload }),
+    dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY_FETCH_DATA", payload }),
   };
 };
 

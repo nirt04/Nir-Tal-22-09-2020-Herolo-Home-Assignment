@@ -1,6 +1,6 @@
 import HTTP from "../HTTP";
 export const accuweatherAPI = {
-  fiveDays: (loactionId) =>
+  fiveDays: (loactionId, isMetric) =>
     HTTP.get(
       `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${loactionId}`,
       { language: "en-us", details: true, metric: true }

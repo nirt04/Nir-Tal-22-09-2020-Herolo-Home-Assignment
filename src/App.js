@@ -5,8 +5,9 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import "./App.css";
 import HeroloTabs from "./components/HeroloTabs/HeroloTabs";
 // import HeroloAutocomplete from "./Views/Weather/components/HeroloAutocomplete/HeroloAutocomplete";
-import CurrentWeather from "./modules/CurrentWeather/CurrentWeather";
+import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
 import Weather from "./Views/Weather/Weather";
+import { Box, Grid } from "@material-ui/core";
 
 const theme = createMuiTheme({
   breakpoints: {
@@ -24,16 +25,27 @@ function App() {
     // <MuiThemeProvider theme={theme}>
     <Router>
       <div className="App">
-        {/* HEADER */}
-        <Route path="/:tab/:locationId?" render={(url) => <HeroloTabs url={url} />} />
-
-        {/* BODY */}
-        <Switch>
-          <Route path="/weather/:locationId?" component={Weather} />
-          <Route path="/favorite"> <h1>favorite</h1> </Route>
-          <Redirect exact to="/weather" />
-        </Switch>
-        {/* FOOTER */}
+        <Box height="100%" display="flex" flexDirection="column">
+          {/* HEADER */}
+          <Box flexGrow={0}>
+            <Route
+              path="/:tab/:locationId?"
+              render={(url) => <HeroloTabs url={url} />}
+            />
+          </Box>
+          {/* BODY */}
+          <Box flexGrow={1}>
+            <Switch>
+              <Route path="/weather/:locationId?" component={Weather} />
+              <Route path="/favorite">
+                {" "}
+                <h1>favorite</h1>{" "}
+              </Route>
+              <Redirect exact to="/weather" />
+            </Switch>
+          </Box>
+          {/* FOOTER */}
+        </Box>
       </div>
     </Router>
     // </MuiThemeProvider>

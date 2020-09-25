@@ -22,7 +22,6 @@ export default function HeroloAutocomplete(props) {
   const [open, setOpen] = React.useState(false);
   return (
     <Autocomplete
-
       {...props}
       getOptionSelected={(option, value) => (value && option) && option.Key === value.Key}
       renderOption={(option) => {
