@@ -23,6 +23,7 @@ function Weather(props) {
 		},
 
 		bgs: {
+			height: '203px',
 			background: "#461EB7",
 			padding: "17px",
 			"& > *": {
@@ -56,13 +57,13 @@ function Weather(props) {
 	return (
 		<React.Fragment>
 			<Grid container className={classes.root} spacing={5}>
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={"6"}>
 					<Route component={WelcomeSearch} />
 				</Grid>
 				<Grid
 					item
 					xs={12}
-					md={6}
+					md={"6"}
 					//   spacing={3}
 					container
 					// className={`${classes.currentWeatherGrid}`}
@@ -79,7 +80,7 @@ function Weather(props) {
 											container
 											xs={12}
 											// className={classes.bgs}
-											style={{ paddingLeft: "7px" }}
+											style={{ paddingLeft: "7px", padding: '15px' }}
 										>
 											<Grid item>
 												<CardMedia
