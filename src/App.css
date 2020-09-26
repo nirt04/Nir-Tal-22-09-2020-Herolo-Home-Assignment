@@ -2,8 +2,8 @@
     height: 100vh;
 }
 
-body {
-    background-image: url("/img/Wave-16.7s-2544px (2).svg");
+.App {
+    background-image: url("/img/Wave-16.7s-2544px_2.svg");
     background-color: #450057;
     background-attachment: fixed;
     background-size: cover;

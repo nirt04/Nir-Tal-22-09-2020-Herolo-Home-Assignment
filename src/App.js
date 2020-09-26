@@ -3,17 +3,37 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import "./App.css";
+import { makeStyles } from "@material-ui/core/styles";
+
 import HeroloTabs from "./components/HeroloTabs/HeroloTabs";
 // import HeroloAutocomplete from "./Views/Weather/components/HeroloAutocomplete/HeroloAutocomplete";
 import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
 import Weather from "./Views/Weather/Weather";
-import { Box, Grid } from "@material-ui/core";
+import { Box, CardMedia, Grid } from "@material-ui/core";
+
+const useStyles = makeStyles({
+	media: {
+		backgroundSize: "auto",
+		// margin: "auto",
+		width: "100vw",
+		height: "100vh",
+		opacity: 0.3,
+		"-webkit-mask-image":
+			" -webkit-linear-gradient(right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))",
+		position: "fixed",
+		backgroundImage:
+			"url(https://www.ubackground.com/_ph/17/563786933.jpg)",
+	},
+});
 
 const theme = createMuiTheme({
 	palette: {
 		type: "dark",
 		primary: {
-			main: "#FFFFFF",
+			main: "#3810AE",
+		},
+		neutral: {
+			main: "#FFFFF",
 		},
 		secondary: {
 			main: "#ffffff6e",
@@ -29,21 +49,26 @@ const theme = createMuiTheme({
 	},
 });
 function App() {
+	const classes = useStyles();
 	const [selectedLocation, setselectedLocation] = React.useState(null);
 	return (
 		<MuiThemeProvider theme={theme}>
 			<Router>
 				<div className="App">
 					<Box height="100%" display="flex" flexDirection="column">
+						<CardMedia
+							className={classes.media}
+							image="https://www.wallpaperflare.com/static/656/666/467/landscape-mountains-clouds-forest-wallpaper.jpg"
+						/>
 						{/* HEADER */}
-						<Box flexGrow={0}>
+						<Box flexGrow={0} className="z-10">
 							<Route
 								path="/:tab/:locationId?"
 								render={(url) => <HeroloTabs url={url} />}
 							/>
 						</Box>
 						{/* BODY */}
-						<Box flexGrow={1}>
+						<Box flexGrow={1} className="z-10">
 							<Switch>
 								<Route
 									path="/weather/:locationId?"

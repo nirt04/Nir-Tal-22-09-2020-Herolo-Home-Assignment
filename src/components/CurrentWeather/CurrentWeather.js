@@ -64,7 +64,7 @@ function CurrentWeather(props) {
                 onClick={() =>
                   props.updateAppConfig({ tempratureUnit: "Metric" })
                 }
-                color={ props.appConfig.tempratureUnit === "Metric" ? "primary" : 'secondary' }
+                color={ props.appConfig.tempratureUnit === "Metric" ? "neutral(2)" : 'secondary' }
                 className={classes.tempUnitBtn}
               >
                 °C
@@ -78,7 +78,7 @@ function CurrentWeather(props) {
               <Button
                 onClick={() =>
                   props.updateAppConfig({ tempratureUnit: "Imperial" })
-                } color={ props.appConfig.tempratureUnit === "Imperial" ? "primary" : 'secondary' }
+                } color={ props.appConfig.tempratureUnit === "Imperial" ? "neutral(2)" : 'secondary' }
                 className={classes.tempUnitBtn}
               >
                 °F
