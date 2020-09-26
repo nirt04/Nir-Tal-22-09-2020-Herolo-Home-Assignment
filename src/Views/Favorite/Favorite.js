@@ -9,35 +9,29 @@ import InboxIcon from "@material-ui/icons/Inbox";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import { Box, Card, Container, Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-
-const useStyles = makeStyles((theme) => {
-  debugger;
-  return {
-    favList: {
-      maxHeight: "65vh",
-      overflowY: "auto",
-    },
-    root: {
-      margin: "0 auto",
-      //   marginTop: "17vh",
-      width: "100%",
-      maxWidth: "957px",
-      backgroundColor: theme.palette.OutterCard.main,
-    },
-    innerCard: {
-      //   width: "100%",
-      //   margin: "20px",
-      // maxWidth: 360,
-      backgroundColor: theme.palette.innerCard.main,
-    },
-  };
-});
-
+import { connect } from "react-redux";
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
-export default function SimpleList() {
+function SimpleList(props) {
+  const useStyles = makeStyles((theme) => {
+    debugger;
+    return {
+      favList: {
+        maxHeight: "65vh",
+        overflowY: "auto",
+      },
+      root: {
+        margin: "0 auto",
+        width: "100%",
+        maxWidth: "957px",
+        // backgroundColor: theme.palette.otterCard[props.appConfig.themeType],
+      },
+  
+    };
+  });
+
   const classes = useStyles();
 
   return (
@@ -49,14 +43,14 @@ export default function SimpleList() {
     >
       <Grid container spacing={3} className="py-4">
         <Grid item xs={12}>
-          <Card container className={classes.innerCard}>
+          <Card container>
             <Typography variant="h5" className="px-4 py-3">
               h5. Heading
             </Typography>
           </Card>
         </Grid>
         <Grid item xs={12}>
-          <Card container className={(classes.innerCard, classes.favList)}>
+          <Card container className={(classes.favList)}>
             <List component="nav" aria-label="main mailbox folders">
               <ListItem button>
                 <ListItemIcon>
@@ -215,3 +209,11 @@ export default function SimpleList() {
     </Box>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    appConfig: state.appConfig,
+  };
+};
+
+export default connect(mapStateToProps)(SimpleList);

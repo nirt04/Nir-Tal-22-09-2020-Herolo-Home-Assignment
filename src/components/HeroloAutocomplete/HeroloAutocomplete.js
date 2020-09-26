@@ -5,12 +5,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { util } from "../../services/util";
 import TextField from "@material-ui/core/TextField";
-import {  useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import Grid from "@material-ui/core/Grid";
-// import ListboxComponent from "./ListboxComponent"
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
@@ -18,29 +17,28 @@ import HTTP from "../../services/HTTP";
 import CITEIS_AUTOCOMPLETE_DATA from "../../data/cities_autocomplete.json";
 import { Paper } from "@material-ui/core";
 import "./WeatherAutocomplete.scss";
-const useStyles = makeStyles((theme) => ({
-	root: {
-		// padding: 0,
-		background: "#3810AE",
-		padding: "2px 4px",
-		display: "flex",
-		alignItems: "center",
-	},
-
-	icon: {
-		// color: theme.palette.text.secondary,
-		marginRight: theme.spacing(2),
-	},
-
-	resultsList: {
-
-	},
-}));
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 /* prettier-ignore */
 
 function HeroloAutocomplete(props) {
+
+
+	const useStyles = makeStyles((theme) => ({
+		root: {
+			// padding: 0,
+			backgroundColor: theme.palette.outterCard[props.appConfig.themeType],
+			padding: "2px 4px",
+			display: "flex",
+			alignItems: "center",
+		},
+	
+		icon: {
+			// color: theme.palette.text.secondary,
+			marginRight: theme.spacing(2),
+		},
+	}));
+
 	const query = useQuery();
 	const [open, setOpen] = React.useState(false);
 	const [loading, setLoading] = React.useState(false);
@@ -117,14 +115,14 @@ function HeroloAutocomplete(props) {
 			getOptionSelected={(option, value) => value && option && option.Key === value.Key }
 			open={open}
 			onOpen={() => { setOpen(true); }}
-			onClose={() => { setOpen(false); }}
+			onClose={() => { setOpen(true); }}
 			renderOption={(option) => {
 				return (
-					<Grid container alignItems="center" className={classes.resultsList}>
+					<Grid container alignItems="center" className="asdsadlfgjoedfikghjokdfsghj" >
 						<Grid item>
 							<LocationOnIcon className={classes.icon} />
 						</Grid>
-						<Grid item xs className={classes.resultsList}>
+						<Grid item xs >
 							<Typography variant="body2" >{`${option.LocalizedName}, ${option.Country.LocalizedName}`}</Typography>
 						</Grid>
 					</Grid>
@@ -162,18 +160,19 @@ function HeroloAutocomplete(props) {
 }
 
 const mapStateToProps = (state) => {
-	return {
-		// fiveDay: state.fiveDay,
-		// currentWeather: state.currentWeatherReducer,
-	};
+  return {
+    appConfig: state.appConfig,
+    // fiveDay: state.fiveDay,
+    // currentWeather: state.currentWeatherReducer,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		dispatchCurrentWeatherInfo: (payload) =>
-			dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
-		// dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY_FETCH_DATA", payload }),
-	};
+  return {
+    dispatchCurrentWeatherInfo: (payload) =>
+      dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
+    // dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY_FETCH_DATA", payload }),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeroloAutocomplete);

@@ -30,13 +30,17 @@ const useStyles = makeStyles({
 function App(props) {
   const theme = createMuiTheme({
     palette: {
-	  type: props.appConfig.themeType,
-	  
-      innerCard: {
-        main: "#461eb7",
+      type: props.appConfig.themeType,
+      background: {
+        paper: props.appConfig.themeType == "dark" ? "#3810ae" : "#FFFF",
       },
-      OutterCard: {
-        main: "#3810ae",
+      innerCard: {
+        light: "#FFFF",
+        dark: "#461eb7",
+      },
+      outterCard: {
+        light: "#FFFF",
+        dark: "#3810ae",
       },
     },
     breakpoints: {
