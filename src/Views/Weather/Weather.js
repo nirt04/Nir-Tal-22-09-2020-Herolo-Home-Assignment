@@ -23,7 +23,7 @@ function Weather(props) {
 		},
 
 		bgs: {
-			height: '203px',
+			minHeight: '203px',
 			background: "#461EB7",
 			padding: "17px",
 			"& > *": {
@@ -33,12 +33,14 @@ function Weather(props) {
 		currentWeatherReportCard: {
 			color: "white",
 			width: "100%",
+			height: 'max-content'
 			//   height: "100%",
 			//   padding: "10px",
 		},
 		currentWeatherGrid: {
 			background: "#3810AE",
 			padding: "17px",
+			height: 'max-content'
 			//   padding: "22px",
 		},
 		CurrentWeather: {
@@ -46,6 +48,7 @@ function Weather(props) {
 		},
 		root: {
 			// padding: '10px',
+			width: '100%',
 			marginTop: "17vh",
 			margin: "0 auto",
 			maxWidth: "1005px",
