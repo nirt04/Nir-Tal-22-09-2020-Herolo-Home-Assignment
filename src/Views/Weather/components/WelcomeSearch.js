@@ -23,7 +23,7 @@ export default function WelcomeSearch() {
       <Box mt={8} width="100%">
         <Route component={HeroloAutocomplete} />
         <Box mt={2}>
-          <Typography variant="subtitle2">
+          <Typography variant="subtitle2" className="text-white">
             Best way to know your ciry weather.
           </Typography>
         </Box>

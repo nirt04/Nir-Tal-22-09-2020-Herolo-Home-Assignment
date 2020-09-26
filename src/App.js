@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 		// margin: "auto",
 		width: "100vw",
 		height: "100vh",
-		opacity: 0.3,
+		opacity: 0.15,
 		"-webkit-mask-image":
 			" -webkit-linear-gradient(right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))",
 		position: "fixed",
@@ -61,14 +61,14 @@ function App() {
 							image="https://www.wallpaperflare.com/static/656/666/467/landscape-mountains-clouds-forest-wallpaper.jpg"
 						/>
 						{/* HEADER */}
-						<Box flexGrow={0} zIndex={1} >
+						<Box flexGrow={0} zIndex={1}>
 							<Route
 								path="/:tab/:locationId?"
 								render={(url) => <HeroloTabs url={url} />}
 							/>
 						</Box>
 						{/* BODY */}
-						<Box flexGrow={1} zIndex={1} >
+						<Box flexGrow={1} zIndex={1}>
 							<Switch>
 								<Route
 									path="/weather/:locationId?"
