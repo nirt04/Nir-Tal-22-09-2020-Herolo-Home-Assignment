@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/css/main.85e1fc43.chunk.css",
+    "main.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.b39235e9.chunk.js",
+    "main.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.b39235e9.chunk.js.map",
+    "runtime-main.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/runtime-main.19da98f5.js",
+    "runtime-main.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/runtime-main.19da98f5.js.map",
+    "static/js/2.508c3d7a.chunk.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.508c3d7a.chunk.js",
+    "static/js/2.508c3d7a.chunk.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.508c3d7a.chunk.js.map",
+    "index.html": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/index.html",
+    "precache-manifest.d563558823cdcec24ae7ca61324d2979.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/precache-manifest.d563558823cdcec24ae7ca61324d2979.js",
+    "service-worker.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/service-worker.js",
+    "static/css/main.85e1fc43.chunk.css.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/css/main.85e1fc43.chunk.css.map",
+    "static/js/2.508c3d7a.chunk.js.LICENSE.txt": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.508c3d7a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.19da98f5.js",
+    "static/js/2.508c3d7a.chunk.js",
+    "static/css/main.85e1fc43.chunk.css",
+    "static/js/main.b39235e9.chunk.js"
+  ]
+}
