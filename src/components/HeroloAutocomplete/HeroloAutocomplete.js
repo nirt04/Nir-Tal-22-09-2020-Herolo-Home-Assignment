@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	icon: {
-		color: theme.palette.text.secondary,
+		// color: theme.palette.text.secondary,
 		marginRight: theme.spacing(2),
 	},
 
@@ -125,7 +125,7 @@ function HeroloAutocomplete(props) {
 							<LocationOnIcon className={classes.icon} />
 						</Grid>
 						<Grid item xs className={classes.resultsList}>
-							<Typography variant="body2" color="textSecondary">{`${option.LocalizedName}, ${option.Country.LocalizedName}`}</Typography>
+							<Typography variant="body2" >{`${option.LocalizedName}, ${option.Country.LocalizedName}`}</Typography>
 						</Grid>
 					</Grid>
 				);
@@ -134,7 +134,7 @@ function HeroloAutocomplete(props) {
 				<Paper component="form" className={classes.root}>	
 				<TextField
 				className="WeatherAutocomplete--input"
-				color="natural"
+				// color="natural"
 				disableUnderline
 					autoFocus
 					{...params}

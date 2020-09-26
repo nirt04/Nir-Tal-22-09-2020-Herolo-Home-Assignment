@@ -11,11 +11,12 @@ export default function WelcomeSearch() {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.root}>
-      <Typography variant="h4" gutterBottom className="text-white"> Diffrent kind of weather </Typography>
-      <Typography variant="h4" gutterBottom className="text-white"> inside of 24/7 hours. </Typography>
+    <Grid container >
+      
+      <Typography color="textPrimary" variant="h4" gutterBottom > Diffrent kind of weather </Typography>
+      <Typography color="textPrimary" variant="h4" gutterBottom > inside of 24/7 hours. </Typography>
       <Box mt={2}>
-        <Typography m={2} variant="subtitle2" gutterBottom className="text-white">
+        <Typography color="textPrimary" m={2} variant="subtitle2" gutterBottom >
           Yet too often some very human cultural artifacts really lead the
           business down the certain routes.
         </Typography>
@@ -23,7 +24,7 @@ export default function WelcomeSearch() {
       <Box mt={8} width="100%">
         <Route component={HeroloAutocomplete} />
         <Box mt={2}>
-          <Typography variant="subtitle2" className="text-white">
+          <Typography color="textPrimary" variant="subtitle2" >
             Best way to know your ciry weather.
           </Typography>
         </Box>

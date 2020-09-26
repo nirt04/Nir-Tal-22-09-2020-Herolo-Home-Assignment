@@ -1,5 +1,6 @@
 export const appConfigReducer = (
   state = {
+    themeType: 'dark',
     tempratureUnit: "Metric",
   },
   action

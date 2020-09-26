@@ -27,11 +27,11 @@ function Weather(props) {
       background: "#461EB7",
       padding: "17px",
       "& > *": {
-        color: "white",
+        // color: "white",
       },
     },
     currentWeatherReportCard: {
-      color: "white",
+      // color: "white",
       width: "100%",
       height: "max-content",
       //   height: "100%",

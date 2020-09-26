@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import "./App.css";
 import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 
 import HeroloTabs from "./components/HeroloTabs/HeroloTabs";
 // import HeroloAutocomplete from "./Views/Weather/components/HeroloAutocomplete/HeroloAutocomplete";
@@ -26,74 +27,61 @@ const useStyles = makeStyles({
   },
 });
 
-const theme = createMuiTheme({
-  palette: {
-    type: "dark",
-    innerCard: {
-      main: "#461eb7",
+function App(props) {
+  const theme = createMuiTheme({
+    palette: {
+	  type: props.appConfig.themeType,
+	  
+      innerCard: {
+        main: "#461eb7",
+      },
+      OutterCard: {
+        main: "#3810ae",
+      },
     },
-    OutterCard: {
-      main: "#3810ae",
+    breakpoints: {
+      // Define custom breakpoint values.
+      // These will apply to Material-UI components that use responsive
+      // breakpoints, such as `Grid` and `Hidden`. You can also use the
+      // theme breakpoint functions `up`, `down`, and `between` to create
+      // media queries for these breakpoints
+      values: { xs: 0, sm: 450, md: 600, lg: 900, xl: 1200, test: 1120 },
     },
-    primary: {
-      main: "#3810AE",
-    },
-    neutral: {
-      main: "#FFFFF",
-    },
-    secondary: {
-      main: "#ffffff6e",
-    },
-  },
-  breakpoints: {
-    // Define custom breakpoint values.
-    // These will apply to Material-UI components that use responsive
-    // breakpoints, such as `Grid` and `Hidden`. You can also use the
-    // theme breakpoint functions `up`, `down`, and `between` to create
-    // media queries for these breakpoints
-    values: { xs: 0, sm: 450, md: 600, lg: 900, xl: 1200, test: 1120 },
-  },
-});
-function App() {
+  });
   const classes = useStyles();
   const [selectedLocation, setselectedLocation] = React.useState(null);
   return (
     <MuiThemeProvider theme={theme}>
-      <Router>
-        <div className="App">
-          <Grid container spacing={3}>
-            {/* <Box height="100%" display="flex" flexDirection="column"> */}
-            <CardMedia
-              className={classes.media}
-              image="https://www.wallpaperflare.com/static/656/666/467/landscape-mountains-clouds-forest-wallpaper.jpg"
-            />
-            <Grid item xs={12}>
-              {/* HEADER */}
-              {/* <Box flexGrow={0} zIndex={1}> */}
-              <Route
-                path="/:tab/:locationId?"
-                render={(url) => <HeroloTabs url={url} />}
-              />
-            </Grid>
-            {/* </Box> */}
-            {/* BODY */}
-            {/* <Box flexGrow={1} zIndex={1}> */}
-            <Grid item xs={12}>
-              <Switch>
-                <Route path="/weather/:locationId?" component={Weather} />
-                <Route path="/favorite" component={Favorite} />
+      <CardMedia
+        className={classes.media}
+        image="https://www.wallpaperflare.com/static/656/666/467/landscape-mountains-clouds-forest-wallpaper.jpg"
+      />
 
-                <Redirect exact to="/weather" />
-              </Switch>
-            </Grid>
-            {/* </Box> */}
-            {/* FOOTER */}
-            {/* </Box> */}
+      <Router>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Route
+              path="/:tab/:locationId?"
+              render={(url) => <HeroloTabs url={url} />}
+            />
           </Grid>
-        </div>
+          <Grid item xs={12}>
+            <Switch>
+              <Route path="/weather/:locationId?" component={Weather} />
+              <Route path="/favorite" component={Favorite} />
+              <Redirect exact to="/weather" />
+            </Switch>
+          </Grid>
+        </Grid>
       </Router>
     </MuiThemeProvider>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    appConfig: state.appConfig,
+  };
+};
+
+export default connect(mapStateToProps)(App);
