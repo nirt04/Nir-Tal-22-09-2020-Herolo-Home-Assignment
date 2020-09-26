@@ -61,14 +61,14 @@ function App() {
 							image="https://www.wallpaperflare.com/static/656/666/467/landscape-mountains-clouds-forest-wallpaper.jpg"
 						/>
 						{/* HEADER */}
-						<Box flexGrow={0} className="z-10">
+						<Box flexGrow={0} zIndex={1} >
 							<Route
 								path="/:tab/:locationId?"
 								render={(url) => <HeroloTabs url={url} />}
 							/>
 						</Box>
 						{/* BODY */}
-						<Box flexGrow={1} className="z-10">
+						<Box flexGrow={1} zIndex={1} >
 							<Switch>
 								<Route
 									path="/weather/:locationId?"
