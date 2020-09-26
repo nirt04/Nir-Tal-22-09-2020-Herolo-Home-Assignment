@@ -14,156 +14,129 @@ import WelcomeSearch from "./components/WelcomeSearch";
 import { Box, Card, CardMedia, Typography } from "@material-ui/core";
 
 function Weather(props) {
-	const useStyles = makeStyles((theme) => ({
-		media: {
-			// backgroundSize: 'co',
-			// margin: "auto",
-			width: "96px",
-			height: "100%",
-		},
+  const useStyles = makeStyles((theme) => ({
+    media: {
+      // backgroundSize: 'co',
+      // margin: "auto",
+      width: "96px",
+      height: "100%",
+    },
 
-		bgs: {
-			minHeight: '203px',
-			background: "#461EB7",
-			padding: "17px",
-			"& > *": {
-				color: "white",
-			},
-		},
-		currentWeatherReportCard: {
-			color: "white",
-			width: "100%",
-			height: 'max-content'
-			//   height: "100%",
-			//   padding: "10px",
-		},
-		currentWeatherGrid: {
-			background: "#3810AE",
-			padding: "17px",
-			height: 'max-content'
-			//   padding: "22px",
-		},
-		CurrentWeather: {
-			//   margin: "20px 0",
-		},
-		root: {
-			// padding: '10px',
-			width: '100%',
-			marginTop: "17vh",
-			margin: "0 auto",
-			maxWidth: "1005px",
-		},
-	}));
+    bgs: {
+      minHeight: "203px",
+      background: "#461EB7",
+      padding: "17px",
+      "& > *": {
+        color: "white",
+      },
+    },
+    currentWeatherReportCard: {
+      color: "white",
+      width: "100%",
+      height: "max-content",
+      //   height: "100%",
+      //   padding: "10px",
+    },
+    currentWeatherGrid: {
+      background: "#3810AE",
+      padding: "17px",
+      height: "max-content",
+      //   padding: "22px",
+    },
+    CurrentWeather: {
+      //   margin: "20px 0",
+    },
+    root: {
+      // padding: '10px',
+      width: "100%",
+      marginTop: "17vh",
+      margin: "0 auto",
+      maxWidth: "1005px",
+    },
+  }));
 
-	const classes = useStyles();
+  const classes = useStyles();
 
-	return (
-		<React.Fragment>
-			<Grid container className={classes.root} spacing={5}>
-				<Grid item xs={12} md={"6"}>
-					<Route component={WelcomeSearch} />
-				</Grid>
-				<Grid
-					item
-					xs={12}
-					md={"6"}
-					//   spacing={3}
-					container
-					// className={`${classes.currentWeatherGrid}`}
-				>
-					<Card container  className={`${classes.currentWeatherGrid}`}>
-						<Grid container spacing={3}>
-							<Grid item xs={12}>
-								<Grid container>
-									<Card
-										className={`${classes.currentWeatherReportCard} bg-card-primary-0`}
-										container
-									>
-										<Grid
-											container
-											xs={12}
-											// className={classes.bgs}
-											style={{ paddingLeft: "7px", padding: '15px' }}
-										>
-											<Grid item>
-												<CardMedia
-													className={classes.media}
-													image={`https://www.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png`}
-												/>
-											</Grid>
-											<Grid item>
-												<Typography variant="h5">
-													Total Weather Report
-												</Typography>
-												<Typography variant="h5">
-													{" "}
-													some info
-												</Typography>
-											</Grid>
-										</Grid>
-									</Card>
-								</Grid>
-							</Grid>
-							<Grid
-								item
-								xs={12}
-								className={classes.CurrentWeather}
-							>
-								<Card className={classes.bgs}>
-									<Route
-										exact
-										path="/weather/:locationId/"
-										component={CurrentWeather}
-									/>
-								</Card>
-							</Grid>
-						</Grid>
-					</Card>
-				</Grid>
-				{/* <Grid item xs={3}>
-          <Box display="flex" flexDirection="column">
-            <Route
-              exact
-              path="/weather/:locationId/"
-              component={CurrentWeather}
-            />
-            <Route
-              exact
-              path="/weather/:locationId/"
-              component={CurrentWeather}
-            />
-          </Box>
-        </Grid> */}
-				{/* <Grid item xs={12}>
-          <Box display="flex" flexDirection="column">
-            <h1>some info</h1>
-            <h2>weather info</h2>
-          </Box>
-        </Grid> */}
-				<Grid item xs={12}>
-					<Route
-						exact
-						path="/weather/:locationId/"
-						component={FiveDailyForecasts}
-					/>
-				</Grid>
-			</Grid>
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      <Grid container className={classes.root} spacing={5}>
+        <Grid item xs={12} md={"6"}>
+          <Route component={WelcomeSearch} />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={"6"}
+          //   spacing={3}
+          container
+          // className={`${classes.currentWeatherGrid}`}
+        >
+          <Card container className={`${classes.currentWeatherGrid}`}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Grid container>
+                  <Card
+                    className={`${classes.currentWeatherReportCard} bg-card-primary-0`}
+                    container
+                  >
+                    <Grid
+                      container
+                      xs={12}
+                      // className={classes.bgs}
+                      style={{ paddingLeft: "7px", padding: "15px" }}
+                    >
+                      <Grid item>
+                        <CardMedia
+                          className={classes.media}
+                          image={`https://www.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png`}
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Typography variant="h5">
+                          Total Weather Report
+                        </Typography>
+                        <Typography variant="h5"> some info</Typography>
+                      </Grid>
+                    </Grid>
+                  </Card>
+                </Grid>
+              </Grid>
+              <Grid item xs={12} className={classes.CurrentWeather}>
+                <Card className={classes.bgs}>
+                  <Route
+                    exact
+                    path="/weather/:locationId/"
+                    component={CurrentWeather}
+                  />
+                </Card>
+              </Grid>
+            </Grid>
+          </Card>
+        </Grid>
+        <Grid item xs={12}>
+          <Route
+            exact
+            path="/weather/:locationId/"
+            component={FiveDailyForecasts}
+          />
+        </Grid>
+      </Grid>
+    </React.Fragment>
+  );
 }
 
 const mapStateToProps = (state) => {
-	return {
-		// fiveDay: state.fiveDay,
-		// currentWeather: state.currentWeatherReducer,
-	};
+  return {
+    // fiveDay: state.fiveDay,
+    // currentWeather: state.currentWeatherReducer,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		// dispatchCurrentWeatherInfo: (payload) => dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
-		// dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY_FETCH_DATA", payload }),
-	};
+  return {
+    // dispatchCurrentWeatherInfo: (payload) => dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
+    // dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY_FETCH_DATA", payload }),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Weather);
