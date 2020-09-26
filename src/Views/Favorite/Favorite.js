@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => {
   debugger;
   return {
     root: {
-      paddingTop: "17px",
-      marginTop: "17vh",
+    //   margin: "20px",
+      //   marginTop: "17vh",
       // width: "100%",
       // maxWidth: 360,
       backgroundColor: theme.palette.OutterCard.main,

@@ -49,7 +49,7 @@ function Weather(props) {
     root: {
       // padding: '10px',
       width: "100%",
-      marginTop: "17vh",
+    //   marginTop: "17vh",
       margin: "0 auto",
       maxWidth: "1005px",
     },
