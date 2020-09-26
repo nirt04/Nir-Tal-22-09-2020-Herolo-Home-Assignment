@@ -25,6 +25,9 @@ function Weather(props) {
     bgs: {
       background: "#461EB7",
       padding: "17px",
+      "& > *": {
+        color: "white",
+      },
     },
     currentWeatherReportCard: {
       color: "white",
@@ -33,8 +36,8 @@ function Weather(props) {
       //   padding: "10px",
     },
     currentWeatherGrid: {
-      background: "red",
-    //   padding: "22px",
+      background: "#3810AE",
+      //   padding: "22px",
     },
     CurrentWeather: {
       //   margin: "20px 0",
@@ -61,16 +64,16 @@ function Weather(props) {
           md={6}
           //   spacing={3}
           container
-          className={`${classes.currentWeatherGrid} MuiPaper-rounded MuiPaper-elevation1`}
+          className={`${classes.currentWeatherGrid}`}
         >
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Grid container>
-                <Card className={classes.currentWeatherReportCard} container>
+                <Card className={`${classes.currentWeatherReportCard} bg-card-primary-0`} container>
                   <Grid
                     container
                     xs={12}
-                    className={classes.bgs}
+                    // className={classes.bgs}
                     style={{ paddingLeft: "7px" }}
                   >
                     <Grid item>
@@ -88,7 +91,7 @@ function Weather(props) {
               </Grid>
             </Grid>
             <Grid item xs={12} className={classes.CurrentWeather}>
-              <Card className={classes.bgs}>
+              <Card className="bg-card-primary-0">
                 <Route
                   exact
                   path="/weather/:locationId/"

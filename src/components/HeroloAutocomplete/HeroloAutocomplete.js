@@ -16,138 +16,138 @@ import HTTP from "../../services/HTTP";
 import CITEIS_AUTOCOMPLETE_DATA from "../../data/cities_autocomplete.json";
 
 const useStyles = makeStyles((theme) => ({
-  root:{
-    padding: 0
-  },
-  icon: {
-    color: theme.palette.text.secondary,
-    marginRight: theme.spacing(2),
-  },
+	root: {
+		padding: 0,
+	},
+	icon: {
+		color: theme.palette.text.secondary,
+		marginRight: theme.spacing(2),
+	},
 }));
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 /* prettier-ignore */
 function HeroloAutocomplete(props) {
-  const query = useQuery();
-  const [open, setOpen] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-  const [items, setItems] = React.useState([]);
-  const [value, setValue] = React.useState(null);
-  const [input, setInput] = React.useState(null);
-  const locationId = props.match.params.locationId
+	const query = useQuery();
+	const [open, setOpen] = React.useState(false);
+	const [loading, setLoading] = React.useState(false);
+	const [items, setItems] = React.useState([]);
+	const [value, setValue] = React.useState(null);
+	const [input, setInput] = React.useState(null);
+	const locationId = props.match.params.locationId
 
-  const fetchCities = async (searchQuery) => {
-    console.log("fetchCities");
-    let cities;
-    setLoading(true);
-    if (!searchQuery) cities = [];
-    else {
-      await util.sleep(1000);
-      cities = CITEIS_AUTOCOMPLETE_DATA || (await HTTP.get("locations/v1/cities/autocomplete", { language: "en-us", q: searchQuery, }));
-    }
+	const fetchCities = async (searchQuery) => {
+		console.log("fetchCities");
+		let cities;
+		setLoading(true);
+		if (!searchQuery) cities = [];
+		else {
+			await util.sleep(1000);
+			cities = CITEIS_AUTOCOMPLETE_DATA || (await HTTP.get("locations/v1/cities/autocomplete", { language: "en-us", q: searchQuery, }));
+		}
 
-    setLoading(false);
-    return cities;
-  };
+		setLoading(false);
+		return cities;
+	};
 
-  const setNewVal = (newVal) => {
-    setValue(newVal);
-    if (!newVal) {
-      props.history.push(`/weather`);
-      props.dispatchCurrentWeatherInfo({ name: null, key: null });
-      return;
-    } else {
-      props.history.push( `/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
-      props.dispatchCurrentWeatherInfo({
-        name: `${newVal.LocalizedName}${ newVal.Country ? ", " + newVal.Country.LocalizedName : "" }`,
-        key: newVal.Key,
-      });
-    }
-  };
+	const setNewVal = (newVal) => {
+		setValue(newVal);
+		if (!newVal) {
+			props.history.push(`/weather`);
+			props.dispatchCurrentWeatherInfo({ name: null, key: null });
+			return;
+		} else {
+			props.history.push( `/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
+			props.dispatchCurrentWeatherInfo({
+				name: `${newVal.LocalizedName}${ newVal.Country ? ", " + newVal.Country.LocalizedName : "" }`,
+				key: newVal.Key,
+			});
+		}
+	};
 
-  const onMountedData = async () => {
-    const searchQuery = query.get("search");
-    const cities = await fetchCities(searchQuery);
-    setItems(cities);
-    if (locationId) {
-      // If there is locationId in the route we wants to select it from the items we fetched to the autocomplete
-      const itemInOptions = cities.find( (option) => option.Key === locationId );
-      setNewVal(itemInOptions);
-    }
-  };
+	const onMountedData = async () => {
+		const searchQuery = query.get("search");
+		const cities = await fetchCities(searchQuery);
+		setItems(cities);
+		if (locationId) {
+			// If there is locationId in the route we wants to select it from the items we fetched to the autocomplete
+			const itemInOptions = cities.find( (option) => option.Key === locationId );
+			setNewVal(itemInOptions);
+		}
+	};
 
-  // On Mounted
-  React.useEffect(() => {
-    onMountedData();
-  }, []);
+	// On Mounted
+	React.useEffect(() => {
+		onMountedData();
+	}, []);
 
-  util.useDebounce(input, 1000, async () => { if (input) setItems(await fetchCities(input)); });
-  const classes = useStyles();
+	util.useDebounce(input, 1000, async () => { if (input) setItems(await fetchCities(input)); });
+	const classes = useStyles();
 
-  return (
-    <Autocomplete
-      onInputChange={async (event, searchQuery) => {
-        // Emiting the function only if input changed came from user typing and not by clicking on of the options
-        if (event && event.type === "change" && searchQuery)
-          setInput(searchQuery);
-      }}
-      onChange={(event, newVal) => setNewVal(newVal)} 
-      getOptionLabel={(option) => `${option.LocalizedName}, ${ option.Country ? option.Country.LocalizedName : "" }` }
-      value={value}
-      options={items}
-      loading={loading}
-      getOptionSelected={(option, value) => value && option && option.Key === value.Key }
-      open={open}
-      onOpen={() => { setOpen(true); }}
-      onClose={() => { setOpen(false); }}
-      renderOption={(option) => {
-        return (
-          <Grid container alignItems="center" className={classes.root}>
-            <Grid item>
-              <LocationOnIcon className={classes.icon} />
-            </Grid>
-            <Grid item xs>
-              <Typography variant="body2" color="textSecondary">{`${option.LocalizedName}, ${option.Country.LocalizedName}`}</Typography>
-            </Grid>
-          </Grid>
-        );
-      }}
-      renderInput={(params) => (
-        <TextField
-          autoFocus
-          {...params}
-          label="Select Location"
-          variant="outlined"
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <React.Fragment>
-                {loading ? (
-                  <CircularProgress color="inherit" size={20} />
-                ) : null}
-                {params.InputProps.endAdornment}
-              </React.Fragment>
-            ),
-          }}
-        />
-      )}
-    />
-  );
+	return (
+		<Autocomplete
+			onInputChange={async (event, searchQuery) => {
+				// Emiting the function only if input changed came from user typing and not by clicking on of the options
+				if (event && event.type === "change" && searchQuery)
+					setInput(searchQuery);
+			}}
+			onChange={(event, newVal) => setNewVal(newVal)} 
+			getOptionLabel={(option) => `${option.LocalizedName}, ${ option.Country ? option.Country.LocalizedName : "" }` }
+			value={value}
+			options={items}
+			loading={loading}
+			getOptionSelected={(option, value) => value && option && option.Key === value.Key }
+			open={open}
+			onOpen={() => { setOpen(true); }}
+			onClose={() => { setOpen(false); }}
+			renderOption={(option) => {
+				return (
+					<Grid container alignItems="center" className={classes.root}>
+						<Grid item>
+							<LocationOnIcon className={classes.icon} />
+						</Grid>
+						<Grid item xs>
+							<Typography variant="body2" color="textSecondary">{`${option.LocalizedName}, ${option.Country.LocalizedName}`}</Typography>
+						</Grid>
+					</Grid>
+				);
+			}}
+			renderInput={(params) => (
+				<TextField
+					autoFocus
+					{...params}
+					label="Select Location"
+					variant="outlined"
+					InputProps={{
+						...params.InputProps,
+						endAdornment: (
+							<React.Fragment>
+								{loading ? (
+									<CircularProgress color="inherit" size={20} />
+								) : null}
+								{params.InputProps.endAdornment}
+							</React.Fragment>
+						),
+					}}
+				/>
+			)}
+		/>
+	);
 }
 
 const mapStateToProps = (state) => {
-  return {
-    // fiveDay: state.fiveDay,
-    // currentWeather: state.currentWeatherReducer,
-  };
+	return {
+		// fiveDay: state.fiveDay,
+		// currentWeather: state.currentWeatherReducer,
+	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatchCurrentWeatherInfo: (payload) =>
-      dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
-    // dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY_FETCH_DATA", payload }),
-  };
+	return {
+		dispatchCurrentWeatherInfo: (payload) =>
+			dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
+		// dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY_FETCH_DATA", payload }),
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeroloAutocomplete);

@@ -12,14 +12,10 @@ export default function WelcomeSearch() {
 
   return (
     <Grid container className={classes.root}>
-      <Typography variant="h4" gutterBottom>
-        Diffrent kind of weather
-      </Typography>
-      <Typography variant="h4" gutterBottom>
-        inside of 24/7 hours.
-      </Typography>
+      <Typography variant="h4" gutterBottom className="text-white"> Diffrent kind of weather </Typography>
+      <Typography variant="h4" gutterBottom className="text-white"> inside of 24/7 hours. </Typography>
       <Box mt={2}>
-        <Typography m={2} variant="subtitle2" gutterBottom>
+        <Typography m={2} variant="subtitle2" gutterBottom className="text-white">
           Yet too often some very human cultural artifacts really lead the
           business down the certain routes.
         </Typography>

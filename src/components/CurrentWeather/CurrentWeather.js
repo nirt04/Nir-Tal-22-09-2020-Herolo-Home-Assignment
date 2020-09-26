@@ -17,6 +17,7 @@ import moment from "moment";
 const useStyles = makeStyles({
   tempUnitBtn: {
     minWidth: "unset",
+    outline: 'none !important'
   },
   media: {
     backgroundSize: "auto",
@@ -48,25 +49,22 @@ function CurrentWeather(props) {
     dataInit(props.currentWeather.info.key);
   }, [props.currentWeather.info.key]);
 
-  debugger;
   return (
     <React.Fragment >
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" className="px-4 pt-4" >
         {props.currentWeather.info.name}
       </Typography>
       {currentWeather &&
         currentWeather.map((item, i) => (
           <React.Fragment key={i}>
-            <Box display="flex" justifyContent="center" flexDirection="column">
+            <Box display="flex" justifyContent="center" alignItems="center">
+            <Typography variant="h5" className="pt-1 px-2"> {Math.floor( item.Temperature[props.appConfig.tempratureUnit].Value )}
+            </Typography>
               <Button
                 onClick={() =>
                   props.updateAppConfig({ tempratureUnit: "Metric" })
                 }
-                color={
-                  props.appConfig.tempratureUnit === "Metric"
-                    ? "primary"
-                    : undefined
-                }
+                color={ props.appConfig.tempratureUnit === "Metric" ? "primary" : 'secondary' }
                 className={classes.tempUnitBtn}
               >
                 °C
@@ -80,31 +78,22 @@ function CurrentWeather(props) {
               <Button
                 onClick={() =>
                   props.updateAppConfig({ tempratureUnit: "Imperial" })
-                }
-                color={
-                  props.appConfig.tempratureUnit === "Imperial"
-                    ? "primary"
-                    : undefined
-                }
+                } color={ props.appConfig.tempratureUnit === "Imperial" ? "primary" : 'secondary' }
                 className={classes.tempUnitBtn}
               >
                 °F
               </Button>
             </Box>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h5" className="px-4"  >
               {item.WeatherText}
             </Typography>
 
-            <h5>
+            <Typography variant="h5" className="px-4"  >
               {" "}
               {moment(item.LocalObservationDateTime).format("dddd")}{" "}
               {moment(item.LocalObservationDateTime).format("HH:MM")}{" "}
-            </h5>
-            <h5>
-              {Math.floor(
-                item.Temperature[props.appConfig.tempratureUnit].Value
-              )}
-            </h5>
+            </Typography>
+
             <CardMedia
               className={classes.media}
               image={`https://developer.accuweather.com/sites/default/files/${item.WeatherIcon.toString().padStart(
@@ -115,7 +104,7 @@ function CurrentWeather(props) {
           </React.Fragment>
         ))}
 
-      <h5>hello current_weather </h5>
+      <Typography variant="h5" className="px-4"  >hello current_weather </Typography>
     </React.Fragment>
   );
 }
