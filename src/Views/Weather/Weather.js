@@ -11,7 +11,7 @@ import currentWeather from "../../data/current_weather.json";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import WelcomeSearch from "./components/WelcomeSearch";
-import { Box, Card, CardMedia, Typography } from "@material-ui/core";
+import { Box, Card, CardMedia, Container, Typography } from "@material-ui/core";
 
 function Weather(props) {
   const useStyles = makeStyles((theme) => ({
@@ -49,7 +49,7 @@ function Weather(props) {
     root: {
       // padding: '10px',
       width: "100%",
-    //   marginTop: "17vh",
+      //   marginTop: "17vh",
       margin: "0 auto",
       maxWidth: "1005px",
     },
@@ -58,8 +58,8 @@ function Weather(props) {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
-      <Grid container className={classes.root} spacing={5}>
+    <Container maxWidth="md" className={classes.root}>
+      <Grid container className={classes.root} spacing={0}>
         <Grid item xs={12} md={"6"}>
           <Route component={WelcomeSearch} />
         </Grid>
@@ -121,7 +121,7 @@ function Weather(props) {
           />
         </Grid>
       </Grid>
-    </React.Fragment>
+    </Container>
   );
 }
 

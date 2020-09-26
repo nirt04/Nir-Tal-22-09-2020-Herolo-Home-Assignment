@@ -61,29 +61,35 @@ function App() {
     <MuiThemeProvider theme={theme}>
       <Router>
         <div className="App">
-          <Box height="100%" display="flex" flexDirection="column">
+          <Grid container spacing={3}>
+            {/* <Box height="100%" display="flex" flexDirection="column"> */}
             <CardMedia
               className={classes.media}
               image="https://www.wallpaperflare.com/static/656/666/467/landscape-mountains-clouds-forest-wallpaper.jpg"
             />
-            {/* HEADER */}
-            <Box flexGrow={0} zIndex={1}>
+            <Grid item xs={12}>
+              {/* HEADER */}
+              {/* <Box flexGrow={0} zIndex={1}> */}
               <Route
                 path="/:tab/:locationId?"
                 render={(url) => <HeroloTabs url={url} />}
               />
-            </Box>
+            </Grid>
+            {/* </Box> */}
             {/* BODY */}
-            <Box flexGrow={1} zIndex={1}>
+            {/* <Box flexGrow={1} zIndex={1}> */}
+            <Grid item xs={12}>
               <Switch>
                 <Route path="/weather/:locationId?" component={Weather} />
                 <Route path="/favorite" component={Favorite} />
 
                 <Redirect exact to="/weather" />
               </Switch>
-            </Box>
+            </Grid>
+            {/* </Box> */}
             {/* FOOTER */}
-          </Box>
+            {/* </Box> */}
+          </Grid>
         </div>
       </Router>
     </MuiThemeProvider>

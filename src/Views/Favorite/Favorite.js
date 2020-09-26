@@ -7,17 +7,17 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import InboxIcon from "@material-ui/icons/Inbox";
 import DraftsIcon from "@material-ui/icons/Drafts";
-import { Card, Container, Grid } from "@material-ui/core";
+import { Box, Card, Container, Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => {
   debugger;
   return {
     root: {
-    //   margin: "20px",
+      margin: "0 auto",
       //   marginTop: "17vh",
-      // width: "100%",
-      // maxWidth: 360,
+      width: "100%",
+      maxWidth: '957px',
       backgroundColor: theme.palette.OutterCard.main,
     },
     innerCard: {
@@ -37,7 +37,8 @@ export default function SimpleList() {
   const classes = useStyles();
 
   return (
-    <Container maxWidth="md" className={classes.root}>
+    
+    <Box display="flex" flexDirection="column" zIndex={4} className={classes.root}>
       <Grid container spacing={3} className="py-4">
         <Grid item xs={12}>
           <Card container className={classes.innerCard}>
@@ -74,6 +75,6 @@ export default function SimpleList() {
           </Card>
         </Grid>
       </Grid>
-    </Container>
+    </Box>
   );
 }
