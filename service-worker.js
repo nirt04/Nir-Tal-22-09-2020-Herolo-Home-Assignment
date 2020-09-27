@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/precache-manifest.a8c19c572f23e41b9c6ada265dbf1934.js"
+  "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/precache-manifest.9f693d88f0f5cc26f31ab0b1bcae4ded.js"
 );
 
 self.addEventListener('message', (event) => {
