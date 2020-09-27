@@ -41,7 +41,7 @@ function SimpleList(props) {
       zIndex={4}
       className={classes.root}
     >
-      <Grid container spacing={3} className="py-4">
+      <Grid container spacing={3}>
         <Grid item xs={12}>
           <Card container>
             <Typography variant="h5" className="px-4 py-3">

@@ -1,86 +1,44 @@
+/* prettier-ignore */
 import React from "react";
 import current_weather from "../../data/current_weather.json";
-import { makeStyles } from "@material-ui/core/styles";
-import appConfigActions from "../../App/actions";
 import { accuweatherAPI } from "../../services/API/accuweather";
 import { connect } from "react-redux";
-import {
-  Box,
-  Button,
-  Card,
-  CardMedia,
-  Container,
-  Divider,
-  Grid,
-  Typography,
-} from "@material-ui/core";
+import { Box, Button, CardMedia, Divider, Grid, Typography, } from "@material-ui/core";
 import moment from "moment";
 import InnerCard from "../InnerCard.js";
+import appConfigActions from "../../App/actions";
+import {useStyles} from "./style"
 
-const useStyles = makeStyles({
-  tempUnitBtn: {
-    paddingTop: "12px",
-    minWidth: "unset",
-    outline: "none !important",
-    "&:hover": {
-      backgroundColor: "#461eb7 !important",
-    },
-  },
-  media: {
-    backgroundSize: "auto",
-    // margin: "auto",
-    width: "45px",
-    height: "45px",
-  },
-  root: {
-	  minWidth: '444px',
-	  minHeight: '191px'
-  }
-});
-
+/* prettier-ignore */
 function CurrentWeather(props) {
   const locationId = props.match.params.locationId;
   const [currentWeather, setCurrentWeather] = React.useState(null);
-  // const [props.appConfig.tempratureUnit, setTemperatureUnit] = React.useState("Metric");
   const classes = useStyles();
 
   const dataInit = async () => {
     if (!locationId) return;
-
-    const currentWeather =
-      current_weather ||
-      props.currentWeather[locationId] ||
-      (await accuweatherAPI.currentWeather(locationId));
+    const currentWeather = current_weather || props.CURRENT_WEATHER_STORE[locationId] || await accuweatherAPI.currentWeather(locationId);
     setCurrentWeather(currentWeather);
     props.dispatchCurrentWeather({ [locationId]: currentWeather });
   };
 
   React.useEffect(() => {
-    console.log("currentWeather key change", props.currentWeather.info.key);
-    dataInit(props.currentWeather.info.key);
-  }, [props.currentWeather.info.key]);
-  const appTempUnit = props.appConfig.tempratureUnit;
+    dataInit(props.CURRENT_WEATHER_STORE.info.key);
+  }, [props.CURRENT_WEATHER_STORE.info.key]);
+
+  const appTempUnit = props.APP_CONFIG.tempratureUnit;
+
   return (
-    //   <InnerCard></InnerCard>
+ 
     <InnerCard className={classes.root}>
       {currentWeather &&
-        props.currentWeather.info.name &&
+        props.CURRENT_WEATHER_STORE.info.name &&
         currentWeather.map((item, i) => (
           <Grid container spacing={3} key={i} style={{ padding: "15px" }}>
             <Grid item xs={12}>
-              <Typography variant="subtitle2" className="px-4">
-                {" "}
-                {props.currentWeather.info.name}{" "}
-              </Typography>
-              <Typography variant="subtitle1" className="px-4">
-                {" "}
-                {moment(item.LocalObservationDateTime).format("dddd")}{" "}
-                {moment(item.LocalObservationDateTime).format("HH:MM")}{" "}
-              </Typography>
-              <Typography variant="subtitle1" className="px-4">
-                {" "}
-                {item.WeatherText}{" "}
-              </Typography>
+              <Typography variant="subtitle2" className="px-4"> {props.CURRENT_WEATHER_STORE.info.name} </Typography>
+              <Typography variant="subtitle1" className="px-4">{moment(item.LocalObservationDateTime).format("dddd")} {moment(item.LocalObservationDateTime).format("HH:MM")}</Typography>
+              <Typography variant="subtitle1" className="px-4">{item.WeatherText}</Typography>
               <Grid
                 container
                 spacing={2}
@@ -91,56 +49,33 @@ function CurrentWeather(props) {
                 <Grid item xs={"auto"}>
                   <CardMedia
                     className={classes.media}
-                    image={`https://developer.accuweather.com/sites/default/files/${item.WeatherIcon.toString().padStart(
-                      2,
-                      "0"
-                    )}-s.png`}
+                    image={`https://developer.accuweather.com/sites/default/files/${item.WeatherIcon.toString().padStart( 2, "0" )}-s.png`}
                   />
                 </Grid>
                 <Grid item xs={"auto"}>
                   <Box display="flex">
-                    <Typography variant="h2" className="pt-1">
-                      {" "}
-                      {Math.floor(item.Temperature[appTempUnit].Value)}{" "}
-                    </Typography>
+                    <Typography variant="h2" className="pt-1">{Math.floor(item.Temperature[appTempUnit].Value)}</Typography>
                     <Box display="flex" height="max-content">
                       <Button
-                        onClick={() =>
-                          props.updateAppConfig({ tempratureUnit: "Metric" })
-                        }
-                        color={
-                          appTempUnit === "Metric" ? "neutral(2)" : "secondary"
-                        }
+                        style={{color: appTempUnit === "Imperial" ? "grey" : "white"}}
+                        onClick={() => props.updateAppConfig({ tempratureUnit: "Metric" }) }
                         className={classes.tempUnitBtn}
                       >
-                        {" "}
-                        °C{" "}
+                        °C
                       </Button>
                       <Divider orientation="vertical" flexItem />
                       <Button
-                        onClick={() =>
-                          props.updateAppConfig({
-                            tempratureUnit: "Imperial",
-                          })
-                        }
-                        color={
-                          appTempUnit === "Imperial"
-                            ? "neutral(2)"
-                            : "secondary"
-                        }
+                        onClick={() => props.updateAppConfig({ tempratureUnit: "Imperial", }) }
+                        style={{color: appTempUnit === "Imperial" ? "white" : "grey"}}
                         className={classes.tempUnitBtn}
                       >
-                        {" "}
-                        °F{" "}
+                    	°F
                       </Button>
                     </Box>
                   </Box>
                 </Grid>
               </Grid>
             </Grid>
-            {/* <Grid item xs={6}>
-                <h1>hello placeholder</h1>
-              </Grid> */}
           </Grid>
         ))}
     </InnerCard>
@@ -149,8 +84,8 @@ function CurrentWeather(props) {
 
 const mapStateToProps = (state) => {
   return {
-    currentWeather: state.currentWeather,
-    appConfig: state.appConfig,
+    CURRENT_WEATHER_STORE: state.currentWeather,
+    APP_CONFIG: state.appConfig,
   };
 };
 

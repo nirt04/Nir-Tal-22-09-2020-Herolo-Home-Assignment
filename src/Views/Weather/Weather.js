@@ -55,16 +55,16 @@ function Weather(props) {
           xs={12}
           md={"6"}
           //   spacing={3}
-          container
+      
           // className={`${classes.currentWeatherGrid}`}
         >
-          <Card container className={`${classes.currentWeatherGrid}`}>
+          <Card  className={`${classes.currentWeatherGrid}`}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
-                <InnerCard container>
+                <InnerCard>
                   <Grid
                     container
-                    xs={12}
+                   
                     //   className="px-2"
                     style={{ padding: "15px" }}
                   >
@@ -84,7 +84,7 @@ function Weather(props) {
               <Grid item xs={12}>
                 <Route
                 //   exact
-                  path={"/weather/:locationId/"}
+                  path={"/weather/:locationId?/"}
                   component={CurrentWeather}
                 />
               </Grid>
@@ -93,8 +93,8 @@ function Weather(props) {
         </Grid>
         <Grid item xs={12}>
           <Route
-            exact
-            path={"/weather/:locationId/"}
+            
+            path={"/weather/:locationId?/"}
             component={FiveDailyForecasts}
           />
         </Grid>

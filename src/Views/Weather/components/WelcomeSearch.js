@@ -12,7 +12,6 @@ export default function WelcomeSearch() {
 
   return (
     <Grid container >
-      
       <Typography color="textPrimary" variant="h4" gutterBottom > Diffrent kind of weather </Typography>
       <Typography color="textPrimary" variant="h4" gutterBottom > inside of 24/7 hours. </Typography>
       <Box mt={2}>
@@ -29,18 +28,6 @@ export default function WelcomeSearch() {
           </Typography>
         </Box>
       </Box>
-      {/* <Grid item xs={12} style={{ padding: 0 }}> */}
-      {/* </Grid> */}
-      {/* <Grid item xs={12}>
-        <Route exact path="/weather/:locationId/" component={CurrentWeather} />
-      </Grid>
-      <Grid item xs={12}>
-        <Route
-          exact
-          path="/weather/:locationId/"
-          component={FiveDailyForecasts}
-        />
-      </Grid> */}
     </Grid>
   );
 }

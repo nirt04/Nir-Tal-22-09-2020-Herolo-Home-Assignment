@@ -115,7 +115,7 @@ function HeroloAutocomplete(props) {
 			getOptionSelected={(option, value) => value && option && option.Key === value.Key }
 			open={open}
 			onOpen={() => { setOpen(true); }}
-			onClose={() => { setOpen(true); }}
+			onClose={() => { setOpen(false); }}
 			renderOption={(option) => {
 				return (
 					<Grid container alignItems="center" className="asdsadlfgjoedfikghjokdfsghj" >
@@ -133,7 +133,6 @@ function HeroloAutocomplete(props) {
 				<TextField
 				className="WeatherAutocomplete--input"
 				// color="natural"
-				disableUnderline
 					autoFocus
 					{...params}
 					// margin="dense"

@@ -2,6 +2,7 @@ export const appConfigReducer = (
   state = {
     themeType: 'dark',
     tempratureUnit: "Metric",
+    isAppReady: false,
   },
   action
 ) => {
