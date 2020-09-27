@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/css/main.85e1fc43.chunk.css",
-    "main.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.b39235e9.chunk.js",
-    "main.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.b39235e9.chunk.js.map",
+    "main.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.5b7dda5d.chunk.js",
+    "main.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.5b7dda5d.chunk.js.map",
     "runtime-main.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/runtime-main.19da98f5.js",
     "runtime-main.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/runtime-main.19da98f5.js.map",
     "static/js/2.508c3d7a.chunk.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.508c3d7a.chunk.js",
     "static/js/2.508c3d7a.chunk.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.508c3d7a.chunk.js.map",
     "index.html": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/index.html",
-    "precache-manifest.d563558823cdcec24ae7ca61324d2979.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/precache-manifest.d563558823cdcec24ae7ca61324d2979.js",
+    "precache-manifest.037fa43c4dbec7da0da5989a54fd7d0e.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/precache-manifest.037fa43c4dbec7da0da5989a54fd7d0e.js",
     "service-worker.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/service-worker.js",
     "static/css/main.85e1fc43.chunk.css.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/css/main.85e1fc43.chunk.css.map",
     "static/js/2.508c3d7a.chunk.js.LICENSE.txt": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.508c3d7a.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.19da98f5.js",
     "static/js/2.508c3d7a.chunk.js",
     "static/css/main.85e1fc43.chunk.css",
-    "static/js/main.b39235e9.chunk.js"
+    "static/js/main.5b7dda5d.chunk.js"
   ]
 }
