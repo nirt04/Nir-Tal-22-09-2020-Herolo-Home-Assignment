@@ -65,15 +65,15 @@ function App(props) {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Route
-              path="/:tab/:locationId?"
+              path={process.env.PUBLIC_URL + "/:tab/:locationId?"}
               render={(url) => <HeroloTabs url={url} />}
             />
           </Grid>
           <Grid item xs={12}>
             <Switch>
-              <Route path="/weather/:locationId?" component={Weather} />
-              <Route path="/favorite" component={Favorite} />
-              <Redirect exact to="/weather" />
+              <Route path={process.env.PUBLIC_URL + "/weather/:locationId?"} component={Weather} />
+              <Route path={process.env.PUBLIC_URL + "/favorite"} component={Favorite} />
+              <Redirect exact to={process.env.PUBLIC_URL + "/weather" }/>
             </Switch>
           </Grid>
         </Grid>

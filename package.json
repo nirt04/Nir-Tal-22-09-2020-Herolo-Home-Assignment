@@ -2,6 +2,7 @@
   "name": "herolo-weather-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://nirt04.github.io/Nir-Tal-22-09-2020-Herolo-Home-Assignment",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -26,6 +27,8 @@
     "start": "^5.1.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -45,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   }
 }

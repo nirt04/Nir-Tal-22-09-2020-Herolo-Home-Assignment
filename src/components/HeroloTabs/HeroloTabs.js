@@ -39,7 +39,7 @@ function HeroloTabs(props) {
       "aria-controls": `simple-tabpanel-${index}`,
       label: tabName,
       value: tabName,
-      to: `/${tabName}${locationId ? "/" + locationId : ""}/${query}`,
+      to: `${process.env.PUBLIC_URL}/${tabName}${locationId ? "/" + locationId : ""}/${query}`,
       component: Link,
     };
   };
