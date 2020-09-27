@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9815d4347d15dc331a4f46d4f8f4d6b5",
+    "revision": "f842b33b235b1b897a42e21e7958481c",
     "url": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/index.html"
   },
   {
