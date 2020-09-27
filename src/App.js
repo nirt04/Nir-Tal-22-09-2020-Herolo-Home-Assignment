@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import "./App.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -65,15 +65,15 @@ function App(props) {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Route
-              path={process.env.PUBLIC_URL + "/:tab/:locationId?"}
+              path={"/:tab/:locationId?"}
               render={(url) => <HeroloTabs url={url} />}
             />
           </Grid>
           <Grid item xs={12}>
             <Switch>
-              <Route path={process.env.PUBLIC_URL + "/weather/:locationId?"} component={Weather} />
-              <Route path={process.env.PUBLIC_URL + "/favorite"} component={Favorite} />
-              <Redirect exact to={process.env.PUBLIC_URL + "/weather" }/>
+              <Route path={"/weather/:locationId?"} component={Weather} />
+              <Route path={"/favorite"} component={Favorite} />
+              <Redirect exact to={"/weather" }/>
             </Switch>
           </Grid>
         </Grid>

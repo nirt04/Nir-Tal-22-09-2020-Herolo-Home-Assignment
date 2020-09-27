@@ -84,7 +84,7 @@ function Weather(props) {
               <Grid item xs={12}>
                 <Route
                 //   exact
-                  path={process.env.PUBLIC_URL + "/weather/:locationId/"}
+                  path={"/weather/:locationId/"}
                   component={CurrentWeather}
                 />
               </Grid>
@@ -94,7 +94,7 @@ function Weather(props) {
         <Grid item xs={12}>
           <Route
             exact
-            path={process.env.PUBLIC_URL + "/weather/:locationId/"}
+            path={"/weather/:locationId/"}
             component={FiveDailyForecasts}
           />
         </Grid>
