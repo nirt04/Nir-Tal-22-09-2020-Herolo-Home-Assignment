@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/css/main.7d3c4f59.chunk.css",
-    "main.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.dd989ace.chunk.js",
-    "main.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.dd989ace.chunk.js.map",
+    "main.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.44c6376c.chunk.js",
+    "main.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.44c6376c.chunk.js.map",
     "runtime-main.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/runtime-main.19da98f5.js",
     "runtime-main.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/runtime-main.19da98f5.js.map",
-    "static/js/2.508c3d7a.chunk.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.508c3d7a.chunk.js",
-    "static/js/2.508c3d7a.chunk.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.508c3d7a.chunk.js.map",
+    "static/js/2.546b51f6.chunk.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.546b51f6.chunk.js",
+    "static/js/2.546b51f6.chunk.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.546b51f6.chunk.js.map",
     "index.html": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/index.html",
-    "precache-manifest.0d2b70ee8f3a6d7dc8377364f850675d.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/precache-manifest.0d2b70ee8f3a6d7dc8377364f850675d.js",
+    "precache-manifest.150036269cd3abce47a771c77a33dcb1.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/precache-manifest.150036269cd3abce47a771c77a33dcb1.js",
     "service-worker.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/service-worker.js",
     "static/css/main.7d3c4f59.chunk.css.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/css/main.7d3c4f59.chunk.css.map",
-    "static/js/2.508c3d7a.chunk.js.LICENSE.txt": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.508c3d7a.chunk.js.LICENSE.txt"
+    "static/js/2.546b51f6.chunk.js.LICENSE.txt": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.546b51f6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.19da98f5.js",
-    "static/js/2.508c3d7a.chunk.js",
+    "static/js/2.546b51f6.chunk.js",
     "static/css/main.7d3c4f59.chunk.css",
-    "static/js/main.dd989ace.chunk.js"
+    "static/js/main.44c6376c.chunk.js"
   ]
 }
