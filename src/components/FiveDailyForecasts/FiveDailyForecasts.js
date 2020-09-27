@@ -9,6 +9,9 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { useStyles } from "./style";
 import Card from "@material-ui/core/Card";
 import FIVE_DAYS_DATA from "../../data/5_days_of_daily_forecasts.json";
+import InnerCard from "../InnerCard";
+import { CardMedia, Typography } from "@material-ui/core";
+import { GridContainer } from "../GridContainer";
 
 function sleep(delay = 0) {
   return new Promise((resolve) => {
@@ -20,7 +23,9 @@ function DailyForecasts(props) {
   const classes = useStyles();
   const locationId = props.match.params.locationId;
   const [loading, setLoading] = React.useState(false);
-  const [fiveDaysForecastsItems, setFiveDaysForecastsItems] = React.useState( null );
+  const [fiveDaysForecastsItems, setFiveDaysForecastsItems] = React.useState(
+    null
+  );
 
   const dataInit = async () => {
     setLoading(true);
@@ -44,33 +49,52 @@ function DailyForecasts(props) {
   }, [locationId]);
 
   return (
-    <Card className={classes.root}>
-      {loading ? (
-        <Grid item xs={"auto"}>
-          <Box
-            display="flex"
-            justifyContent="center"
-            height={177}
-            alignItems="center"
-          >
-            <CircularProgress color="inherit" size={80} />
-          </Box>
-        </Grid>
-      ) : (
-        <Grid item xs={"auto"}>
-          <Grid container justify="center" direction="row">
-            {fiveDaysForecastsItems &&
-              fiveDaysForecastsItems.map((item, i) => (
-                <Grid key={i} item md={"auto"} xs={"auto"} lg={"auto"}>
-                  <Box display="flex" justifyContent="center">
-                    <ForcastCard item={item} />
-                  </Box>
-                </Grid>
-              ))}
+    <GridContainer>
+      <InnerCard>
+        <Grid
+          container
+          style={{ padding: "15px" }}
+        >
+          <Grid item>
+            <CardMedia
+              className={classes.weatherTitleIcon}
+              image={`https://www.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png`}
+            />
+          </Grid>
+          <Grid item>
+            <Typography variant="h5">Total Weather Report</Typography>
+            <Typography variant="h5"> some info</Typography>
           </Grid>
         </Grid>
-      )}
-    </Card>
+      </InnerCard>
+      <InnerCard className={classes.root}>
+        {loading ? (
+          <Grid item xs={"auto"}>
+            <Box
+              display="flex"
+              justifyContent="center"
+              height={177}
+              alignItems="center"
+            >
+              <CircularProgress color="inherit" size={80} />
+            </Box>
+          </Grid>
+        ) : (
+          <Grid item xs={"auto"}>
+            <Grid container justify="center" direction="row">
+              {fiveDaysForecastsItems &&
+                fiveDaysForecastsItems.map((item, i) => (
+                  <Grid key={i} item md={"auto"} xs={"auto"} lg={"auto"}>
+                    <Box display="flex" justifyContent="center">
+                      <ForcastCard item={item} />
+                    </Box>
+                  </Grid>
+                ))}
+            </Grid>
+          </Grid>
+        )}
+      </InnerCard>
+    </GridContainer>
   );
 }
 

@@ -13,32 +13,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import WelcomeSearch from "./components/WelcomeSearch";
 import { Box, Card, CardMedia, Container, Typography } from "@material-ui/core";
 import InnerCard from "../../components/InnerCard";
+import { GridContainer } from "../../components/GridContainer";
 
 function Weather(props) {
   const useStyles = makeStyles((theme) => ({
-    favList: {
-      maxHeight: "65vh",
-      overflowY: "auto",
-    },
-    outterCard: {
-      margin: "0 auto",
-      width: "100%",
-      maxWidth: "957px",
-      //   backgroundColor: theme.palette.outterCard[props.appConfig.themeType],
-    },
     weatherTitleIcon: {
       width: "96px",
       height: "100%",
     },
-
-    currentWeatherGrid: {
-      padding: "17px",
-      height: "max-content",
-    },
     root: {
       width: "100%",
       margin: "0 auto",
-      maxWidth: "1005px",
+      maxWidth: "1060px",
     },
   }));
 
@@ -50,50 +36,30 @@ function Weather(props) {
         <Grid item xs={12} md={"6"}>
           <Route component={WelcomeSearch} />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          md={"6"}
-          //   spacing={3}
-      
-          // className={`${classes.currentWeatherGrid}`}
-        >
-          <Card  className={`${classes.currentWeatherGrid}`}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <InnerCard>
-                  <Grid
-                    container
-                   
-                    //   className="px-2"
-                    style={{ padding: "15px" }}
-                  >
-                    <Grid item>
-                      <CardMedia
-                        className={classes.weatherTitleIcon}
-                        image={`https://www.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png`}
-                      />
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="h5">Total Weather Report</Typography>
-                      <Typography variant="h5"> some info</Typography>
-                    </Grid>
-                  </Grid>
-                </InnerCard>
+        <Grid item xs={12} md={"6"}>
+          <GridContainer>
+            <InnerCard>
+              <Grid container style={{ padding: "15px" }} >
+                <Grid item>
+                  <CardMedia
+                    className={classes.weatherTitleIcon}
+                    image={`https://www.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png`}
+                  />
+                </Grid>
+                <Grid item>
+                  <Typography variant="h5">Total Weather Report</Typography>
+                  <Typography variant="h5"> some info</Typography>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <Route
-                //   exact
-                  path={"/weather/:locationId?/"}
-                  component={CurrentWeather}
-                />
-              </Grid>
-            </Grid>
-          </Card>
+            </InnerCard>
+            <Route
+              path={"/weather/:locationId?/"}
+              component={CurrentWeather}
+            />
+          </GridContainer>
         </Grid>
         <Grid item xs={12}>
           <Route
-            
             path={"/weather/:locationId?/"}
             component={FiveDailyForecasts}
           />
