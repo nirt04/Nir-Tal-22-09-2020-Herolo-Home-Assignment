@@ -15,6 +15,7 @@ export const useStyles = makeStyles({
     height: "45px",
   },
   root: {
+    display: "flex",
     minWidth: "444px",
     minHeight: "191px",
   },

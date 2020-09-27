@@ -2,10 +2,12 @@
 import React from "react";
 import current_weather from "../../data/current_weather.json";
 import { accuweatherAPI } from "../../services/API/accuweather";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 import { Box, Button, CardMedia, Divider, Grid, Typography, } from "@material-ui/core";
 import moment from "moment";
 import InnerCard from "../InnerCard.js";
+import {util} from "../../services/util"
 import appConfigActions from "../../App/actions";
 import {useStyles} from "./style"
 
@@ -13,11 +15,15 @@ import {useStyles} from "./style"
 function CurrentWeather(props) {
   const locationId = props.match.params.locationId;
   const [currentWeather, setCurrentWeather] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
   const classes = useStyles();
 
   const dataInit = async () => {
-    if (!locationId) return;
-    const currentWeather = current_weather || props.CURRENT_WEATHER_STORE[locationId] || await accuweatherAPI.currentWeather(locationId);
+	if (!locationId) return;
+	setLoading(true)
+	const currentWeather = current_weather || props.CURRENT_WEATHER_STORE[locationId] || await accuweatherAPI.currentWeather(locationId);
+await	util.sleep(1000)
+	setLoading(false)
     setCurrentWeather(currentWeather);
     props.dispatchCurrentWeather({ [locationId]: currentWeather });
   };
@@ -27,14 +33,19 @@ function CurrentWeather(props) {
   }, [props.CURRENT_WEATHER_STORE.info.key]);
 
   const appTempUnit = props.APP_CONFIG.tempratureUnit;
-
+  const isReady = props.APP_CONFIG.isAppReady && !loading && currentWeather && props.CURRENT_WEATHER_STORE.info.name 
   return (
- 
+	
     <InnerCard className={classes.root}>
-      {currentWeather &&
-        props.CURRENT_WEATHER_STORE.info.name &&
+      {!isReady && (
+        <Box margin="auto">
+          <CircularProgress color="inherit" size={75} />
+        </Box>
+      )}
+      {isReady &&
         currentWeather.map((item, i) => (
           <Grid container spacing={3} key={i} style={{ padding: "15px" }}>
+	
             <Grid item xs={12}>
               <Typography variant="subtitle2" className="px-4"> {props.CURRENT_WEATHER_STORE.info.name} </Typography>
               <Typography variant="subtitle1" className="px-4">{moment(item.LocalObservationDateTime).format("dddd")} {moment(item.LocalObservationDateTime).format("HH:MM")}</Typography>

@@ -9,8 +9,15 @@ import HeroloTabs from "./components/HeroloTabs/HeroloTabs";
 import Weather from "./Views/Weather/Weather";
 import { CardMedia, Grid } from "@material-ui/core";
 import Favorite from "./Views/Favorite/Favorite";
+import appConfigActions from "./App/actions"
+
 
 function App(props) {
+  
+  React.useEffect(() => {
+    props.updateAppConfig({isAppReady: true})
+  }, [])
+  
   const [selectedLocation, setselectedLocation] = React.useState(null);
   return (
     <MuiThemeProvider theme={theme(props)}>
@@ -45,4 +52,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateAppConfig: (payload) => dispatch(appConfigActions.UPDATE_APP_CONFIG(payload)),
+
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

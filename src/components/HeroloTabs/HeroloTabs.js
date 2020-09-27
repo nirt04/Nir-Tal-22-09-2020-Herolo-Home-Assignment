@@ -82,8 +82,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateAppConfig: (payload) =>
-      dispatch(appConfigActions.UPDATE_APP_CONFIG(payload)),
+    updateAppConfig: (payload) => dispatch(appConfigActions.UPDATE_APP_CONFIG(payload)),
   };
 };
 
