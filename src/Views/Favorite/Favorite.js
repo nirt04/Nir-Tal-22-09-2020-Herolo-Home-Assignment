@@ -16,7 +16,6 @@ function ListItemLink(props) {
 
 function SimpleList(props) {
   const useStyles = makeStyles((theme) => {
-    debugger;
     return {
       favList: {
         maxHeight: "65vh",

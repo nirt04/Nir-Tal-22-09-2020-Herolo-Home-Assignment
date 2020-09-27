@@ -12,8 +12,8 @@ export default function WelcomeSearch() {
 
   return (
     <Grid container >
-      <Typography color="textPrimary" variant="h4" gutterBottom > Diffrent kind of weather </Typography>
-      <Typography color="textPrimary" variant="h4" gutterBottom > inside of 24/7 hours. </Typography>
+      <Typography color="textPrimary" variant="h4" gutterBottom > Hello there herolo. </Typography>
+      <Typography color="textPrimary" variant="h4" gutterBottom > Welcome to my weather application. :) </Typography>
       <Box mt={2}>
         <Typography color="textPrimary" m={2} variant="subtitle2" gutterBottom >
           Yet too often some very human cultural artifacts really lead the

@@ -1,24 +1,34 @@
-import axios from 'axios';
+import axios from "axios";
+const CancelToken = axios.CancelToken;
+const cancelTokens = {};
 
 const HTTP = axios.create({
-  baseURL: 'http://dataservice.accuweather.com/',
+  baseURL: "http://dataservice.accuweather.com/",
   withCredentials: false,
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+    Accept: "application/json",
+    "Content-Type": "application/json",
   },
-  params:{
-    apikey: 'JpXZNXKBXpKo5VVG0RZzybpKahdMX8vv'
-  }
+  params: {
+    apikey: "JpXZNXKBXpKo5VVG0RZzybpKahdMX8vv",
+  },
 });
 
-const get = (route, params, config) => {
+const get = (route, params, config = {}) => {
   return new Promise((resolve, reject) => {
-    HTTP.get(route, { params })
-      .then(res => {
+    debugger;
+    if (cancelTokens[config.cancelToken]) cancelTokens[config.cancelToken]("Request canceled.");
+
+    HTTP.get(route, {
+      params,
+      cancelToken: config.cancelToken
+        ? new CancelToken((c) => (cancelTokens[config.cancelToken] = c))
+        : null,
+    })
+      .then((res) => {
         resolve(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         reject(err);
       });
   });
@@ -26,7 +36,7 @@ const get = (route, params, config) => {
 
 const post = async (route, params) => {
   return new Promise((resolve, reject) => {
-    HTTP.post(route, params).then(res => {
+    HTTP.post(route, params).then((res) => {
       resolve(res);
     });
   });
@@ -34,7 +44,7 @@ const post = async (route, params) => {
 
 const put = async (route, params) => {
   return new Promise((resolve, reject) => {
-    HTTP.put(route, params).then(res => {
+    HTTP.put(route, params).then((res) => {
       resolve(res);
     });
   });
@@ -42,25 +52,25 @@ const put = async (route, params) => {
 
 // request interceptor
 HTTP.interceptors.request.use(
-  config => {
+  (config) => {
     // config.headers["HEADER-NAME"]
     return config;
   },
-  error => {
+  (error) => {
     // Do something with request error
     return Promise.reject(error);
-  },
+  }
 );
 
 // response interceptor
 HTTP.interceptors.response.use(
-  response => {
+  (response) => {
     return response;
   },
-  error => {
-    console.log('error', error);
+  (error) => {
+    console.log("error", error);
     return Promise.reject(error);
-  },
+  }
 );
 
 export default {

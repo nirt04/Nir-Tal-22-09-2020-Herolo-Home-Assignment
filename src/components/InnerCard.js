@@ -10,7 +10,6 @@ const InnerCard = (props) => {
     },
   }));
   const classes = useStyles();
-  debugger;
   return <Card className={`${classes.innerCard} ${props.className} fgadfgdsfgdsfgkjdsfoikgjdofjg`}>{props.children}</Card>;
 };
 
