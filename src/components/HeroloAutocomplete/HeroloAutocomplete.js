@@ -64,8 +64,8 @@ function HeroloAutocomplete(props) {
 	const setNewVal = (newVal) => {
 		setValue(newVal);
 		if (!newVal) {
-			props.history.push(`/weather`);
-			props.dispatchCurrentWeatherInfo({ name: null, key: null });
+			// props.history.push(`/weather`);
+			// props.dispatchCurrentWeatherInfo({ name: null, key: null });
 			return;
 		} else {
 			props.history.push( `/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
