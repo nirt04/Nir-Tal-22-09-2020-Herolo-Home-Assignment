@@ -56,14 +56,8 @@ function DailyForecasts(props) {
           style={{ padding: "15px" }}
         >
           <Grid item>
-            <CardMedia
-              className={classes.weatherTitleIcon}
-              image={`https://www.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png`}
-            />
-          </Grid>
-          <Grid item>
-            <Typography variant="h5">Total Weather Report</Typography>
-            <Typography variant="h5"> some info</Typography>
+            <Typography variant="h5">Weekly Report</Typography>
+            {/* <Typography variant="h5"> some info</Typography> */}
           </Grid>
         </Grid>
       </InnerCard>
