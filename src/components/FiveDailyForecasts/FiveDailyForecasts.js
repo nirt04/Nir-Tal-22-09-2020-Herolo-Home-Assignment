@@ -27,7 +27,7 @@ function DailyForecasts(props) {
     await sleep(1000);
     // Fetching 5 Days of Daily Forecasts according to the locationId from the route, first trying to get data from redux store, if not exsit fetching from the server
     const fiveDaysFetch =
-    
+      FIVE_DAYS_DATA ||
       props.fiveDay[locationId] ||
       (await accuweatherAPI.fiveDays(locationId));
     if (fiveDaysFetch.DailyForecasts) {

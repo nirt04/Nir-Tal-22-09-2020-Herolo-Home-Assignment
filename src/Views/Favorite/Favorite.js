@@ -27,185 +27,188 @@ function SimpleList(props) {
         maxWidth: "957px",
         // backgroundColor: theme.palette.otterCard[props.appConfig.themeType],
       },
-  
     };
   });
 
   const classes = useStyles();
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      zIndex={4}
-      className={classes.root}
-    >
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Card container>
-            <Typography variant="h5" className="px-4 py-3">
-              h5. Heading
-            </Typography>
-          </Card>
-        </Grid>
-        <Grid item xs={12}>
-          <Card container className={(classes.favList)}>
-            <List component="nav" aria-label="main mailbox folders">
-              <ListItem button>
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Inbox" />
-              </ListItem>
-              <ListItem button>
-                <ListItemIcon>
-                  <DraftsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Drafts" />
-              </ListItem>
-            </List>
-            <Divider />
-            <List component="nav" aria-label="secondary mailbox folders">
-              <ListItem button>
-                <ListItemText primary="Trash" />
-              </ListItem>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-              <ListItemLink href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemLink>
-            </List>
-          </Card>
-        </Grid>
+    <Grid container className={classes.root} spacing={3}>
+      <Grid item xs={12}>
+        {/* <Box
+          display="flex"
+          flexDirection="column"
+          zIndex={4}
+          className={classes.root}
+        > */}
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Card container>
+                <Typography variant="h5" className="px-4 py-3">
+                  h5. Heading
+                </Typography>
+              </Card>
+            </Grid>
+            <Grid item xs={12}>
+              <Card container className={classes.favList}>
+                <List component="nav" aria-label="main mailbox folders">
+                  <ListItem button>
+                    <ListItemIcon>
+                      <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Inbox" />
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <DraftsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Drafts" />
+                  </ListItem>
+                </List>
+                <Divider />
+                <List component="nav" aria-label="secondary mailbox folders">
+                  <ListItem button>
+                    <ListItemText primary="Trash" />
+                  </ListItem>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                  <ListItemLink href="#simple-list">
+                    <ListItemText primary="Spam" />
+                  </ListItemLink>
+                </List>
+              </Card>
+            </Grid>
+          </Grid>
+        {/* </Box> */}
       </Grid>
-    </Box>
+    </Grid>
   );
 }
 

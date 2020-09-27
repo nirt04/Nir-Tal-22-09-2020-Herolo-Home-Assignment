@@ -21,9 +21,7 @@ const get = (route, params, config = {}) => {
 
     HTTP.get(route, {
       params,
-      cancelToken: config.cancelToken
-        ? new CancelToken((c) => (cancelTokens[config.cancelToken] = c))
-        : null,
+      cancelToken: config.cancelToken ? new CancelToken((c) => (cancelTokens[config.cancelToken] = c)) : null,
     })
       .then((res) => {
         resolve(res.data);

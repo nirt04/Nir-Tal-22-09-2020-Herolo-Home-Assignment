@@ -21,7 +21,7 @@ function CurrentWeather(props) {
   const dataInit = async () => {
 	if (!locationId) return;
 	setLoading(true)
-	const currentWeather =  props.CURRENT_WEATHER_STORE[locationId] || await accuweatherAPI.currentWeather(locationId);
+	const currentWeather = current_weather || props.CURRENT_WEATHER_STORE[locationId] || await accuweatherAPI.currentWeather(locationId);
 await	util.sleep(1000)
 	setLoading(false)
     setCurrentWeather(currentWeather);

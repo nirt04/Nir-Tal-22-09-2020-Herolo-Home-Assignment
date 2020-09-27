@@ -1,4 +1,5 @@
 import HTTP from "../HTTP";
+
 export const accuweatherAPI = {
   fiveDays: (loactionId, isMetric) =>
     HTTP.get(

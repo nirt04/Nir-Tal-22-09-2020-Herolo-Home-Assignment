@@ -54,7 +54,7 @@ function HeroloAutocomplete(props) {
 		if (!searchQuery) cities = [];
 		else {
 			await util.sleep(1000);
-			cities =(await HTTP.get("locations/v1/cities/autocomplete", { language: "en-us", q: searchQuery, }));
+			cities = CITEIS_AUTOCOMPLETE_DATA || (await HTTP.get("locations/v1/cities/autocomplete", { language: "en-us", q: searchQuery, }));
 		}
 
 		setLoading(false);

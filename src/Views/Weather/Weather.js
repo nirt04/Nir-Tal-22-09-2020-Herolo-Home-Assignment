@@ -46,7 +46,7 @@ function Weather(props) {
 
   return (
     <Container maxWidth="md" className={classes.root}>
-      <Grid container className={classes.root} spacing={0}>
+      <Grid container className={classes.root} spacing={3}>
         <Grid item xs={12} md={"6"}>
           <Route component={WelcomeSearch} />
         </Grid>
