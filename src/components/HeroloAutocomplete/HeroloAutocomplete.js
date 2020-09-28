@@ -25,8 +25,8 @@ function HeroloAutocomplete(props) {
 
 
 	const useStyles = makeStyles((theme) => ({
+		
 		root: {
-			// padding: 0,
 			backgroundColor: theme.palette.outterCard[props.APP_CONFIG_STORE.themeType],
 			padding: "2px 4px",
 			display: "flex",
@@ -34,9 +34,9 @@ function HeroloAutocomplete(props) {
 		},
 	
 		icon: {
-			// color: theme.palette.text.secondary,
 			marginRight: theme.spacing(2),
 		},
+
 	}));
 
 	const query = useQuery();
@@ -93,7 +93,7 @@ function HeroloAutocomplete(props) {
 	}, []);
 
 	util.useDebounce(fetchQuery, 1000, async () => {
-		if (fetchQuery) {
+		if (fetchQuery && fetchQuery.length > 1) {
 			setLoading(true)
 			const fetchItems = await props.SET_AUTOCOMPLETE_DATA_BY_QUERY(fetchQuery);
 			setItems(fetchItems)
@@ -163,18 +163,13 @@ const mapStateToProps = (state) => {
   return {
     APP_CONFIG_STORE: state.appConfig,
     AUTOCOMPLETE_STORE: state.autocomplete,
-    // fiveDay: state.fiveDay,
-    // currentWeather: state.currentWeatherReducer,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    UPDATE_CURRENT_WEATHER_INFO: (payload) =>
-      dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
-    SET_AUTOCOMPLETE_DATA_BY_QUERY: (query) =>
-      dispatch(autocompleteActions.SET_AUTOCOMPLETE_DATA_BY_QUERY(query)),
-    // dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY_FETCH_DATA", payload }),
+    UPDATE_CURRENT_WEATHER_INFO: (payload) => dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
+    SET_AUTOCOMPLETE_DATA_BY_QUERY: (query) => dispatch(autocompleteActions.SET_AUTOCOMPLETE_DATA_BY_QUERY(query)),
   };
 };
 
