@@ -13,13 +13,11 @@ export const useStyles = makeStyles((theme) => ({
 export const GridContainer = (props) => {
   const classes = useStyles();
   const childrens = props.children;
-
-  debugger;
   return (
     <Card className={`${classes.root}`}>
       <Grid container spacing={3}>
         {childrens.map((child, i) => (
-          <Grid item xs={12}>
+          <Grid item xs={12} key={i}>
             {child}
           </Grid>
         ))}

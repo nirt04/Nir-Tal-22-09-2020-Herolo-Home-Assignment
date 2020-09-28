@@ -60,7 +60,7 @@ function HeroloTabs(props) {
         aria-label="simple tabs example"
       >
         <Tab {...tabProps(0, "weather")} />
-        <Tab {...tabProps(1, "favorite")} />
+        <Tab {...tabProps(1, "favorites")} />
       </Tabs>
       <Switch
         className="ml-auto"

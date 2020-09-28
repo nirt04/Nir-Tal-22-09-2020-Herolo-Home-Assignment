@@ -65,11 +65,11 @@ function HeroloAutocomplete(props) {
 		setValue(newVal);
 		if (!newVal) {
 			// props.history.push(`/weather`);
-			// props.dispatchCurrentWeatherInfo({ name: null, key: null });
+			// props.SET_WHEATHER_DATA_BY_KEYInfo({ name: null, key: null });
 			return;
 		} else {
 			props.history.push( `/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
-			props.dispatchCurrentWeatherInfo({
+			props.SET_WHEATHER_DATA_BY_KEYInfo({
 				name: `${newVal.LocalizedName}${ newVal.Country ? ", " + newVal.Country.LocalizedName : "" }`,
 				key: newVal.Key,
 			});
@@ -168,7 +168,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchCurrentWeatherInfo: (payload) =>
+    SET_WHEATHER_DATA_BY_KEYInfo: (payload) =>
       dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
     // dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY_FETCH_DATA", payload }),
   };

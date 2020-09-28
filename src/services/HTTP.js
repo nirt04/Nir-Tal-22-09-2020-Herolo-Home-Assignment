@@ -16,7 +16,6 @@ const HTTP = axios.create({
 
 const get = (route, params, config = {}) => {
   return new Promise((resolve, reject) => {
-    debugger;
     if (cancelTokens[config.cancelToken]) cancelTokens[config.cancelToken]("Request canceled.");
 
     HTTP.get(route, {
