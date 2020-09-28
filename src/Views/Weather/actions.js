@@ -14,7 +14,6 @@ export default {
   SET_WHEATHER_DATA_BY_KEY: (key) => {
     return async (dispatch, getState) => {
     // Fetch here
-    debugger;
     const store = getState()
     const weatherData = current_weather || store.currentWeather.data[key] || await accuweatherAPI.currentWeather(key);
     await	util.sleep(1000)

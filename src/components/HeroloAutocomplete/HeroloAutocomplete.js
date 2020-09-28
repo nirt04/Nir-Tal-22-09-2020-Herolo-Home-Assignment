@@ -44,22 +44,26 @@ function HeroloAutocomplete(props) {
 
 
 	const [fetchQuery, setFetchQuery] = React.useState(null);
+	const [input, setInput] = React.useState(null);
 	const [loading, setLoading] = React.useState(false);
 	const [open, setOpen] = React.useState(false);
 	const [items, setItems] = React.useState([]);
 	const [value, setValue] = React.useState(null);
-	const [input, setInput] = React.useState(null);
 	const locationId = props.match.params.locationId
 
 	const handleInputChange = (event, inputVal) => {
+		debugger;
 		if(event && event.type === 'blur') return;
-		else if(event && event.type === 'change') setFetchQuery(inputVal)
+		else if(event && event.type === 'change') {
+			props.history.push(`/weather/${locationId}/?search=${inputVal}` );
+			setFetchQuery(inputVal)
+		}
 		setInput(inputVal)
 	};
 
 	const setNewVal = (newVal) => {
-		setValue(newVal);
-		if (!newVal) return;
+		debugger;
+		if (newVal === undefined) return;
 		else {
 			props.history.push(`/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
 			props.UPDATE_CURRENT_WEATHER_INFO({
@@ -67,9 +71,13 @@ function HeroloAutocomplete(props) {
 				key: newVal.Key
 			});
 		}
+		setValue(newVal);
 	};
 
 	const onComponentMount = async () => {
+		debugger;
+		setInput(URL_SEARCH_QUERY)
+		setFetchQuery(URL_SEARCH_QUERY)
 		const fetchItems = await props.SET_AUTOCOMPLETE_DATA_BY_QUERY(URL_SEARCH_QUERY);
 		setItems(fetchItems);
 		if (locationId) {
@@ -104,7 +112,7 @@ function HeroloAutocomplete(props) {
 			getOptionLabel={(option) => `${option.LocalizedName}, ${ option.Country ? option.Country.LocalizedName : "" }` }
 			value={value}
 			inputValue={input}
-			options={items}
+			options={props.AUTOCOMPLETE_STORE.data[fetchQuery] || []}
 			loading={loading}
 			margin="dense"
 			getOptionSelected={(option, value) => value && option && option.Key === value.Key }
