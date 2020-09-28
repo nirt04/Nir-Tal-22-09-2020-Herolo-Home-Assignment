@@ -58,7 +58,7 @@ function HeroloAutocomplete(props) {
 			props.history.push(`/weather/${locationId}/?search=${inputVal}` );
 			setFetchQuery(inputVal)
 		}
-		setInput(inputVal)
+		setInput(inputVal || '')
 	};
 
 	const setNewVal = (newVal) => {
@@ -76,8 +76,8 @@ function HeroloAutocomplete(props) {
 
 	const onComponentMount = async () => {
 		debugger;
-		setInput(URL_SEARCH_QUERY)
-		setFetchQuery(URL_SEARCH_QUERY)
+		setInput(URL_SEARCH_QUERY || '')
+		setFetchQuery(URL_SEARCH_QUERY || '')
 		const fetchItems = await props.SET_AUTOCOMPLETE_DATA_BY_QUERY(URL_SEARCH_QUERY);
 		setItems(fetchItems);
 		if (locationId) {
