@@ -17,7 +17,7 @@ import HTTP from "../../services/HTTP";
 import CITEIS_AUTOCOMPLETE_DATA from "../../data/cities_autocomplete.json";
 import { Paper } from "@material-ui/core";
 import "./WeatherAutocomplete.scss";
-
+import autocompleteActions from "./actions";
 const useQuery = () => new URLSearchParams(useLocation().search);
 /* prettier-ignore */
 
@@ -27,7 +27,7 @@ function HeroloAutocomplete(props) {
 	const useStyles = makeStyles((theme) => ({
 		root: {
 			// padding: 0,
-			backgroundColor: theme.palette.outterCard[props.appConfig.themeType],
+			backgroundColor: theme.palette.outterCard[props.APP_CONFIG_STORE.themeType],
 			padding: "2px 4px",
 			display: "flex",
 			alignItems: "center",
@@ -40,75 +40,70 @@ function HeroloAutocomplete(props) {
 	}));
 
 	const query = useQuery();
-	const [open, setOpen] = React.useState(false);
+	const URL_SEARCH_QUERY = query.get("search");
+
+
+	const [fetchQuery, setFetchQuery] = React.useState(null);
 	const [loading, setLoading] = React.useState(false);
+	const [open, setOpen] = React.useState(false);
 	const [items, setItems] = React.useState([]);
 	const [value, setValue] = React.useState(null);
 	const [input, setInput] = React.useState(null);
 	const locationId = props.match.params.locationId
 
-	const fetchCities = async (searchQuery) => {
-		console.log("fetchCities");
-		let cities;
-		setLoading(true);
-		if (!searchQuery) cities = [];
-		else {
-			await util.sleep(1000);
-			cities = CITEIS_AUTOCOMPLETE_DATA || (await HTTP.get("locations/v1/cities/autocomplete", { language: "en-us", q: searchQuery, }));
-		}
-
-		setLoading(false);
-		return cities;
+	const handleInputChange = (event, inputVal) => {
+		if(event && event.type === 'blur') return;
+		else if(event && event.type === 'change') setFetchQuery(inputVal)
+		setInput(inputVal)
 	};
 
 	const setNewVal = (newVal) => {
 		setValue(newVal);
-		if (!newVal) {
-			// props.history.push(`/weather`);
-			// props.SET_WHEATHER_DATA_BY_KEYInfo({ name: null, key: null });
-			return;
-		} else {
-			props.history.push( `/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
-			props.SET_WHEATHER_DATA_BY_KEYInfo({
+		if (!newVal) return;
+		else {
+			props.history.push(`/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
+			props.UPDATE_CURRENT_WEATHER_INFO({
 				name: `${newVal.LocalizedName}${ newVal.Country ? ", " + newVal.Country.LocalizedName : "" }`,
-				key: newVal.Key,
+				key: newVal.Key
 			});
 		}
 	};
 
-	const onMountedData = async () => {
-		const searchQuery = query.get("search");
-		const cities = await fetchCities(searchQuery);
-		setItems(cities);
+	const onComponentMount = async () => {
+		const fetchItems = await props.SET_AUTOCOMPLETE_DATA_BY_QUERY(URL_SEARCH_QUERY);
+		setItems(fetchItems);
 		if (locationId) {
 			// If there is locationId in the route we wants to select it from the items we fetched to the autocomplete
-			const itemInOptions = cities.find( (option) => option.Key === locationId );
+			const itemInOptions = fetchItems.find( (option) => option.Key === locationId );
 			setNewVal(itemInOptions);
 		}
 	};
 
 	// On Mounted
 	React.useEffect(() => {
-		onMountedData();
+		onComponentMount();
 	}, []);
 
-	util.useDebounce(input, 1000, async () => { if (input) setItems(await fetchCities(input)); });
+	util.useDebounce(fetchQuery, 1000, async () => {
+		if (fetchQuery) {
+			setLoading(true)
+			const fetchItems = await props.SET_AUTOCOMPLETE_DATA_BY_QUERY(fetchQuery);
+			setItems(fetchItems)
+			setLoading(false)
+		} 	
+	});
 	const classes = useStyles();
-
+// debugger;
 
 	return (
 		
 		<Autocomplete
 		className="WeatherAutocomplete--main-container"
-			onInputChange={async (event, searchQuery) => {
-				// Emiting the function only if input changed came from user typing and not by clicking on of the options
-				if (event && event.type === "change" && searchQuery)
-					setInput(searchQuery);
-			}}
+			onInputChange={handleInputChange}
 			onChange={(event, newVal) => setNewVal(newVal)} 
-			// ListboxComponent={ListboxComponent}
 			getOptionLabel={(option) => `${option.LocalizedName}, ${ option.Country ? option.Country.LocalizedName : "" }` }
 			value={value}
+			inputValue={input}
 			options={items}
 			loading={loading}
 			margin="dense"
@@ -132,10 +127,8 @@ function HeroloAutocomplete(props) {
 				<Paper component="form" className={classes.root}>	
 				<TextField
 				className="WeatherAutocomplete--input"
-				// color="natural"
-					autoFocus
 					{...params}
-					// margin="dense"
+					autoFocus
 					placeholder="Select Location"
 					variant="outlined"
 					InputProps={{
@@ -160,7 +153,8 @@ function HeroloAutocomplete(props) {
 
 const mapStateToProps = (state) => {
   return {
-    appConfig: state.appConfig,
+    APP_CONFIG_STORE: state.appConfig,
+    AUTOCOMPLETE_STORE: state.autocomplete,
     // fiveDay: state.fiveDay,
     // currentWeather: state.currentWeatherReducer,
   };
@@ -168,8 +162,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    SET_WHEATHER_DATA_BY_KEYInfo: (payload) =>
+    UPDATE_CURRENT_WEATHER_INFO: (payload) =>
       dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
+    SET_AUTOCOMPLETE_DATA_BY_QUERY: (query) =>
+      dispatch(autocompleteActions.SET_AUTOCOMPLETE_DATA_BY_QUERY(query)),
     // dispatchFiveDaysData: (payload) => dispatch({ type: "ADD_FIVE_DAY_FETCH_DATA", payload }),
   };
 };

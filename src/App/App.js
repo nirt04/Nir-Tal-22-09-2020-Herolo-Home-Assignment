@@ -3,6 +3,8 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { HashRouter as Router } from "react-router-dom";
 import { MuiThemeProvider } from "@material-ui/core/styles";
+import { useLocation } from "react-router-dom";
+
 import { connect } from "react-redux";
 import { theme } from "../plugins/material-ui";
 import HeroloTabs from "../components/HeroloTabs/HeroloTabs";
@@ -14,17 +16,22 @@ import { useStyles } from "./style";
 import { Favorite } from "@material-ui/icons";
 import geolocation from "geolocation";
 import weatherActions from "../Views/Weather/actions"
+import autocompleteActions from "../components/HeroloAutocomplete/actions";
+// const useQuery = () => new URLSearchParams(useLocation().search);
+
 function App(props) {
+  // const query = useQuery();
   const classes = useStyles();
   const appInit = async () => {
     const geolocationPermission = await navigator.permissions.query({ name: "geolocation" })
-    // props.SET_WHEATHER_DATA_BY_KEY('key')
-    // console.log('geolocationPermission', geolocationPermission.state)
     props.updateAppConfig({ isAppReady: true });
     geolocation.getCurrentPosition(function (err, position) {
       if (err) throw err;
       props.SET_WHEATHER_DATA_BY_GEOLOCATION(position)
     });
+    // const searchQuery = query.get("search");
+    // if(searchQuery) props.SET_AUTOCOMPLETE_DATA_BY_QUERY(searchQuery)
+    
   };
   React.useEffect(() => {
     appInit();
@@ -65,6 +72,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     SET_WHEATHER_DATA_BY_GEOLOCATION: () => dispatch(weatherActions.SET_WHEATHER_DATA_BY_GEOLOCATION()),
     SET_WHEATHER_DATA_BY_KEY: (key) => dispatch(weatherActions.SET_WHEATHER_DATA_BY_KEY(key)),
+    SET_AUTOCOMPLETE_DATA_BY_QUERY: (query) => dispatch(autocompleteActions.SET_AUTOCOMPLETE_DATA_BY_QUERY(query)),
     updateAppConfig: (payload) => dispatch(appConfigActions.UPDATE_APP_CONFIG(payload)),
   };
 };

@@ -1,7 +1,12 @@
-export const autocompleteReducer = (state = {}, action) => {
+export const autocompleteReducer = (
+  state = {
+    data: {},
+  },
+  action
+) => {
   switch (action.type) {
-    case "ADD_SERACH_RESULTS":
-      return action.data;
+    case "SET_AUTOCOMPLETE_DATA_BY_QUERY":
+      return { ...state, data: { ...state.data, ...action.payload } };
     default:
       return state;
   }
