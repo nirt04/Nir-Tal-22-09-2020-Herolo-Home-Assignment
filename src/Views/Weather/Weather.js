@@ -48,7 +48,7 @@ function Weather(props) {
                 </Grid>
                 <Grid item>
                   <Typography variant="h5">Total Weather Report</Typography>
-                  <Typography variant="h5"> some info</Typography>
+                  <Typography variant="h5">some info</Typography>
                 </Grid>
               </Grid>
             </InnerCard>

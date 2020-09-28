@@ -25,7 +25,7 @@ function HeroloAutocomplete(props) {
 
 
 	const useStyles = makeStyles((theme) => ({
-		
+
 		root: {
 			backgroundColor: theme.palette.outterCard[props.APP_CONFIG_STORE.themeType],
 			padding: "2px 4px",
@@ -52,7 +52,6 @@ function HeroloAutocomplete(props) {
 	const locationId = props.match.params.locationId
 
 	const handleInputChange = (event, inputVal) => {
-		debugger;
 		if(event && event.type === 'blur') return;
 		else if(event && event.type === 'change') {
 			props.history.push(`/weather/${locationId}/?search=${inputVal}` );
@@ -62,7 +61,6 @@ function HeroloAutocomplete(props) {
 	};
 
 	const setNewVal = (newVal) => {
-		debugger;
 		if (!newVal) return;
 		else {
 			props.history.push(`/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
@@ -75,7 +73,6 @@ function HeroloAutocomplete(props) {
 	};
 
 	const onComponentMount = async () => {
-		debugger;
 		setInput(URL_SEARCH_QUERY || '')
 		setFetchQuery(URL_SEARCH_QUERY || '')
 		const fetchItems = await props.SET_AUTOCOMPLETE_DATA_BY_QUERY(URL_SEARCH_QUERY);
@@ -86,6 +83,11 @@ function HeroloAutocomplete(props) {
 			setNewVal(itemInOptions);
 		}
 	};
+
+	React.useEffect(() => {
+		const curWeatherName = props.CURRENT_WEATHER_STORE.info.name
+		if(props.CURRENT_WEATHER_STORE.info.name) setInput(curWeatherName)
+	}, [props.CURRENT_WEATHER_STORE]);
 
 	// On Mounted
 	React.useEffect(() => {
@@ -101,8 +103,6 @@ function HeroloAutocomplete(props) {
 		} 	
 	});
 	const classes = useStyles();
-// debugger;
-
 	return (
 		
 		<Autocomplete
@@ -161,6 +161,7 @@ function HeroloAutocomplete(props) {
 
 const mapStateToProps = (state) => {
   return {
+	CURRENT_WEATHER_STORE: state.currentWeather,
     APP_CONFIG_STORE: state.appConfig,
     AUTOCOMPLETE_STORE: state.autocomplete,
   };

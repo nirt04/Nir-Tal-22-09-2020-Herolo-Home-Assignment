@@ -10,7 +10,7 @@ const HTTP = axios.create({
     "Content-Type": "application/json",
   },
   params: {
-    apikey: "JpXZNXKBXpKo5VVG0RZzybpKahdMX8vv",
+    apikey: "xFGvCy1FaaIkGtmG3Y3fLsuTE1lpdUVX" || "JpXZNXKBXpKo5VVG0RZzybpKahdMX8vv",
   },
 });
 

@@ -3,12 +3,6 @@ import { createMuiTheme } from "@material-ui/core/styles";
 export const theme = (props) =>
   createMuiTheme({
     palette: {
-      test1: {
-        main: "red",
-      },
-      test2: {
-        main: "blue",
-      },
       type: props.appConfig.themeType,
       background: {
         paper: props.appConfig.themeType == "dark" ? "#3810ae" : "#FFFF",
