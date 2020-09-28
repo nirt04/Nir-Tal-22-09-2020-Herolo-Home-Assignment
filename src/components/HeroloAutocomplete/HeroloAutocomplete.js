@@ -63,7 +63,7 @@ function HeroloAutocomplete(props) {
 
 	const setNewVal = (newVal) => {
 		debugger;
-		if (newVal === undefined) return;
+		if (!newVal) return;
 		else {
 			props.history.push(`/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
 			props.UPDATE_CURRENT_WEATHER_INFO({
