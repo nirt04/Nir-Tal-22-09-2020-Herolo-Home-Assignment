@@ -8,7 +8,7 @@ export const accuweatherAPI = {
     { cancelToken: 'fiveDay' },
   ),
 
-  fiveDays: (loactionId, isMetric) => HTTP.get(
+  fiveDays: (loactionId) => HTTP.get(
     `forecasts/v1/daily/5day/${loactionId}`,
     { language: 'en-us', details: true, metric: true },
     { cancelToken: 'fiveDay' },
