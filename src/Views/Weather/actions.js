@@ -1,12 +1,11 @@
 import { accuweatherAPI } from '../../services/API/accuweather';
 import currentWeather from '../../data/current_weather.json';
-import geopostionSerachData from '../../data/geopostion_serach_data.json';
 
 export default {
   SET_WHEATHER_DATA_BY_GEOLOCATION: (lat, lon) => async (dispatch, getState) => {
     // Fetch here
     const store = getState();
-    const locationData = geopostionSerachData || await accuweatherAPI.geopositionSearch(lat, lon);
+    const locationData = await accuweatherAPI.geopositionSearch(lat, lon);
     const weatherData = currentWeather
     || store.currentWeather.data[locationData.Key]
     || await accuweatherAPI.currentWeather(locationData.Key);

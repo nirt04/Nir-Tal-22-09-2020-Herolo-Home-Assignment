@@ -20,11 +20,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HeroloTabs(props) {
-  const [isDark, setIsDark] = React.useState(props.appConfig.themeType === 'dark');
+function HeroloTabs({ updateAppConfig, url, appConfig }) {
+  const [isDark, setIsDark] = React.useState(appConfig.themeType === 'dark');
+  const [value, setValue] = React.useState(url.match.params.tab || 'weather');
 
   const handleSwitchChange = (event) => {
-    props.updateAppConfig({ themeType: event.target.checked ? 'dark' : 'light' });
+    updateAppConfig({ themeType: event.target.checked ? 'dark' : 'light' });
     setIsDark(event.target.checked);
   };
 
@@ -33,8 +34,8 @@ function HeroloTabs(props) {
   };
 
   const tabProps = (index, tabName) => {
-    const { locationId } = props.url.match.params;
-    const query = props.url.location.search;
+    const { locationId } = url.match.params;
+    const query = url.location.search;
     return {
       id: `simple-tab-${index}`,
       'aria-controls': `simple-tabpanel-${index}`,
@@ -46,14 +47,12 @@ function HeroloTabs(props) {
   };
 
   const classes = useStyles();
-  const [value, setValue] = React.useState(null);
 
   React.useEffect(() => {
-    setValue(props.url.match.params.tab);
-  }, [props.url.match.params.tab]);
+    setValue(url.match.params.tab);
+  }, [url.match.params.tab]);
 
   return (
-    // <div className={classes.root}>
     <AppBar position="static" className={classes.root}>
       <Tabs
         value={value}
@@ -71,9 +70,14 @@ function HeroloTabs(props) {
         inputProps={{ 'aria-label': 'primary checkbox' }}
       />
     </AppBar>
-    // </div>
   );
 }
+
+HeroloTabs.propTypes = {
+  updateAppConfig: PropTypes.func.isRequired,
+  url: PropTypes.objectOf(PropTypes.any).isRequired,
+  appConfig: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 const mapStateToProps = (state) => ({
   appConfig: state.appConfig,

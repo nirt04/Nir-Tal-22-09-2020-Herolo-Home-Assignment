@@ -1,6 +1,5 @@
 import { accuweatherAPI } from '../../services/API/accuweather';
 import autocompleteDataJson from '../../data/cities_autocomplete.json';
-import { util } from '../../services/util';
 
 export default {
   SET_AUTOCOMPLETE_DATA_BY_QUERY: (query) => async (dispatch, getState) => {

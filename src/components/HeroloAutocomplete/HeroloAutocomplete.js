@@ -49,7 +49,7 @@ function HeroloAutocomplete({
   const URL_SEARCH_QUERY = query.get('search');
 
   const [fetchQuery, setFetchQuery] = React.useState(null);
-  const [input, setInput] = React.useState(null);
+  const [input, setInput] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(null);
@@ -98,7 +98,6 @@ function HeroloAutocomplete({
   util.useDebounce(fetchQuery, 1000, async () => {
     if (fetchQuery && fetchQuery.length > 1) {
       setLoading(true);
-      history.push(`/weather/${locationId}/?search=${fetchQuery}`);
       await SET_AUTOCOMPLETE_DATA_BY_QUERY(fetchQuery);
       setLoading(false);
     }

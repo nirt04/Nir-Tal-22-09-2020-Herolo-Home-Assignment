@@ -26,6 +26,6 @@ export const GridContainer = ({ children }) => {
 };
 
 GridContainer.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.node])).isRequired,
+  children: PropTypes.arrayOf(PropTypes.node).isRequired,
 
 };

@@ -4,8 +4,9 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import { accuweatherAPI } from '../../services/API/accuweather';
-import { actions } from './actions';
+import fiveDaysActions from './actions';
 import { useStyles } from './style';
 import FIVE_DAYS_DATA from '../../data/5_days_of_daily_forecasts.json';
 import InnerCard from '../InnerCard';
@@ -18,9 +19,9 @@ function sleep(delay = 0) {
   });
 }
 
-function DailyForecasts(props) {
+function DailyForecasts({ match, fiveDay, ADD_FIVE_DAY_FETCH_DATA }) {
   const classes = useStyles();
-  const { locationId } = props.match.params;
+  const { locationId } = match.params;
   const [loading, setLoading] = React.useState(false);
   const [fiveDaysForecastsItems, setFiveDaysForecastsItems] = React.useState(
     null,
@@ -30,11 +31,11 @@ function DailyForecasts(props) {
     setLoading(true);
     await sleep(1000);
     // Fetching 5 Days of Daily Forecasts according to the locationId from the route, first trying to get data from redux store, if not exsit fetching from the server
-    const fiveDaysFetch = FIVE_DAYS_DATA || props.fiveDay[locationId] || (await accuweatherAPI.fiveDays(locationId));
+    const fiveDaysFetch = FIVE_DAYS_DATA || fiveDay[locationId] || (await accuweatherAPI.fiveDays(locationId));
     if (fiveDaysFetch.DailyForecasts) {
       setFiveDaysForecastsItems(fiveDaysFetch.DailyForecasts);
-      props.ADD_FIVE_DAY_FETCH_DATA({
-        ...props.fiveDay,
+      ADD_FIVE_DAY_FETCH_DATA({
+        ...fiveDay,
         [locationId]: fiveDaysFetch,
       });
     }
@@ -85,13 +86,19 @@ function DailyForecasts(props) {
   );
 }
 
+DailyForecasts.propTypes = {
+  ADD_FIVE_DAY_FETCH_DATA: PropTypes.func.isRequired,
+  match: PropTypes.objectOf(PropTypes.any).isRequired,
+  fiveDay: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
 const mapStateToProps = (state) => ({
   appConfig: state.appConfig,
   fiveDay: state.fiveDay,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  ADD_FIVE_DAY_FETCH_DATA: (payload) => dispatch(actions.ADD_FIVE_DAY_FETCH_DATA(payload)),
+  ADD_FIVE_DAY_FETCH_DATA: (payload) => dispatch(fiveDaysActions.ADD_FIVE_DAY_FETCH_DATA(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DailyForecasts);

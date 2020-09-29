@@ -28,10 +28,10 @@ function Weather() {
   return (
     <Container maxWidth="md" className={classes.root}>
       <Grid container className={classes.root} spacing={3}>
-        <Grid item xs={12} md="6">
+        <Grid item xs={12} md={6}>
           <Route component={WelcomeSearch} />
         </Grid>
-        <Grid item xs={12} md="6">
+        <Grid item xs={12} md={6}>
           <GridContainer>
             <InnerCard>
               <Grid container style={{ padding: '15px' }}>
