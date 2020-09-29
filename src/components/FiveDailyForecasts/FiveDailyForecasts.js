@@ -1,17 +1,16 @@
-import ForcastCard from "../ForcastCard/ForcastCard";
-import Box from "@material-ui/core/Box";
-import { connect } from "react-redux";
-import { accuweatherAPI } from "../../services/API/accuweather";
-import React from "react";
-import { actions } from "./actions";
-import Grid from "@material-ui/core/Grid";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { useStyles } from "./style";
-import Card from "@material-ui/core/Card";
-import FIVE_DAYS_DATA from "../../data/5_days_of_daily_forecasts.json";
-import InnerCard from "../InnerCard";
-import { CardMedia, Typography } from "@material-ui/core";
-import { GridContainer } from "../GridContainer";
+import Box from '@material-ui/core/Box';
+import { connect } from 'react-redux';
+import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Typography } from '@material-ui/core';
+import { accuweatherAPI } from '../../services/API/accuweather';
+import { actions } from './actions';
+import { useStyles } from './style';
+import FIVE_DAYS_DATA from '../../data/5_days_of_daily_forecasts.json';
+import InnerCard from '../InnerCard';
+import ForcastCard from '../ForcastCard/ForcastCard';
+import { GridContainer } from '../GridContainer';
 
 function sleep(delay = 0) {
   return new Promise((resolve) => {
@@ -21,10 +20,10 @@ function sleep(delay = 0) {
 
 function DailyForecasts(props) {
   const classes = useStyles();
-  const locationId = props.match.params.locationId;
+  const { locationId } = props.match.params;
   const [loading, setLoading] = React.useState(false);
   const [fiveDaysForecastsItems, setFiveDaysForecastsItems] = React.useState(
-    null
+    null,
   );
 
   const dataInit = async () => {
@@ -48,10 +47,7 @@ function DailyForecasts(props) {
   return (
     <GridContainer>
       <InnerCard>
-        <Grid
-          container
-          style={{ padding: "15px" }}
-        >
+        <Grid container style={{ padding: '15px' }}>
           <Grid item>
             <Typography variant="h5">Weekly Report</Typography>
             {/* <Typography variant="h5"> some info</Typography> */}
@@ -60,7 +56,7 @@ function DailyForecasts(props) {
       </InnerCard>
       <InnerCard className={classes.root}>
         {loading ? (
-          <Grid item xs={"auto"}>
+          <Grid item xs="auto">
             <Box
               display="flex"
               justifyContent="center"
@@ -71,11 +67,11 @@ function DailyForecasts(props) {
             </Box>
           </Grid>
         ) : (
-          <Grid item xs={"auto"}>
+          <Grid item xs="auto">
             <Grid container justify="center" direction="row">
-              {fiveDaysForecastsItems &&
-                fiveDaysForecastsItems.map((item, i) => (
-                  <Grid key={i} item md={"auto"} xs={"auto"} lg={"auto"}>
+              {fiveDaysForecastsItems
+                && fiveDaysForecastsItems.map((item, i) => (
+                  <Grid key={i} item md="auto" xs="auto" lg="auto">
                     <Box display="flex" justifyContent="center">
                       <ForcastCard item={item} />
                     </Box>
@@ -89,18 +85,13 @@ function DailyForecasts(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    appConfig: state.appConfig,
-    fiveDay: state.fiveDay,
-  };
-};
+const mapStateToProps = (state) => ({
+  appConfig: state.appConfig,
+  fiveDay: state.fiveDay,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    ADD_FIVE_DAY_FETCH_DATA: (payload) =>
-      dispatch(actions.ADD_FIVE_DAY_FETCH_DATA(payload)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  ADD_FIVE_DAY_FETCH_DATA: (payload) => dispatch(actions.ADD_FIVE_DAY_FETCH_DATA(payload)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(DailyForecasts);

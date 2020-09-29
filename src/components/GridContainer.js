@@ -1,24 +1,23 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Card, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Card, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   root: {
-    padding: "17px",
-    height: "max-content",
+    padding: '17px',
+    height: 'max-content',
   },
 }));
 
-export const GridContainer = (props) => {
+export const GridContainer = ({ children }) => {
   const classes = useStyles();
-  const childrens = props.children;
   return (
     <Card className={`${classes.root}`}>
       <Grid container spacing={3}>
-        {childrens.map((child, i) => (
+        {children.map((node, i) => (
           <Grid item xs={12} key={i}>
-            {child}
+            {node}
           </Grid>
         ))}
       </Grid>
@@ -27,5 +26,6 @@ export const GridContainer = (props) => {
 };
 
 GridContainer.propTypes = {
-  childrens: PropTypes.array.isRequired,
+  children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.node])).isRequired,
+
 };

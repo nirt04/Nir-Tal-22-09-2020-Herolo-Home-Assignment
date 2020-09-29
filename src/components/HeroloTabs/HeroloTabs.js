@@ -1,18 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import { connect } from "react-redux";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import { Link } from "react-router-dom";
-import { Switch } from "@material-ui/core";
-import appConfigActions from "../../App/actions"
+import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import { connect } from 'react-redux';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import { Link } from 'react-router-dom';
+import { Switch } from '@material-ui/core';
+import appConfigActions from '../../App/actions';
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 0,
     flexGrow: 1,
     backgroundColor: theme.palette.background.primary,
@@ -20,11 +21,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HeroloTabs(props) {
-  const [isDark, setIsDark] = React.useState( props.appConfig.themeType === "dark" );
+  const [isDark, setIsDark] = React.useState(props.appConfig.themeType === 'dark');
 
   const handleSwitchChange = (event) => {
-    props.updateAppConfig({ themeType: event.target.checked ? 'dark' : 'light'});
-    setIsDark( event.target.checked );
+    props.updateAppConfig({ themeType: event.target.checked ? 'dark' : 'light' });
+    setIsDark(event.target.checked);
   };
 
   const handleTabChange = (event, newValue) => {
@@ -32,14 +33,14 @@ function HeroloTabs(props) {
   };
 
   const tabProps = (index, tabName) => {
-    const locationId = props.url.match.params.locationId;
+    const { locationId } = props.url.match.params;
     const query = props.url.location.search;
     return {
       id: `simple-tab-${index}`,
-      "aria-controls": `simple-tabpanel-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
       label: tabName,
       value: tabName,
-      to: `/${tabName}${locationId ? "/" + locationId : ""}/${query}`,
+      to: `/${tabName}${locationId ? `/${locationId}` : ''}/${query}`,
       component: Link,
     };
   };
@@ -59,31 +60,27 @@ function HeroloTabs(props) {
         onChange={handleTabChange}
         aria-label="simple tabs example"
       >
-        <Tab {...tabProps(0, "weather")} />
-        <Tab {...tabProps(1, "favorites")} />
+        <Tab {...tabProps(0, 'weather')} />
+        <Tab {...tabProps(1, 'favorites')} />
       </Tabs>
       <Switch
         className="ml-auto"
         checked={isDark}
         onChange={handleSwitchChange}
         color="primary"
-        inputProps={{ "aria-label": "primary checkbox" }}
+        inputProps={{ 'aria-label': 'primary checkbox' }}
       />
     </AppBar>
     // </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    appConfig: state.appConfig,
-  };
-};
+const mapStateToProps = (state) => ({
+  appConfig: state.appConfig,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateAppConfig: (payload) => dispatch(appConfigActions.UPDATE_APP_CONFIG(payload)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  updateAppConfig: (payload) => dispatch(appConfigActions.UPDATE_APP_CONFIG(payload)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeroloTabs);
