@@ -1,5 +1,7 @@
 import React from 'react';
-import { Switch, Route, useLocation, Redirect, } from 'react-router-dom';
+import {
+  Switch, Route, useLocation, Redirect,
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container } from '@material-ui/core';
 import geolocation from 'geolocation';
@@ -38,14 +40,14 @@ export const AppRouter = ({
         geolocation.getCurrentPosition(async (err, position) => {
           if (err) { throw err; }
           const data = await SET_WHEATHER_DATA_BY_GEOLOCATION(position.coords.latitude, position.coords.longitude);
-          history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
+          if (data && data.locationData) history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
         });
       }
 
       // defualt location to TLV if geoloaction is not enabled
       else {
         const data = await SET_WHEATHER_DATA_BY_GEOLOCATION('32.045', '34.77');
-        history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
+        if (data && data.locationData) history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
       }
     };
     UPDATE_APP_CONFIG_STORE({ isAppReady: true });

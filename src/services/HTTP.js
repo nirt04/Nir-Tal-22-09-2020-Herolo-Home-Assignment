@@ -4,14 +4,14 @@ const { CancelToken } = axios;
 const cancelTokens = {};
 
 const HTTP = axios.create({
-  baseURL: 'http://dataservice.accuweather.com/',
+  baseURL: 'https://dataservice.accuweather.com/',
   withCredentials: false,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
   params: {
-    apikey: 'rahPnD6qt8hT5e5c1tyfpo5SG51pefEB' || 'nHz7ILclGvWOyqQQA7y3kASkAan1oQ34' || 'yorJNfSt5GWC6ym3UEo8WZGX0N5eyRhb' || 'JpXZNXKBXpKo5VVG0RZzybpKahdMX8vv' || 'xFGvCy1FaaIkGtmG3Y3fLsuTE1lpdUVX',
+    apikey: 'nHz7ILclGvWOyqQQA7y3kASkAan1oQ34' || 'A93ZHWxuSpGJ3A4OlGiTs7dWWgLLDRKD' || 'xFGvCy1FaaIkGtmG3Y3fLsuTE1lpdUVX' || 'JpXZNXKBXpKo5VVG0RZzybpKahdMX8vv' || 'xFGvCy1FaaIkGtmG3Y3fLsuTE1lpdUVX' || 'rahPnD6qt8hT5e5c1tyfpo5SG51pefEB' || 'nHz7ILclGvWOyqQQA7y3kASkAan1oQ34' || 'yorJNfSt5GWC6ym3UEo8WZGX0N5eyRhb',
   },
 });
 

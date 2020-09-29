@@ -5,6 +5,7 @@ import { favoritesReducer } from './reducers/favoritesReducer';
 import { currentWeatherReducer } from './reducers/currentWeatherReducer';
 import { autocompleteReducer } from './reducers/autocompleteReducer';
 import { appConfigReducer } from './reducers/appConfigReducer';
+import { errorReducer } from './reducers/errorReducer';
 
 const reducer = combineReducers({
   fiveDay: fiveDayReducer,
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   currentWeather: currentWeatherReducer,
   autocomplete: autocompleteReducer,
   appConfig: appConfigReducer,
+  error: errorReducer,
 
 });
 

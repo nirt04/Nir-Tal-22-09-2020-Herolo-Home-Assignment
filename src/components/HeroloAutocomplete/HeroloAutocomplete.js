@@ -78,7 +78,7 @@ function HeroloAutocomplete({
     setInput(URL_SEARCH_QUERY || '');
     setFetchQuery(URL_SEARCH_QUERY || '');
     const fetchItems = await SET_AUTOCOMPLETE_DATA_BY_QUERY(URL_SEARCH_QUERY);
-    if (locationId) {
+    if (locationId && fetchItems) {
       // If there is locationId in the route we wants to select it from the items we fetched to the autocomplete
       const itemInOptions = fetchItems.find((option) => option.Key === locationId);
       setNewVal(itemInOptions);

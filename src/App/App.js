@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { CardMedia } from '@material-ui/core';
 import { theme } from '../plugins/material-ui';
 import AppRoutesContainer from './AppRoutesContainer';
+import ErrorSnackbar from '../components/ErrorSnackbar/ErrorSnackbar';
 
 function App(props) {
   return (
@@ -17,6 +18,7 @@ function App(props) {
       <Router>
         <Route path="/:tab?/:locationId?" component={AppRoutesContainer} />
       </Router>
+      <ErrorSnackbar />
     </MuiThemeProvider>
   );
 }

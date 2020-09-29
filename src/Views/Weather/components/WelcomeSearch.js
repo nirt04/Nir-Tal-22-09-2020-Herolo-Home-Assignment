@@ -32,7 +32,7 @@ function WelcomeSearch(props) {
     geolocation.getCurrentPosition(async (err, position) => {
       if (err) throw err;
       const data = await props.SET_WHEATHER_DATA_BY_GEOLOCATION(position.coords.latitude, position.coords.longitude);
-      props.history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
+      if (data && data.locationData) props.history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
       // props.history.push(`/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
     });
   };
