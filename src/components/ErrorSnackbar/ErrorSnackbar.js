@@ -47,7 +47,8 @@ function ErrorSnackbar({ ERROR_STORE }) {
         autoHideDuration={6000}
         onClose={handleClose}
       >
-        <Alert severity="warning" onClose={handleClose} severity="warning">{ERROR_STORE.error ? ERROR_STORE.error.toString() : ''}</Alert>
+        <Alert severity="warning" onClose={handleClose} severity="warning">
+            {ERROR_STORE.error ? ERROR_STORE.error.toString() : ''}</Alert>
       </Snackbar>
     </div>
   );
