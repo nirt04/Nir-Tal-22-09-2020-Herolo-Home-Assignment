@@ -45,6 +45,10 @@ function CurrentWeather({
     dataInit(locationId);
   }, [locationId, SET_WHEATHER_DATA_BY_KEY]);
 
+  React.useEffect(() => {
+    localStorage.setItem('FAVORITES_STORE', JSON.stringify(FAVORITES_STORE));
+  }, [FAVORITES_STORE]);
+
   const appTempUnit = APP_CONFIG.tempratureUnit;
   const isInFavorite = !!FAVORITES_STORE[CURRENT_WEATHER_STORE.info.name];
   const isReady = !loading && APP_CONFIG.isAppReady && CURRENT_WEATHER_STORE.info.name && CURRENT_WEATHER_STORE.data[locationId];
