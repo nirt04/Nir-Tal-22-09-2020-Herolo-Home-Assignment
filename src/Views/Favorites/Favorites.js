@@ -10,12 +10,13 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import { Card, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
+import favAcations from './actions';
 
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
-function SimpleList() {
+function Favorites(props) {
   const useStyles = makeStyles(() => ({
     favList: {
       maxHeight: '65vh',
@@ -29,8 +30,11 @@ function SimpleList() {
     },
   }));
 
-  const classes = useStyles();
+  React.useEffect(() => {
+    localStorage.setItem('FAVORITES_STORE', JSON.stringify(props.FAVORITES_STORE) );
+  }, [props.FAVORITES_STORE]);
 
+  const classes = useStyles();
   return (
     <Grid container className={classes.root} spacing={3}>
       <Grid item xs={12}>
@@ -45,156 +49,15 @@ function SimpleList() {
           <Grid item xs={12}>
             <Card container className={classes.favList}>
               <List component="nav" aria-label="main mailbox folders">
-                <ListItem button>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Inbox" />
-                </ListItem>
-                <ListItem button>
-                  <ListItemIcon>
-                    <DraftsIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Drafts" />
-                </ListItem>
-              </List>
-              <Divider />
-              <List component="nav" aria-label="secondary mailbox folders">
-                <ListItem button>
-                  <ListItemText primary="Trash" />
-                </ListItem>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
-                </ListItemLink>
+                { Object.keys(props.FAVORITES_STORE).map((key, i) => (
+                  <ListItem button key={i} onClick={() => props.history.push(props.FAVORITES_STORE[key])}>
+                    <ListItemIcon>
+                      <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={key} />
+                  </ListItem>
+                ))}
+
               </List>
             </Card>
           </Grid>
@@ -206,6 +69,9 @@ function SimpleList() {
 
 const mapStateToProps = (state) => ({
   appConfig: state.appConfig,
+  FAVORITES_STORE: state.favorites,
 });
-
-export default connect(mapStateToProps)(SimpleList);
+const mapDispatchToProps = (dispatch) => ({
+  REMOVE_FAVORITE: (key) => dispatch(favAcations.REMOVE_FAVORITE(key)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

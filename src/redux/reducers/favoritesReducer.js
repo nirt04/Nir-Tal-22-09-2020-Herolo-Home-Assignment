@@ -1,13 +1,11 @@
-export const favoritesReducer = (state = new Map(), action) => {
+export const favoritesReducer = (state = localStorage.getItem('FAVORITES_STORE') ? JSON.parse(localStorage.getItem('FAVORITES_STORE')) : {}, action) => {
   switch (action.type) {
-    case "ADD_favorites":
-      const a = new Map(state);
-      a.set(action.data.name, action.data);
-      return a;
-    case "REMOVE_favorites":
-      const d = new Map(state);
-      d.delete(action.data.name);
-      return d;
+    case 'ADD_FAVORITE':
+      state[action.payload.key] = action.payload.data;
+      return { ...state };
+    case 'REMOVE_FAVORITE':
+      delete state[action.payload.key];
+      return { ...state };
     default:
       return state;
   }

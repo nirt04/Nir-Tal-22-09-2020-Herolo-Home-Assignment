@@ -6,20 +6,30 @@ import {
   CardMedia,
   Divider,
   Grid,
+  IconButton,
   Typography,
 } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import DeleteIcon from '@material-ui/icons/Delete';
 import appConfigActions from '../../App/actions';
 import { useStyles } from './style';
 import weatherActions from '../../Views/Weather/actions';
 import InnerCard from '../InnerCard';
+import favActions from '../../Views/Favorites/actions';
 
 /* prettier-ignore */
 function CurrentWeather({
-  match, SET_WHEATHER_DATA_BY_KEY, APP_CONFIG, CURRENT_WEATHER_STORE, UPDATE_APP_CONFIG_STORE,
+  match,
+  location,
+  SET_WHEATHER_DATA_BY_KEY,
+  APP_CONFIG, CURRENT_WEATHER_STORE,
+  UPDATE_APP_CONFIG_STORE,
+  FAVORITES_STORE,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE,
 }) {
   const { locationId } = match.params;
   const [loading, setLoading] = React.useState(false);
@@ -35,8 +45,9 @@ function CurrentWeather({
   React.useEffect(() => {
     dataInit(locationId);
   }, [locationId]);
-
+  debugger;
   const appTempUnit = APP_CONFIG.tempratureUnit;
+  const isInFavorite = !!FAVORITES_STORE[CURRENT_WEATHER_STORE.info.name];
   const isReady = !loading && APP_CONFIG.isAppReady && CURRENT_WEATHER_STORE.info.name && CURRENT_WEATHER_STORE.data[locationId];
   return (
 
@@ -50,7 +61,7 @@ function CurrentWeather({
         && CURRENT_WEATHER_STORE.data[locationId].map((item, i) => (
           <Grid container spacing={3} key={i} style={{ padding: '15px' }}>
 
-            <Grid item xs={12}>
+            <Grid item xs={8}>
               <Typography variant="subtitle2" className="px-4">
 
                 {CURRENT_WEATHER_STORE.info.name}
@@ -62,6 +73,7 @@ function CurrentWeather({
                 {moment(item.LocalObservationDateTime).format('HH:MM')}
               </Typography>
               <Typography variant="subtitle1" className="px-4">{item.WeatherText}</Typography>
+
               <Grid
                 container
                 spacing={2}
@@ -69,6 +81,7 @@ function CurrentWeather({
                 style={{ marginTop: 'auto' }}
                 alignItems="center"
               >
+
                 <Grid item xs="auto">
                   <CardMedia
                     className={classes.media}
@@ -101,6 +114,19 @@ function CurrentWeather({
                 </Grid>
               </Grid>
             </Grid>
+            <Grid item xs="auto">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => (
+                  isInFavorite
+                    ? REMOVE_FAVORITE(CURRENT_WEATHER_STORE.info.name)
+                    : ADD_FAVORITE(CURRENT_WEATHER_STORE.info.name, `${location.pathname}${location.search}`))}
+              >
+                {isInFavorite ? 'Liked' : 'Like'}
+              </Button>
+
+            </Grid>
           </Grid>
         ))}
     </InnerCard>
@@ -108,19 +134,26 @@ function CurrentWeather({
 }
 
 CurrentWeather.propTypes = {
+  FAVORITES_STORE: PropTypes.objectOf(PropTypes.any).isRequired,
+  location: PropTypes.objectOf(PropTypes.any).isRequired,
   match: PropTypes.objectOf(PropTypes.any).isRequired,
-  SET_WHEATHER_DATA_BY_KEY: PropTypes.func.isRequired,
-  UPDATE_APP_CONFIG_STORE: PropTypes.func.isRequired,
   APP_CONFIG: PropTypes.objectOf(PropTypes.any).isRequired,
   CURRENT_WEATHER_STORE: PropTypes.objectOf(PropTypes.any).isRequired,
+  SET_WHEATHER_DATA_BY_KEY: PropTypes.func.isRequired,
+  UPDATE_APP_CONFIG_STORE: PropTypes.func.isRequired,
+  ADD_FAVORITE: PropTypes.func.isRequired,
+  REMOVE_FAVORITE: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   CURRENT_WEATHER_STORE: state.currentWeather,
+  FAVORITES_STORE: state.favorites,
   APP_CONFIG: state.appConfig,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  REMOVE_FAVORITE: (key) => dispatch(favActions.REMOVE_FAVORITE(key)),
+  ADD_FAVORITE: (key, data) => dispatch(favActions.ADD_FAVORITE(key, data)),
   UPDATE_APP_CONFIG_STORE: (payload) => dispatch(appConfigActions.UPDATE_APP_CONFIG(payload)),
   SET_WHEATHER_DATA_BY_KEY: (key) => dispatch(weatherActions.SET_WHEATHER_DATA_BY_KEY(key)),
 });
