@@ -13,7 +13,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import DeleteIcon from '@material-ui/icons/Delete';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import appConfigActions from '../../App/actions';
 import { useStyles } from './style';
 import weatherActions from '../../Views/Weather/actions';
@@ -35,17 +35,16 @@ function CurrentWeather({
   const [loading, setLoading] = React.useState(false);
   const classes = useStyles();
 
-  const dataInit = async () => {
-    if (!locationId) return;
-    setLoading(true);
-    await SET_WHEATHER_DATA_BY_KEY(locationId);
-    setLoading(false);
-  };
-
   React.useEffect(() => {
+    const dataInit = async () => {
+      if (!locationId) return;
+      setLoading(true);
+      await SET_WHEATHER_DATA_BY_KEY(locationId);
+      setLoading(false);
+    };
     dataInit(locationId);
-  }, [locationId]);
-  debugger;
+  }, [locationId, SET_WHEATHER_DATA_BY_KEY]);
+
   const appTempUnit = APP_CONFIG.tempratureUnit;
   const isInFavorite = !!FAVORITES_STORE[CURRENT_WEATHER_STORE.info.name];
   const isReady = !loading && APP_CONFIG.isAppReady && CURRENT_WEATHER_STORE.info.name && CURRENT_WEATHER_STORE.data[locationId];
@@ -115,16 +114,24 @@ function CurrentWeather({
               </Grid>
             </Grid>
             <Grid item xs="auto">
-              <Button
+
+              <IconButton
+                disableRipple
+                className={classes.disableHover}
                 variant="contained"
-                color="primary"
+                color={isInFavorite ? 'secondary' : 'default'}
                 onClick={() => (
                   isInFavorite
                     ? REMOVE_FAVORITE(CURRENT_WEATHER_STORE.info.name)
                     : ADD_FAVORITE(CURRENT_WEATHER_STORE.info.name, `${location.pathname}${location.search}`))}
               >
-                {isInFavorite ? 'Liked' : 'Like'}
-              </Button>
+                <FavoriteIcon />
+                <p className="mx-2">
+                  {isInFavorite ? 'Liked' : 'Like'}
+                </p>
+
+              </IconButton>
+              {/* </Box> */}
 
             </Grid>
           </Grid>

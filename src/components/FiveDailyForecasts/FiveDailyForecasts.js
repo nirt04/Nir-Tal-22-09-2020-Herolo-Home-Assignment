@@ -27,23 +27,23 @@ function DailyForecasts({ match, fiveDay, ADD_FIVE_DAY_FETCH_DATA }) {
     null,
   );
 
-  const dataInit = async () => {
-    setLoading(true);
-    await sleep(1000);
-    // Fetching 5 Days of Daily Forecasts according to the locationId from the route, first trying to get data from redux store, if not exsit fetching from the server
-    const fiveDaysFetch = FIVE_DAYS_DATA || fiveDay[locationId] || (await accuweatherAPI.fiveDays(locationId));
-    if (fiveDaysFetch.DailyForecasts) {
-      setFiveDaysForecastsItems(fiveDaysFetch.DailyForecasts);
-      ADD_FIVE_DAY_FETCH_DATA({
-        ...fiveDay,
-        [locationId]: fiveDaysFetch,
-      });
-    }
-    setLoading(false);
-  };
   React.useEffect(() => {
+    const dataInit = async () => {
+      setLoading(true);
+      await sleep(1000);
+      // Fetching 5 Days of Daily Forecasts according to the locationId from the route, first trying to get data from redux store, if not exsit fetching from the server
+      const fiveDaysFetch = FIVE_DAYS_DATA || fiveDay[locationId] || (await accuweatherAPI.fiveDays(locationId));
+      if (fiveDaysFetch.DailyForecasts) {
+        setFiveDaysForecastsItems(fiveDaysFetch.DailyForecasts);
+        ADD_FIVE_DAY_FETCH_DATA({
+          ...fiveDay,
+          [locationId]: fiveDaysFetch,
+        });
+      }
+      setLoading(false);
+    };
     dataInit();
-  }, [locationId]);
+  }, [locationId,ADD_FIVE_DAY_FETCH_DATA,fiveDay]);
 
   return (
     <GridContainer>

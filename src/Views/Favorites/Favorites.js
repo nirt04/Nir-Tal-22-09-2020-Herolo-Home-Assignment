@@ -4,17 +4,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import { Card, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import favAcations from './actions';
-
-function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
-}
 
 function Favorites(props) {
   const useStyles = makeStyles(() => ({
@@ -31,7 +25,7 @@ function Favorites(props) {
   }));
 
   React.useEffect(() => {
-    localStorage.setItem('FAVORITES_STORE', JSON.stringify(props.FAVORITES_STORE) );
+    localStorage.setItem('FAVORITES_STORE', JSON.stringify(props.FAVORITES_STORE));
   }, [props.FAVORITES_STORE]);
 
   const classes = useStyles();
@@ -40,14 +34,14 @@ function Favorites(props) {
       <Grid item xs={12}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Card container>
+            <Card>
               <Typography variant="h5" className="px-4 py-3">
                 h5. Heading
               </Typography>
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card container className={classes.favList}>
+            <Card className={classes.favList}>
               <List component="nav" aria-label="main mailbox folders">
                 { Object.keys(props.FAVORITES_STORE).map((key, i) => (
                   <ListItem button key={i} onClick={() => props.history.push(props.FAVORITES_STORE[key])}>

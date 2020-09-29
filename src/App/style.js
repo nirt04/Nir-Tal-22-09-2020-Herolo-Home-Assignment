@@ -1,13 +1,11 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   root: {
-    height: "100vh",
-    // width: '100%',
-    padding: "0",
-    // margin: '0'
-    "& > div": {
-      marginTop: "15vh",
+    height: '100vh',
+    padding: '0',
+    '& > div': {
+      marginTop: '15vh',
     },
   },
 }));

@@ -22,23 +22,6 @@ export const AppRouter = ({
   const query = useQuery();
   const URL_ROUTE_VALID = (match.params.locationId && query.get('search'));
 
-  const dataInit = async () => {
-    const geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
-
-    if (geolocationPermission.state === 'granted' && !URL_ROUTE_VALID) {
-      geolocation.getCurrentPosition(async (err, position) => {
-        if (err) { throw err; }
-        const data = await SET_WHEATHER_DATA_BY_GEOLOCATION(position.coords.latitude, position.coords.longitude);
-        history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
-      });
-    }
-
-    // defualt location to TLV if geoloaction is not enabled
-    else {
-      const data = await SET_WHEATHER_DATA_BY_GEOLOCATION('32.045', '34.77');
-      history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
-    }
-  };
   React.useEffect(() => {
     if (URL_ROUTE_VALID) {
       UPDATE_CURRENT_WEATHER_INFO({
@@ -50,6 +33,24 @@ export const AppRouter = ({
   }, []);
 
   React.useEffect(() => {
+    const dataInit = async () => {
+      const geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
+
+      if (geolocationPermission.state === 'granted' && !URL_ROUTE_VALID) {
+        geolocation.getCurrentPosition(async (err, position) => {
+          if (err) { throw err; }
+          const data = await SET_WHEATHER_DATA_BY_GEOLOCATION(position.coords.latitude, position.coords.longitude);
+          history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
+        });
+      }
+
+      // defualt location to TLV if geoloaction is not enabled
+      else {
+        const data = await SET_WHEATHER_DATA_BY_GEOLOCATION('32.045', '34.77');
+        history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
+      }
+    };
+
     if (!URL_ROUTE_VALID) dataInit();
   }, [URL_ROUTE_VALID]);
 
