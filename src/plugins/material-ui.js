@@ -4,7 +4,7 @@ export const theme = (props) => createMuiTheme({
   palette: {
     type: props.appConfig.themeType,
     background: {
-      paper: props.appConfig.themeType == 'dark' ? '#3810ae' : '#FFFF',
+      paper: props.appConfig.themeType === 'dark' ? '#3810ae' : '#FFFF',
     },
     innerCard: {
       light: '#FFFF',
