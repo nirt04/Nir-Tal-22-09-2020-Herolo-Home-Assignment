@@ -15,7 +15,7 @@ function App(props) {
         image="https://www.wallpaperflare.com/static/656/666/467/landscape-mountains-clouds-forest-wallpaper.jpg"
       />
       <Router>
-        <Route path="/:tab/:locationId?" component={AppRoutesContainer} />
+        <Route path="/:tab?/:locationId?" component={AppRoutesContainer} />
       </Router>
     </MuiThemeProvider>
   );

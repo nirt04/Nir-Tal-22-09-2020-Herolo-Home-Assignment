@@ -4,7 +4,7 @@ export const useStyles = makeStyles({
   disableHover: {
     outline: 'none !important',
     '&:hover': {
-      backgroundColor: '#461eb7 !important',
+      backgroundColor: '#ffffff00 !important',
     },
   },
   tempUnitBtn: {
@@ -12,7 +12,7 @@ export const useStyles = makeStyles({
     minWidth: 'unset',
     outline: 'none !important',
     '&:hover': {
-      backgroundColor: '#461eb7 !important',
+      backgroundColor: '#ffffff00 !important',
     },
   },
   media: {

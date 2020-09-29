@@ -50,7 +50,7 @@ export const AppRouter = ({
         history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
       }
     };
-
+    UPDATE_APP_CONFIG_STORE({ isAppReady: true });
     if (!URL_ROUTE_VALID) dataInit();
   }, [URL_ROUTE_VALID]);
 

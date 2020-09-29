@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/Inbox';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { Card, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
@@ -25,7 +26,10 @@ function Favorites(props) {
   }));
 
   React.useEffect(() => {
-    localStorage.setItem('FAVORITES_STORE', JSON.stringify(props.FAVORITES_STORE));
+    localStorage.setItem(
+      'FAVORITES_STORE',
+      JSON.stringify(props.FAVORITES_STORE),
+    );
   }, [props.FAVORITES_STORE]);
 
   const classes = useStyles();
@@ -36,22 +40,30 @@ function Favorites(props) {
           <Grid item xs={12}>
             <Card>
               <Typography variant="h5" className="px-4 py-3">
-                h5. Heading
+                Favorites
               </Typography>
             </Card>
           </Grid>
           <Grid item xs={12}>
             <Card className={classes.favList}>
               <List component="nav" aria-label="main mailbox folders">
-                { Object.keys(props.FAVORITES_STORE).map((key, i) => (
-                  <ListItem button key={i} onClick={() => props.history.push(props.FAVORITES_STORE[key])}>
-                    <ListItemIcon>
-                      <InboxIcon />
+                { Object.keys(props.FAVORITES_STORE).length === 0 && (
+                <ListItem>
+                  <ListItemText primary="Nothing to show :(" />
+                </ListItem>
+                )}
+                {Object.keys(props.FAVORITES_STORE).map((key, i) => (
+
+                  <ListItem button key={i}>
+                    <ListItemIcon onClick={() => props.REMOVE_FAVORITE(key)}>
+                      <DeleteIcon />
                     </ListItemIcon>
-                    <ListItemText primary={key} />
+                    <ListItemText
+                      primary={key}
+                      onClick={() => props.history.push(props.FAVORITES_STORE[key])}
+                    />
                   </ListItem>
                 ))}
-
               </List>
             </Card>
           </Grid>

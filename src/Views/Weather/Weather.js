@@ -13,8 +13,9 @@ import { GridContainer } from '../../components/GridContainer';
 function Weather() {
   const useStyles = makeStyles(() => ({
     weatherTitleIcon: {
-      width: '96px',
+      width: '40px',
       height: '100%',
+      marginRight: '10px',
     },
     root: {
       width: '100%',
@@ -43,7 +44,6 @@ function Weather() {
                 </Grid>
                 <Grid item>
                   <Typography variant="h5">Total Weather Report</Typography>
-                  <Typography variant="h5">some info</Typography>
                 </Grid>
               </Grid>
             </InnerCard>

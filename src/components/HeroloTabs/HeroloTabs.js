@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Link } from 'react-router-dom';
-import { Switch } from '@material-ui/core';
+import { Box, FormControlLabel, Switch } from '@material-ui/core';
 import appConfigActions from '../../App/actions';
 
 const useStyles = makeStyles((theme) => ({
@@ -62,13 +62,19 @@ function HeroloTabs({ updateAppConfig, url, appConfig }) {
         <Tab {...tabProps(0, 'weather')} />
         <Tab {...tabProps(1, 'favorites')} />
       </Tabs>
-      <Switch
-        className="ml-auto"
-        checked={isDark}
-        onChange={handleSwitchChange}
-        color="primary"
-        inputProps={{ 'aria-label': 'primary checkbox' }}
-      />
+      <Box marginLeft="auto">
+        <FormControlLabel
+          control={(
+            <Switch
+              checked={isDark}
+              onChange={handleSwitchChange}
+              color="default"
+              inputProps={{ 'aria-label': 'primary checkbox' }}
+            />
+        )}
+          label={appConfig.themeType === 'dark' ? 'Dark' : 'Light'}
+        />
+      </Box>
     </AppBar>
   );
 }

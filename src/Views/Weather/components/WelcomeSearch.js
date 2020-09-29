@@ -41,21 +41,24 @@ function WelcomeSearch(props) {
     <Grid container className={classes.root}>
 
       <Grid item xs={12}>
-        <Typography color="textPrimary" variant="h4" gutterBottom>
+        <Typography color="textPrimary" variant="h4">
           Hello there Herolo.
         </Typography>
       </Grid>
 
       <Grid item xs={12}>
-        <Typography color="textPrimary" variant="h4" gutterBottom>
+        <Typography color="textPrimary" variant="h5" gutterBottom>
           Welcome to my weather application.
         </Typography>
       </Grid>
 
       <Grid item xs={12}>
         <Typography color="textPrimary" m={2} variant="subtitle2" gutterBottom>
-          Yet too often some very human cultural artifacts really lead the
-          business down the certain routes.
+          The Application is Fully responsive,Fully Route integrated, Local Storaged, State Mangement, Uses Axios cancel tokens for preventing old async fetch calls that can override the data, auto Geolocation if possible, and autocomplete with 1000ms debounce. And featured with Dark/Light mode theme. I had great time making it for you.
+        </Typography>
+        <Typography color="textPrimary" m={2} variant="subtitle2" gutterBottom>
+          Thanks for your time and Hope you will enjoy :)
+          {' '}
         </Typography>
       </Grid>
 

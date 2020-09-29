@@ -5,7 +5,7 @@ export default {
   SET_AUTOCOMPLETE_DATA_BY_QUERY: (query) => async (dispatch, getState) => {
     // Fetch here
     const store = getState();
-    const autocompleteData = autocompleteDataJson || store.autocomplete.data[query] || await accuweatherAPI.autocompleteCities(query);
+    const autocompleteData =  store.autocomplete.data[query] || await accuweatherAPI.autocompleteCities(query);
     // await util.sleep(1000)
     dispatch({ type: 'SET_AUTOCOMPLETE_DATA_BY_QUERY', payload: { [query]: autocompleteData } });
     return autocompleteData;
