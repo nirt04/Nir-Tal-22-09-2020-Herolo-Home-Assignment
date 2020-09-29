@@ -26,8 +26,8 @@ export const AppRouter = ({
         name: query.get('search'),
         key: match.params.locationId,
       });
-      UPDATE_APP_CONFIG_STORE({ isAppReady: true });
     }
+    UPDATE_APP_CONFIG_STORE({ isAppReady: true });
   }, []);
 
   React.useEffect(() => {

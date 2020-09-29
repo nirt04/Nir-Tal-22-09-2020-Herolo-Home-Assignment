@@ -22,16 +22,17 @@ function DailyForecasts({ match, fiveDay, ADD_FIVE_DAY_FETCH_DATA }) {
   const classes = useStyles();
   const { locationId } = match.params;
   const [loading, setLoading] = React.useState(false);
-  const [fiveDaysForecastsItems, setFiveDaysForecastsItems] = React.useState( null, );
+  const [fiveDaysForecastsItems, setFiveDaysForecastsItems] = React.useState(null);
 
   React.useEffect(() => {
     const dataInit = async () => {
+      if (!locationId) return;
       setLoading(true);
       // Fetching 5 Days of Daily Forecasts according to the locationId from the route, first trying to get data from redux store, if not exsit fetching from the server
       const fiveDaysFetch = fiveDay[locationId] || (await accuweatherAPI.fiveDays(locationId));
       if (fiveDaysFetch.DailyForecasts) {
         setFiveDaysForecastsItems(fiveDaysFetch.DailyForecasts);
-        ADD_FIVE_DAY_FETCH_DATA({ ...fiveDay, [locationId]: fiveDaysFetch, });
+        ADD_FIVE_DAY_FETCH_DATA({ ...fiveDay, [locationId]: fiveDaysFetch });
       }
       setLoading(false);
     };
