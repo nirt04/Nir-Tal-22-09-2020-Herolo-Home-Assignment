@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const util = {
   useDebounce: (value, delay, callback) => {
@@ -21,14 +21,12 @@ export const util = {
           clearTimeout(handler);
         };
       },
-      [value, delay] // Only re-call effect if value or delay changes
+      [value, delay], // Only re-call effect if value or delay changes
     );
 
     return debouncedValue;
   },
-  sleep: (delay = 0) => {
-    return new Promise((resolve) => {
-      setTimeout(resolve, delay);
-    });
-  },
+  sleep: (delay = 0) => new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  }),
 };

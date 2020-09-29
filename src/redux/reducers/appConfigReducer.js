@@ -1,13 +1,13 @@
 export const appConfigReducer = (
   state = {
     themeType: 'dark',
-    tempratureUnit: "Metric",
+    tempratureUnit: 'Metric',
     isAppReady: false,
   },
-  action
+  action,
 ) => {
   switch (action.type) {
-    case "UPDATE_APP_CONFIG":
+    case 'UPDATE_APP_CONFIG':
       return { ...state, ...action.payload };
     default:
       return state;

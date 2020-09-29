@@ -2,18 +2,18 @@ export const currentWeatherReducer = (
   state = {
     data: {},
     info: {
-        name: null,
-        key: null,
-    }
+      name: null,
+      key: null,
+    },
   },
-  action
+  action,
 ) => {
   switch (action.type) {
-    case "SET_WHEATHER_DATA_BY_GEOLOCATION":
+    case 'SET_WHEATHER_DATA_BY_GEOLOCATION':
       return { ...state, data: { ...state.data, ...action.payload } };
-    case "SET_WHEATHER_DATA_BY_KEY":
+    case 'SET_WHEATHER_DATA_BY_KEY':
       return { ...state, data: { ...state.data, ...action.payload } };
-    case "UPDATE_CURRENT_WEATHER_INFO":
+    case 'UPDATE_CURRENT_WEATHER_INFO':
       return { ...state, info: { ...state.info, ...action.payload } };
     default:
       return state;

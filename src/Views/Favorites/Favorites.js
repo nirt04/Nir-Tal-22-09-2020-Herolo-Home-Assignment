@@ -4,7 +4,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/Inbox';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Card, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
@@ -21,7 +20,6 @@ function Favorites(props) {
       margin: '0 auto',
       width: '100%',
       maxWidth: '957px',
-      // backgroundColor: theme.palette.otterCard[props.appConfig.themeType],
     },
   }));
 

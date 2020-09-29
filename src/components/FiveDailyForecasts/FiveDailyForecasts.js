@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import { accuweatherAPI } from '../../services/API/accuweather';
 import fiveDaysActions from './actions';
 import { useStyles } from './style';
-import FIVE_DAYS_DATA from '../../data/5_days_of_daily_forecasts.json';
 import InnerCard from '../InnerCard';
 import ForcastCard from '../ForcastCard/ForcastCard';
 import { GridContainer } from '../GridContainer';

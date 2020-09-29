@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Switch, Route, useLocation, Redirect,
-} from 'react-router-dom';
+import { Switch, Route, useLocation, Redirect, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container } from '@material-ui/core';
 import geolocation from 'geolocation';

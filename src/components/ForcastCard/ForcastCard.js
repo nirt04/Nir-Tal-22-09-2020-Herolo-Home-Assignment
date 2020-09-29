@@ -13,7 +13,6 @@ const convert = require('convert-units');
 const useStyles = makeStyles({
   media: {
     backgroundSize: 'auto',
-    // margin: "auto",
     width: '47px',
     height: '45px',
   },
