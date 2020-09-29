@@ -3,13 +3,13 @@ import HTTP from '../HTTP';
 export const accuweatherAPI = {
 
   geopositionSearch: (lat, lon) => HTTP.get(
-    'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search',
+    'locations/v1/cities/geoposition/search',
     { q: `${lat},${lon}`, language: 'en-us', details: true },
     { cancelToken: 'fiveDay' },
   ),
 
   fiveDays: (loactionId, isMetric) => HTTP.get(
-    `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${loactionId}`,
+    `forecasts/v1/daily/5day/${loactionId}`,
     { language: 'en-us', details: true, metric: true },
     { cancelToken: 'fiveDay' },
   ),
@@ -27,7 +27,7 @@ export const accuweatherAPI = {
   },
 
   currentWeather: (loactionId) => HTTP.get(
-    `http://dataservice.accuweather.com/currentconditions/v1/${loactionId}`,
+    `currentconditions/v1/${loactionId}`,
     { language: 'en-us', details: true, toplevel: true },
     { cancelToken: 'currentconditions' },
   ),
