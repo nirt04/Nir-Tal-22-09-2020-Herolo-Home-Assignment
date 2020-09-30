@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6c5d5c510127338f1df1a8a387884c35",
+    "revision": "523ff897bface273a6cfc1824ed66ab5",
     "url": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/index.html"
   },
   {
-    "revision": "8abe88131ed669ba3c94",
+    "revision": "6b06372c68bee6e04d69",
     "url": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/css/main.05f364a6.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.5818c3d2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8abe88131ed669ba3c94",
-    "url": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.2bfe5d6e.chunk.js"
+    "revision": "6b06372c68bee6e04d69",
+    "url": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.58027044.chunk.js"
   },
   {
     "revision": "b3cc8ebc4637d29bb881",
