@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/css/main.05f364a6.chunk.css",
-    "main.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.da3d6d48.chunk.js",
-    "main.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.da3d6d48.chunk.js.map",
+    "main.css": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/css/main.99e2459d.chunk.css",
+    "main.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.06d05e62.chunk.js",
+    "main.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/main.06d05e62.chunk.js.map",
     "runtime-main.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/runtime-main.19da98f5.js",
     "runtime-main.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/runtime-main.19da98f5.js.map",
-    "static/js/2.5818c3d2.chunk.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.5818c3d2.chunk.js",
-    "static/js/2.5818c3d2.chunk.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.5818c3d2.chunk.js.map",
+    "static/js/2.3d963f8d.chunk.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.3d963f8d.chunk.js",
+    "static/js/2.3d963f8d.chunk.js.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.3d963f8d.chunk.js.map",
     "index.html": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/index.html",
-    "precache-manifest.3d70180b1d5099395a7ffe18ea415b8e.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/precache-manifest.3d70180b1d5099395a7ffe18ea415b8e.js",
+    "precache-manifest.361d2e77915ca1c4ae749e77d8b3680d.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/precache-manifest.361d2e77915ca1c4ae749e77d8b3680d.js",
     "service-worker.js": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/service-worker.js",
-    "static/css/main.05f364a6.chunk.css.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/css/main.05f364a6.chunk.css.map",
-    "static/js/2.5818c3d2.chunk.js.LICENSE.txt": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.5818c3d2.chunk.js.LICENSE.txt"
+    "static/css/main.99e2459d.chunk.css.map": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/css/main.99e2459d.chunk.css.map",
+    "static/js/2.3d963f8d.chunk.js.LICENSE.txt": "/Nir-Tal-22-09-2020-Herolo-Home-Assignment/static/js/2.3d963f8d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.19da98f5.js",
-    "static/js/2.5818c3d2.chunk.js",
-    "static/css/main.05f364a6.chunk.css",
-    "static/js/main.da3d6d48.chunk.js"
+    "static/js/2.3d963f8d.chunk.js",
+    "static/css/main.99e2459d.chunk.css",
+    "static/js/main.06d05e62.chunk.js"
   ]
 }
