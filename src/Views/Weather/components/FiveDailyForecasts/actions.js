@@ -1,4 +1,4 @@
-import { accuweatherAPI } from '../../services/API/accuweather';
+import { accuweatherAPI } from 'services/API/accuweather.js';
 
 export default {
   SET_FIVE_DAY_FETCH_DATA: (locationId) => async (dispatch, getState) => {

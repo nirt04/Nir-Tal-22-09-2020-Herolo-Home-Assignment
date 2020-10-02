@@ -4,11 +4,11 @@ import { Route } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { CardMedia, Container, Typography } from '@material-ui/core';
-import CurrentWeather from '../../components/CurrentWeather/CurrentWeather';
-import FiveDailyForecasts from '../../components/FiveDailyForecasts/FiveDailyForecasts';
+import CurrentWeather from './components/CurrentWeather/CurrentWeather';
+import FiveDailyForecasts from './components/FiveDailyForecasts/FiveDailyForecasts';
 import WelcomeSearch from './components/WelcomeSearch';
 import InnerCard from '../../components/InnerCard';
-import { GridContainer } from '../../components/GridContainer';
+import { GridContainer } from 'components/GridContainer.js';
 
 function Weather() {
   const useStyles = makeStyles(() => ({

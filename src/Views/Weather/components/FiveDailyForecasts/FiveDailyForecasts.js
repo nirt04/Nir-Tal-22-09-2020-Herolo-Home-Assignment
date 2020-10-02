@@ -5,11 +5,11 @@ import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import ForcastCard from 'Views/Weather/components/FiveDailyForecasts/components/ForcastCard.js';
+import { GridContainer } from 'components/GridContainer.js';
 import fiveDaysActions from './actions';
 import { useStyles } from './style';
-import InnerCard from '../InnerCard';
-import ForcastCard from '../ForcastCard/ForcastCard';
-import { GridContainer } from '../GridContainer';
+import InnerCard from 'components/InnerCard.js';
 
 function DailyForecasts({ match, fiveDay, SET_FIVE_DAY_FETCH_DATA }) {
   const classes = useStyles();

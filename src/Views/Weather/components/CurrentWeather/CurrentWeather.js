@@ -14,17 +14,17 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import appConfigActions from '../../App/actions';
+import appConfigActions from '../../../../App/actions';
 import { useStyles } from './style';
-import weatherActions from '../../Views/Weather/actions';
-import InnerCard from '../InnerCard';
-import favActions from '../../Views/Favorites/actions';
+import weatherActions from './actions';
+import InnerCard from 'components/InnerCard.js';
+import favActions from '../../../Favorites/actions';
 
 /* prettier-ignore */
 function CurrentWeather({
   match,
   location,
-  SET_WHEATHER_DATA_BY_KEY,
+  SET_CURRENT_WHEATHER_DATA_BY_KEY,
   APP_CONFIG, CURRENT_WEATHER_STORE,
   UPDATE_APP_CONFIG_STORE,
   FAVORITES_STORE,
@@ -39,11 +39,11 @@ function CurrentWeather({
     const dataInit = async () => {
       if (!locationId) return;
       setLoading(true);
-      await SET_WHEATHER_DATA_BY_KEY(locationId);
+      await SET_CURRENT_WHEATHER_DATA_BY_KEY(locationId);
       setLoading(false);
     };
     dataInit(locationId);
-  }, [locationId, SET_WHEATHER_DATA_BY_KEY]);
+  }, [locationId, SET_CURRENT_WHEATHER_DATA_BY_KEY]);
 
   React.useEffect(() => {
     localStorage.setItem('FAVORITES_STORE', JSON.stringify(FAVORITES_STORE));
@@ -150,7 +150,7 @@ CurrentWeather.propTypes = {
   match: PropTypes.objectOf(PropTypes.any).isRequired,
   APP_CONFIG: PropTypes.objectOf(PropTypes.any).isRequired,
   CURRENT_WEATHER_STORE: PropTypes.objectOf(PropTypes.any).isRequired,
-  SET_WHEATHER_DATA_BY_KEY: PropTypes.func.isRequired,
+  SET_CURRENT_WHEATHER_DATA_BY_KEY: PropTypes.func.isRequired,
   UPDATE_APP_CONFIG_STORE: PropTypes.func.isRequired,
   ADD_FAVORITE: PropTypes.func.isRequired,
   REMOVE_FAVORITE: PropTypes.func.isRequired,
@@ -166,7 +166,7 @@ const mapDispatchToProps = (dispatch) => ({
   REMOVE_FAVORITE: (key) => dispatch(favActions.REMOVE_FAVORITE(key)),
   ADD_FAVORITE: (key, data) => dispatch(favActions.ADD_FAVORITE(key, data)),
   UPDATE_APP_CONFIG_STORE: (payload) => dispatch(appConfigActions.UPDATE_APP_CONFIG(payload)),
-  SET_WHEATHER_DATA_BY_KEY: (key) => dispatch(weatherActions.SET_WHEATHER_DATA_BY_KEY(key)),
+  SET_CURRENT_WHEATHER_DATA_BY_KEY: (key) => dispatch(weatherActions.SET_CURRENT_WHEATHER_DATA_BY_KEY(key)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentWeather);

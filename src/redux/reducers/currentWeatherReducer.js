@@ -9,9 +9,9 @@ export const currentWeatherReducer = (
   action,
 ) => {
   switch (action.type) {
-    case 'SET_WHEATHER_DATA_BY_GEOLOCATION':
+    case 'SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION':
       return { ...state, data: { ...state.data, ...action.payload } };
-    case 'SET_WHEATHER_DATA_BY_KEY':
+    case 'SET_CURRENT_WHEATHER_DATA_BY_KEY':
       return { ...state, data: { ...state.data, ...action.payload } };
     case 'UPDATE_CURRENT_WEATHER_INFO':
       return { ...state, info: { ...state.info, ...action.payload } };

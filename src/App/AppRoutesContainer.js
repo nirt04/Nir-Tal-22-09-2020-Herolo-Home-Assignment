@@ -11,12 +11,12 @@ import HeroloTabs from '../components/HeroloTabs/HeroloTabs';
 import Weather from '../Views/Weather/Weather';
 import Favorites from '../Views/Favorites/Favorites';
 import appConfigActions from './actions';
-import weatherActions from '../Views/Weather/actions';
+import weatherActions from '../Views/Weather/components/CurrentWeather/actions';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
 export const AppRouter = ({
-  match, history, SET_WHEATHER_DATA_BY_GEOLOCATION, UPDATE_APP_CONFIG_STORE, UPDATE_CURRENT_WEATHER_INFO,
+  match, history, SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION, UPDATE_APP_CONFIG_STORE, UPDATE_CURRENT_WEATHER_INFO,
 }) => {
   const classes = useStyles();
   const query = useQuery();
@@ -39,14 +39,14 @@ export const AppRouter = ({
       if (geolocationPermission.state === 'granted' && !URL_ROUTE_VALID) {
         geolocation.getCurrentPosition(async (err, position) => {
           if (err) { throw err; }
-          const data = await SET_WHEATHER_DATA_BY_GEOLOCATION(position.coords.latitude, position.coords.longitude);
+          const data = await SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION(position.coords.latitude, position.coords.longitude);
           if (data && data.locationData) history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
         });
       }
 
       // defualt location to TLV if geoloaction is not enabled
       else {
-        const data = await SET_WHEATHER_DATA_BY_GEOLOCATION('32.045', '34.77');
+        const data = await SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION('32.045', '34.77');
         if (data && data.locationData) history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
       }
     };
@@ -69,7 +69,7 @@ export const AppRouter = ({
 AppRouter.propTypes = {
   UPDATE_APP_CONFIG_STORE: PropTypes.func.isRequired,
   UPDATE_CURRENT_WEATHER_INFO: PropTypes.func.isRequired,
-  SET_WHEATHER_DATA_BY_GEOLOCATION: PropTypes.func.isRequired,
+  SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION: PropTypes.func.isRequired,
   match: PropTypes.objectOf(PropTypes.any).isRequired,
   history: PropTypes.objectOf(PropTypes.any).isRequired,
 };
@@ -80,7 +80,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   UPDATE_CURRENT_WEATHER_INFO: (payload) => dispatch({ type: 'UPDATE_CURRENT_WEATHER_INFO', payload }),
-  SET_WHEATHER_DATA_BY_GEOLOCATION: (lat, lon) => dispatch(weatherActions.SET_WHEATHER_DATA_BY_GEOLOCATION(lat, lon)),
+  SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION: (lat, lon) => dispatch(weatherActions.SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION(lat, lon)),
   UPDATE_APP_CONFIG_STORE: (payload) => dispatch(appConfigActions.UPDATE_APP_CONFIG(payload)),
 });
 
