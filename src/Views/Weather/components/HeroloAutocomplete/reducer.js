@@ -1,4 +1,4 @@
-export const autocompleteReducer = (
+const autocompleteReducer = (
   state = {
     data: {},
   },
@@ -11,3 +11,5 @@ export const autocompleteReducer = (
       return state;
   }
 };
+
+export default autocompleteReducer;

@@ -32,6 +32,12 @@ function HeroloAutocomplete({
 }) {
   const useStyles = makeStyles((theme) => ({
 
+    'WeatherAutocomplete--input': {
+      '& + *': {
+        border: 'unset !important',
+      },
+    },
+
     root: {
       backgroundColor: theme.palette.outterCard[APP_CONFIG_STORE.themeType],
       padding: '2px 4px',
