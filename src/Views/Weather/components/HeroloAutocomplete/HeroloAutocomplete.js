@@ -1,22 +1,22 @@
 // *https://www.registers.service.gov.uk/registers/country/use-the-api*
 // import fetch from "cross-fetch";
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import TextField from '@material-ui/core/TextField';
-import { useLocation } from 'react-router-dom';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
-import { Paper } from '@material-ui/core';
-import { util } from 'services/util.js';
-import './WeatherAutocomplete.scss';
-import autocompleteActions from './actions';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import TextField from "@material-ui/core/TextField";
+import { useLocation } from "react-router-dom";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import SearchIcon from "@material-ui/icons/Search";
+import { Paper } from "@material-ui/core";
+import { util } from "services/util.js";
+import "./WeatherAutocomplete.scss";
+import autocompleteActions from "./actions";
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 /* prettier-ignore */
@@ -32,9 +32,9 @@ function HeroloAutocomplete({
 }) {
   const useStyles = makeStyles((theme) => ({
 
-    'WeatherAutocomplete--input': {
-      '& + *': {
-        border: 'unset !important',
+    input: {
+      '& fieldset': {
+        border: 'none !important',
       },
     },
 
@@ -138,7 +138,7 @@ function HeroloAutocomplete({
       renderInput={(params) => (
         <Paper component="form" className={classes.root}>
           <TextField
-            className="WeatherAutocomplete--input"
+            className={classes.input}
             {...params}
             autoFocus
             placeholder="Select Location"
@@ -177,8 +177,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  UPDATE_CURRENT_WEATHER_INFO: (payload) => dispatch({ type: 'UPDATE_CURRENT_WEATHER_INFO', payload }),
-  SET_AUTOCOMPLETE_DATA_BY_QUERY: (query) => dispatch(autocompleteActions.SET_AUTOCOMPLETE_DATA_BY_QUERY(query)),
+  UPDATE_CURRENT_WEATHER_INFO: (payload) =>
+    dispatch({ type: "UPDATE_CURRENT_WEATHER_INFO", payload }),
+  SET_AUTOCOMPLETE_DATA_BY_QUERY: (query) =>
+    dispatch(autocompleteActions.SET_AUTOCOMPLETE_DATA_BY_QUERY(query)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeroloAutocomplete);
