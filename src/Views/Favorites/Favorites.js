@@ -8,9 +8,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { Card, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import favAcations from './actions';
 
-function Favorites(props) {
+function Favorites({ FAVORITES_STORE, REMOVE_FAVORITE, history }) {
   const useStyles = makeStyles(() => ({
     favList: {
       maxHeight: '65vh',
@@ -26,9 +27,9 @@ function Favorites(props) {
   React.useEffect(() => {
     localStorage.setItem(
       'FAVORITES_STORE',
-      JSON.stringify(props.FAVORITES_STORE),
+      JSON.stringify(FAVORITES_STORE),
     );
-  }, [props.FAVORITES_STORE]);
+  }, [FAVORITES_STORE]);
 
   const classes = useStyles();
   return (
@@ -45,20 +46,20 @@ function Favorites(props) {
           <Grid item xs={12}>
             <Card className={classes.favList}>
               <List component="nav" aria-label="main mailbox folders">
-                { Object.keys(props.FAVORITES_STORE).length === 0 && (
+                { Object.keys(FAVORITES_STORE).length === 0 && (
                 <ListItem>
                   <ListItemText primary="Nothing to show :(" />
                 </ListItem>
                 )}
-                {Object.keys(props.FAVORITES_STORE).map((key, i) => (
+                {Object.keys(FAVORITES_STORE).map((key, i) => (
 
                   <ListItem button key={i}>
-                    <ListItemIcon onClick={() => props.REMOVE_FAVORITE(key)}>
+                    <ListItemIcon onClick={() => REMOVE_FAVORITE(key)}>
                       <DeleteIcon />
                     </ListItemIcon>
                     <ListItemText
                       primary={key}
-                      onClick={() => props.history.push(props.FAVORITES_STORE[key])}
+                      onClick={() => history.push(FAVORITES_STORE[key])}
                     />
                   </ListItem>
                 ))}
@@ -71,8 +72,13 @@ function Favorites(props) {
   );
 }
 
+Favorites.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+  FAVORITES_STORE: PropTypes.objectOf(PropTypes.any).isRequired,
+  REMOVE_FAVORITE: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
-  appConfig: state.appConfig,
   FAVORITES_STORE: state.favorites,
 });
 const mapDispatchToProps = (dispatch) => ({
