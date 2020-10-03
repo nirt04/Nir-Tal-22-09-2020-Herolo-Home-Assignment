@@ -6,10 +6,11 @@ import { Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import geolocation from 'geolocation';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import HeroloAutocomplete from './HeroloAutocomplete/HeroloAutocomplete';
 import weatherActions from './CurrentWeather/actions';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: '100%',
   },
@@ -25,15 +26,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function WelcomeSearch(props) {
+function WelcomeSearch({ history, SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION }) {
   const classes = useStyles();
 
   const handleLocateMeButton = async () => {
     geolocation.getCurrentPosition(async (err, position) => {
       if (err) throw err;
-      const data = await props.SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION(position.coords.latitude, position.coords.longitude);
-      if (data && data.locationData) props.history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
-      // props.history.push(`/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
+      const data = await SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION(position.coords.latitude, position.coords.longitude);
+      if (data && data.locationData) history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
+      // history.push(`/weather/${newVal.Key}/?search=${newVal.LocalizedName}` );
     });
   };
   /* prettier-ignore */
@@ -76,10 +77,13 @@ function WelcomeSearch(props) {
   );
 }
 
-const mapStateToProps = (state) => ({ });
+WelcomeSearch.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+  SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
   SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION: (lat, lon) => dispatch(weatherActions.SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION(lat, lon)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WelcomeSearch);
+export default connect(null, mapDispatchToProps)(WelcomeSearch);

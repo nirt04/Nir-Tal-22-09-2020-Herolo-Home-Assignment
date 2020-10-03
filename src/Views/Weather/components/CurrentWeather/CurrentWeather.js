@@ -1,23 +1,15 @@
 /* prettier-ignore */
 import React from 'react';
-import {
-  Box,
-  Button,
-  CardMedia,
-  Divider,
-  Grid,
-  IconButton,
-  Typography,
-} from '@material-ui/core';
+import { Box, Button, CardMedia, Divider, Grid, IconButton, Typography, } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import InnerCard from 'components/InnerCard';
 import appConfigActions from '../../../../App/actions';
 import { useStyles } from './style';
 import weatherActions from './actions';
-import InnerCard from 'components/InnerCard.js';
 import favActions from '../../../Favorites/actions';
 
 /* prettier-ignore */
