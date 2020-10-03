@@ -15,5 +15,4 @@ body {
     opacity: 0.15;
     -webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
     position: fixed;
-    /* background-image: url(https://www.ubackground.com/_ph/17/563786933.jpg) */
 }
