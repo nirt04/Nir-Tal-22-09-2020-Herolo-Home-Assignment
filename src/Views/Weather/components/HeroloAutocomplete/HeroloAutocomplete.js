@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { Paper } from '@material-ui/core';
 import { util } from 'services/util';
-import autocompleteActions from './actions';
+import autocompleteActions from './redux/actions';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 /* prettier-ignore */

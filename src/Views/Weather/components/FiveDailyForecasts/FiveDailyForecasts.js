@@ -7,7 +7,7 @@ import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import ForcastCard from 'Views/Weather/components/FiveDailyForecasts/components/ForcastCard.js';
 import { GridContainer } from 'components/GridContainer.js';
-import fiveDaysActions from './actions';
+import fiveDaysActions from './redux/actions';
 import { useStyles } from './style';
 import InnerCard from 'components/InnerCard.js';
 

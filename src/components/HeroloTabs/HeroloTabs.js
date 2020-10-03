@@ -7,7 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Link } from 'react-router-dom';
 import { Box, FormControlLabel, Switch } from '@material-ui/core';
-import appConfigActions from '../../App/actions';
+import appConfigActions from '../../App/redux/actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {

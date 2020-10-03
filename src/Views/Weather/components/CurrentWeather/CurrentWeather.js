@@ -7,10 +7,10 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import InnerCard from 'components/InnerCard';
-import appConfigActions from '../../../../App/actions';
+import appConfigActions from '../../../../App/redux/actions';
 import { useStyles } from './style';
-import weatherActions from './actions';
-import favActions from '../../../Favorites/actions';
+import weatherActions from './redux/actions';
+import favActions from '../../../Favorites/redux/actions';
 
 /* prettier-ignore */
 function CurrentWeather({

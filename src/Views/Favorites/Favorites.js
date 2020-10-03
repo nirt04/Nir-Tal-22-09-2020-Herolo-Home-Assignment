@@ -9,7 +9,7 @@ import { Card, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import favAcations from './actions';
+import favAcations from './redux/actions';
 
 function Favorites({ FAVORITES_STORE, REMOVE_FAVORITE, history }) {
   const useStyles = makeStyles(() => ({

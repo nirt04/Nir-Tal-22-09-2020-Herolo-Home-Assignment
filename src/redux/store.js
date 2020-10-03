@@ -1,11 +1,11 @@
 import thunk from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import autocompleteReducer from "Views/Weather/components/HeroloAutocomplete/reducer";
-import { fiveDayReducer } from "./reducers/fiveDayReducer";
-import { favoritesReducer } from "./reducers/favoritesReducer";
-import { currentWeatherReducer } from "./reducers/currentWeatherReducer";
-import { appConfigReducer } from "./reducers/appConfigReducer";
-import { errorReducer } from "./reducers/errorReducer";
+import autocompleteReducer from "Views/Weather/components/HeroloAutocomplete/redux/reducer";
+import { fiveDayReducer } from "Views/Weather/components/FiveDailyForecasts/redux/reducer";
+import { favoritesReducer } from "Views/Favorites/redux/reducer";
+import { currentWeatherReducer } from "Views/Weather/components/CurrentWeather/redux/reducer";
+import { appConfigReducer } from "App/redux/reducer";
+import { errorReducer } from "components/ErrorSnackbar/redux/reducer";
 
 const reducer = combineReducers({
   fiveDay: fiveDayReducer,

@@ -1,17 +1,15 @@
 import React from 'react';
-import {
-  Switch, Route, useLocation, Redirect,
-} from 'react-router-dom';
+import { Switch, Route, useLocation, Redirect, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container } from '@material-ui/core';
 import geolocation from 'geolocation';
 import PropTypes from 'prop-types';
 import { useStyles } from './style';
-import HeroloTabs from '../components/HeroloTabs/HeroloTabs';
-import Weather from '../Views/Weather/Weather';
-import Favorites from '../Views/Favorites/Favorites';
-import appConfigActions from './actions';
-import weatherActions from '../Views/Weather/components/CurrentWeather/actions';
+import HeroloTabs from 'components/HeroloTabs/HeroloTabs';
+import Weather from 'Views/Weather/Weather';
+import Favorites from 'Views/Favorites/Favorites';
+import appConfigActions from './redux/actions';
+import weatherActions from 'Views/Weather/components/CurrentWeather/redux/actions';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 

@@ -8,7 +8,7 @@ import geolocation from 'geolocation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import HeroloAutocomplete from './HeroloAutocomplete/HeroloAutocomplete';
-import weatherActions from './CurrentWeather/actions';
+import weatherActions from './CurrentWeather/redux/actions';
 
 const useStyles = makeStyles(() => ({
   root: {
