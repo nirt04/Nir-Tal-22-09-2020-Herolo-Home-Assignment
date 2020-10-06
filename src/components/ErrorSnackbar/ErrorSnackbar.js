@@ -1,23 +1,12 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import errorActions from './redux/actions';
+import { useStyles } from './style';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
 
 function ErrorSnackbar({ ERROR_STORE }) {
   const classes = useStyles();
@@ -37,9 +26,6 @@ function ErrorSnackbar({ ERROR_STORE }) {
 
   return (
     <div className={classes.root}>
-      {/* <Button variant="outlined" onClick={handleClick}>
-        Open success snackbar
-      </Button> */}
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
 
@@ -58,8 +44,4 @@ const mapStateToProps = (state) => ({
   ERROR_STORE: state.error,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-//   SET_ERROR: (payload) => dispatch(errorActions.SET_ERROR(payload)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ErrorSnackbar);
+export default connect(mapStateToProps)(ErrorSnackbar);

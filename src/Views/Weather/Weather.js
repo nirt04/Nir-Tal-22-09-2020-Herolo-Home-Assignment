@@ -9,21 +9,10 @@ import CurrentWeather from './components/CurrentWeather/CurrentWeather';
 import FiveDailyForecasts from './components/FiveDailyForecasts/FiveDailyForecasts';
 import WelcomeSearch from './components/WelcomeSearch';
 import InnerCard from '../../components/InnerCard';
+import { useStyles } from './style';
 
 function Weather() {
-  const useStyles = makeStyles(() => ({
-    weatherTitleIcon: {
-      width: '40px',
-      height: '100%',
-      marginRight: '10px',
-    },
-    root: {
-      width: '100%',
-      margin: '0 auto',
-      maxWidth: '1060px',
-    },
-  }));
-
+ 
   const classes = useStyles();
 
   return (

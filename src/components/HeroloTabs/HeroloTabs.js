@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import { connect } from 'react-redux';
 import Tabs from '@material-ui/core/Tabs';
@@ -8,21 +7,12 @@ import Tab from '@material-ui/core/Tab';
 import { Link } from 'react-router-dom';
 import { Box, FormControlLabel, Switch } from '@material-ui/core';
 import appConfigActions from '../../App/redux/actions';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 0,
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.primary,
-  },
-}));
+import { useStyles } from './style';
 
 function HeroloTabs({ updateAppConfig, url, appConfig }) {
   const [isDark, setIsDark] = React.useState(appConfig.themeType === 'dark');
   const [value, setValue] = React.useState(url.match.params.tab || 'weather');
+  const classes = useStyles();
 
   const handleSwitchChange = (event) => {
     updateAppConfig({ themeType: event.target.checked ? 'dark' : 'light' });
@@ -46,7 +36,6 @@ function HeroloTabs({ updateAppConfig, url, appConfig }) {
     };
   };
 
-  const classes = useStyles();
 
   React.useEffect(() => {
     setValue(url.match.params.tab);
