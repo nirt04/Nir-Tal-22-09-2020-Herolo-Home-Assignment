@@ -14,8 +14,13 @@ import weatherActions from 'Views/Weather/components/CurrentWeather/redux/action
 const useQuery = () => new URLSearchParams(useLocation().search);
 
 export const AppRouter = ({
-  match, history, SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION, UPDATE_APP_CONFIG_STORE, UPDATE_CURRENT_WEATHER_INFO,
+  match,
+  history, 
+  SET_CURRENT_WHEATHER_DATA_BY_GEOLOCATION, 
+  UPDATE_APP_CONFIG_STORE, 
+  UPDATE_CURRENT_WEATHER_INFO,
 }) => {
+  
   const classes = useStyles();
   const query = useQuery();
   const URL_ROUTE_VALID = (match.params.locationId && query.get('search'));
@@ -48,8 +53,9 @@ export const AppRouter = ({
         if (data && data.locationData) history.push(`/weather/${data.locationData.Key}/?search=${data.locationData.LocalizedName}`);
       }
     };
-    UPDATE_APP_CONFIG_STORE({ isAppReady: true });
+
     if (!URL_ROUTE_VALID) dataInit();
+    
   }, [URL_ROUTE_VALID]);
 
   return (
